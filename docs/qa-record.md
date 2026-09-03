@@ -18,6 +18,12 @@ A final source-tree scan excluded dependency, generated, and Git directories and
 
 The credential-pattern scan checked the repository for common secret formats including OpenAI keys, Shopify Admin and Storefront key prefixes, GitHub personal access token prefixes, AWS access-key prefixes, PEM private-key markers, and JWT-like token patterns. It returned **no matches**. `git diff --check` also returned no whitespace errors.
 
+## GitHub delivery and history note
+
+The selected `brandhouseAlex/cellova-labs` repository contained an existing `main` branch before this independent Next.js rebuild. Its history was preserved rather than force-replaced, and the new Cellova storefront was pushed as a clean source implementation commit followed by a history-preserving merge. A scan of all reachable Git history using the same credential-pattern set returned **no matches**.
+
+The final release archive is published as the [`Cellova Labs Storefront v0.1.1` release asset](https://github.com/brandhouseAlex/cellova-labs/releases/download/v0.1.1/Cellova-Labs-Storefront-v0.1.1.zip). The final release page is available at [GitHub Releases](https://github.com/brandhouseAlex/cellova-labs/releases/tag/v0.1.1).
+
 ## Intentional constraints
 
 The connected Shopify store currently has no approved catalog products or configured Cellova documentation metadata. The storefront therefore displays controlled, customer-safe empty states rather than sample products, invented prices, fictional lab values, or broken COA records. Product, collection, cart, checkout, customer, consent, metafield, and COA features activate from real provider data after the documented Shopify configuration is completed.

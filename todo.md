@@ -21,8 +21,9 @@
 - [x] Write deployment and provider handoff documentation including required environment variables, metafield/metaobject mappings, outstanding Shopify configuration, Medusa switching needs, and security boundaries.
 - [x] Add and run automated unit tests, TypeScript checks, linting, and the production build.
 - [x] Scan the complete repository for prohibited legacy brand references, Liquid or Shopify theme files, secrets, and unsafe Vercel configuration.
-- [ ] Create a delivery ZIP archive and push the clean, credential-free source history and archive to https://github.com/brandhouseAlex/cellova-labs.
+- [x] Create a delivery ZIP archive and push the clean, credential-free source history and archive to https://github.com/brandhouseAlex/cellova-labs.
 - [x] Add a centralized provider-neutral Shopify metaobject fallback for product documentation and COA retrieval.
 - [x] Implement progressive catalog loading behind the provider-neutral catalog interface instead of a fixed listing cap.
 - [x] Run and document a repository-wide secret-pattern compliance scan before delivery.
 - [x] Document the final repository credential-pattern scan results in the delivery handoff.
+- [x] Document the preserved pre-existing repository history exception, scan all reachable Git history for credential patterns, and record the GitHub delivery-asset location.
