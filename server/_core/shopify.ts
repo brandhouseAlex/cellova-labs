@@ -220,6 +220,7 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
     heavyMetals: metafield(namespace: "cellova_coa", key: "heavy_metals") { value }
     pdfUrl: metafield(namespace: "cellova_coa", key: "pdf") { value }
     status: metafield(namespace: "cellova_coa", key: "status") { value }
+    coaRecords: metafield(namespace: "cellova_coa", key: "records") { value }
   }
 `;
 

@@ -4,9 +4,10 @@
  */
 import { FormEvent, useState } from "react";
 import { Link, useRoute } from "wouter";
-import { ArrowRight, Check, ChevronRight, FileText, FlaskConical, LoaderCircle, LogIn, Search, ShieldCheck, UserPlus } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, FileText, FlaskConical, Headphones, LoaderCircle, LogIn, PackageCheck, Search, ShieldCheck, Truck, UserPlus } from "lucide-react";
 import { ProductGrid } from "@/components/storefront/ProductGrid";
-import { LotDocumentationPanel } from "@/components/storefront/LotDocumentationPanel";
+import { PurchasePanel } from "@/components/storefront/PurchasePanel";
+import { ProductInformationTabs } from "@/components/storefront/ProductInformationTabs";
 import { trpc } from "@/lib/trpc";
 import { CELLLOVA_ASSETS, CELLLOVA_SITE, formatMoney, usePageMeta } from "@/lib/cellova";
 import { useCart } from "@/contexts/CartContext";
@@ -65,31 +66,35 @@ export function CatalogPage() {
 }
 
 export function ProductDetailPage() {
-  const [, params] = useRoute<{ handle: string }>("/catalog/:handle");
-  const productQuery = trpc.commerce.products.byHandle.useQuery({ handle: params?.handle ?? "" }, { enabled: Boolean(params?.handle) });
-  const { addItem, loading } = useCart();
+  const [, catalogParams] = useRoute<{ handle: string }>("/catalog/:handle");
+  const [, productParams] = useRoute<{ handle: string }>("/products/:handle");
+  const handle = catalogParams?.handle ?? productParams?.handle ?? "";
+  const productQuery = trpc.commerce.products.byHandle.useQuery({ handle }, { enabled: Boolean(handle) });
+  const relatedQuery = trpc.commerce.products.list.useQuery({ first: 8 });
   const product = productQuery.data;
   usePageMeta(product?.title || "Catalog Record", product?.description || "Cellova Labs product record.");
   if (productQuery.isLoading) return <main className="page-main"><div className="site-width loading-page"><LoaderCircle className="spin" size={28} /> Loading product record…</div></main>;
   if (!product) return <main className="page-main"><div className="site-width not-found-panel"><p className="eyebrow">CATALOG RECORD</p><h1>This product record is unavailable.</h1><Link href="/catalog" className="button button--ink">Back to catalog</Link></div></main>;
-  const variant = product.variants[0];
   const image = product.images[0];
-  const lot = product.lotDocumentation;
+  const related = (relatedQuery.data ?? []).filter(item => item.id !== product.id).slice(0, 4);
   return (
     <main className="page-main product-detail-page">
       <div className="site-width breadcrumb"><Link href="/catalog">Catalog</Link><ChevronRight size={14} /><span>{product.title}</span></div>
       <section className="site-width product-detail">
-        <div className="product-detail__image"><img src={image?.url || CELLLOVA_ASSETS.product} alt={image?.altText || `${product.title} product presentation`} /></div>
+        <div className="product-detail__gallery"><div className="product-detail__image"><img src={image?.url || CELLLOVA_ASSETS.product} alt={image?.altText || `${product.title} product presentation`} /></div>{product.images.length > 1 && <div className="product-detail__thumbnails">{product.images.map((photo, index) => <img key={photo.url} src={photo.url} alt={photo.altText || `${product.title} visual ${index + 1}`} />)}</div>}</div>
         <div className="product-detail__record">
-          <p className="product-tech">{product.productType || "RESEARCH MATERIAL"} {product.vendor ? `• ${product.vendor.toUpperCase()}` : ""}</p>
+          <div className="product-detail__badges"><span>{product.productType || "RESEARCH MATERIAL"}</span><span>RESEARCH USE ONLY</span></div>
           <h1>{product.title}</h1>
-          <p className="product-detail__price">{formatMoney(product.priceRange.min.amount, product.priceRange.min.currencyCode)}</p>
           <p className="product-detail__description">{product.description || "Product details and research documentation will be maintained in the Cellova Labs catalog."}</p>
-          <div className="product-detail__actions"><button type="button" className="button button--spark" disabled={!variant?.availableForSale || loading} onClick={() => variant && addItem(variant.id, 1)}>{loading ? "Updating cart…" : variant?.availableForSale ? "Add to cart" : "Not currently available"}</button><Link href="/coa-library" className="button button--ink">View lot documentation</Link></div>
-          <div className="specification-box"><p className="eyebrow eyebrow--spark">SPECIFICATIONS</p><dl><div><dt>Product class</dt><dd>{product.productType || "Research material"}</dd></div><div><dt>Catalog status</dt><dd>{variant?.availableForSale ? "Available" : "Availability pending"}</dd></div><div><dt>Lot documentation</dt><dd>{lot ? "Available in COA Library" : "Published when configured"}</dd></div></dl></div>
-          {lot ? <LotDocumentationPanel lot={lot} /> : null}
+          <div className="specification-box"><p className="eyebrow eyebrow--spark">SPECIFICATIONS</p><dl><div><dt>Product class</dt><dd>{product.productType || "Research material"}</dd></div><div><dt>Formats</dt><dd>{product.variants.length ? `${product.variants.length} available` : "Pending"}</dd></div><div><dt>Catalog status</dt><dd>{product.variants.some(item => item.availableForSale) ? "Available" : "Availability pending"}</dd></div><div><dt>Lot records</dt><dd>{product.lotDocumentations.length ? `${product.lotDocumentations.length} published` : "Published when configured"}</dd></div></dl></div>
+          <div className="quality-badges"><span><ShieldCheck size={20} /><b>Quality standards</b><small>Product record maintained</small></span><span><Check size={20} /><b>Documentation-led</b><small>Identity and lot details</small></span><span><FlaskConical size={20} /><b>Research catalog</b><small>For authorized use</small></span></div>
+          <PurchasePanel product={product} />
+          <div className="product-assurance"><span><Truck size={20} />Research-order fulfillment</span><span><FlaskConical size={20} />Research-use handling</span><span><PackageCheck size={20} />Secure packaging</span></div>
         </div>
       </section>
+      <section className="site-width"><ProductInformationTabs product={product} /></section>
+      <section className="site-width product-service-grid"><article><Truck size={28} /><h3>Order handling</h3><p>Review current fulfillment details before completing a research order.</p></article><article><PackageCheck size={28} /><h3>Delivery records</h3><p>Product and documentation records stay connected through the catalog.</p></article><article><FlaskConical size={28} /><h3>Standards matter</h3><p>Use product documentation to support your research workflow.</p></article><article><Headphones size={28} /><h3>Research support</h3><p>Contact Cellova for catalog and documentation questions.</p></article></section>
+      {related.length > 0 && <section className="site-width related-products"><p className="eyebrow eyebrow--spark">CONTINUE EXPLORING</p><h2>You may also research</h2><div className="related-products__grid">{related.map(item => <Link key={item.id} href={`/catalog/${item.handle}`}><img src={item.images[0]?.url || CELLLOVA_ASSETS.product} alt="" /><span>{item.productType || "RESEARCH MATERIAL"}</span><strong>{item.title}</strong><small>{formatMoney(item.priceRange.min.amount, item.priceRange.min.currencyCode)}</small></Link>)}</div></section>}
     </main>
   );
 }

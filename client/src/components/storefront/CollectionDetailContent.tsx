@@ -1,0 +1,9 @@
+import React from "react";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import { Link } from "wouter";
+import type { Collection, Product } from "@shared/commerce/types";
+import { CELLLOVA_ASSETS, formatMoney } from "@/lib/cellova";
+
+export function CollectionDetailContent({ collection, products }: { collection: Collection; products: Product[] }) {
+  return <main className="page-main"><section className="collection-detail-hero">{collection.image && <img src={collection.image.url} alt="" />}<div className="site-width"><div className="breadcrumb"><Link href="/collections">Collections</Link><ChevronRight size={14} /><span>{collection.title}</span></div><p className="eyebrow eyebrow--spark">RESEARCH COLLECTION</p><h1>{collection.title}</h1><p>{collection.description || "Published research materials for the selected Cellova collection."}</p></div></section><section className="site-width parity-catalog">{products.length ? <div className="parity-product-grid">{products.map(product => <article key={product.id}><Link href={`/products/${product.handle}`}><img src={product.images[0]?.url || CELLLOVA_ASSETS.product} alt={product.images[0]?.altText || `${product.title} product presentation`} /></Link><div><p>{product.productType || "RESEARCH MATERIAL"}</p><h3><Link href={`/products/${product.handle}`}>{product.title}</Link></h3><span>{product.lotDocumentations.length ? "Lot documentation available" : "Documentation pending"}</span><footer><strong>{formatMoney(product.priceRange.min.amount, product.priceRange.min.currencyCode)}</strong><Link className="button button--spark button--small" href={`/products/${product.handle}`}>View record <ArrowRight size={14} /></Link></footer></div></article>)}</div> : <div className="empty-catalog"><p className="eyebrow">COLLECTION INITIALIZATION</p><h3>Products will appear as the active provider publishes them to this collection.</h3></div>}</section></main>;
+}

@@ -77,6 +77,8 @@ export type Product = {
   variants: ProductVariant[];
   /** Null until every required Cellova lot/COA field is complete and published. */
   lotDocumentation: LotDocumentation | null;
+  /** Complete published lot records, newest first when the provider supplies a set. */
+  lotDocumentations: LotDocumentation[];
 };
 
 export type Collection = {

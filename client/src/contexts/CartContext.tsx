@@ -124,6 +124,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       } catch {
         setError("The cart could not be updated. Please try again.");
         setIsOpen(true);
+        throw new Error("The cart could not be updated.");
       } finally {
         setLoading(false);
       }

@@ -9,10 +9,10 @@ import { useCart } from "@/contexts/CartContext";
 import { CELLLOVA_ASSETS } from "@/lib/cellova";
 
 const navigation = [
-  { href: "/catalog", label: "Catalog" },
+  { href: "/products", label: "Products" },
+  { href: "/collections", label: "Collections" },
   { href: "/coa-library", label: "COA Library" },
-  { href: "/research-access", label: "Research Access" },
-  { href: "/access", label: "Account" },
+  { href: "/account", label: "Account" },
 ];
 
 export function SiteHeader() {

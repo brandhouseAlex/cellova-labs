@@ -69,6 +69,7 @@ export type RawProduct = {
   priceRange: { minVariantPrice: RawMoney; maxVariantPrice: RawMoney };
   images: Edges<RawImage>;
   variants: Edges<RawVariant>;
+  coaRecords?: RawMetafield;
   lotNumber: RawMetafield;
   testedDate: RawMetafield;
   laboratory: RawMetafield;
@@ -165,7 +166,33 @@ function normalizeLotDocumentation(raw: RawLotDocumentation): LotDocumentation |
     : null;
 }
 
+function coerceMetafield(record: Record<string, unknown>, snake: string, camel: string): RawMetafield {
+  const value = record[snake] ?? record[camel];
+  return { value: typeof value === "string" ? value : null };
+}
+
+function normalizeLotRecords(raw: RawProduct): LotDocumentation[] {
+  const primary = normalizeLotDocumentation(raw);
+  const serialized = textValue(raw.coaRecords ?? null);
+  if (!serialized) return primary ? [primary] : [];
+  try {
+    const parsed = JSON.parse(serialized) as unknown;
+    if (!Array.isArray(parsed)) return primary ? [primary] : [];
+    const records = parsed.map(item => {
+      const record = item && typeof item === "object" ? item as Record<string, unknown> : {};
+      return normalizeLotDocumentation({
+        lotNumber: coerceMetafield(record, "lot_number", "lotNumber"), testedDate: coerceMetafield(record, "tested_date", "testedDate"), laboratory: coerceMetafield(record, "laboratory", "laboratory"), identityMs: coerceMetafield(record, "identity_ms", "identityMs"), purityHplc: coerceMetafield(record, "purity_hplc", "purityHplc"), netContent: coerceMetafield(record, "net_content", "netContent"), endotoxin: coerceMetafield(record, "endotoxin", "endotoxin"), heavyMetals: coerceMetafield(record, "heavy_metals", "heavyMetals"), pdfUrl: coerceMetafield(record, "pdf", "pdfUrl"), status: coerceMetafield(record, "status", "status"),
+      });
+    }).filter((record): record is LotDocumentation => Boolean(record));
+    const merged = [...records, ...(primary ? [primary] : [])];
+    return merged.filter((record, index) => merged.findIndex(item => item.lotNumber === record.lotNumber) === index).sort((a, b) => b.testedDate.localeCompare(a.testedDate));
+  } catch {
+    return primary ? [primary] : [];
+  }
+}
+
 export function normalizeProduct(p: RawProduct): Product {
+  const lotDocumentations = normalizeLotRecords(p);
   return {
     id: p.id,
     handle: p.handle,
@@ -182,7 +209,8 @@ export function normalizeProduct(p: RawProduct): Product {
     },
     options: (p.options ?? []).map(normalizeProductOption),
     variants: p.variants.edges.map(e => normalizeVariant(e.node)),
-    lotDocumentation: normalizeLotDocumentation(p),
+    lotDocumentation: lotDocumentations[0] ?? null,
+    lotDocumentations,
   };
 }
 

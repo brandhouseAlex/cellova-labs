@@ -17,7 +17,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { isShopifyConfigured, listProducts } from "./_core/shopify";
+import { getCollectionByHandle, isShopifyConfigured, listProducts } from "./_core/shopify";
 
 const configured = isShopifyConfigured();
 
@@ -54,6 +54,18 @@ describe.skipIf(!configured)("shopify smoke (live)", () => {
         usable,
         "No product had all three of: title, first image URL, and price > 0"
       ).toBeTruthy();
+    }
+  );
+
+  it(
+    "returns the populated Cellova research-material collection for its detail route",
+    { timeout: 30_000 },
+    async () => {
+      const collection = await getCollectionByHandle("research-materials");
+      const products = await listProducts({ first: 10, collectionHandle: collection.handle });
+
+      expect(collection.title).toBe("Research Materials");
+      expect(products.some(product => product.handle === "bpc-157")).toBe(true);
     }
   );
 });

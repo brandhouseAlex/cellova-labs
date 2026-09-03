@@ -191,6 +191,7 @@ function normalizeProduct(raw: MedusaProduct): Product {
   const min = prices.length ? Math.min(...prices) : 0;
   const max = prices.length ? Math.max(...prices) : 0;
   const currency = variants[0]?.price.currencyCode || medusaCurrencyCode();
+  const lotDocumentation = normalizeLotDocumentation(raw.metadata);
 
   return {
     id: raw.id,
@@ -205,7 +206,8 @@ function normalizeProduct(raw: MedusaProduct): Product {
     priceRange: { min: { amount: min.toFixed(2), currencyCode: currency }, max: { amount: max.toFixed(2), currencyCode: currency } },
     options: productOptions,
     variants,
-    lotDocumentation: normalizeLotDocumentation(raw.metadata),
+    lotDocumentation,
+    lotDocumentations: lotDocumentation ? [lotDocumentation] : [],
   };
 }
 

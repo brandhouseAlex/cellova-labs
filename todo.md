@@ -36,3 +36,24 @@
 - [x] Add provider-selection and adapter-contract Vitest coverage.
 - [x] Document how to switch between Shopify and Medusa without changing storefront UI code.
 - [x] Validate the refactor and package the complete updated Cellova project as a ZIP archive.
+- [x] Inventory every supplied storefront route, navigation element, account flow, access gate, and product-detail module.
+- [x] Recreate the original site’s complete public and gated route set using Cellova branding and independent data.
+- [x] Implement functional catalog gating, registration, sign-in, approval status, and account behavior before catalog access.
+- [x] Match original product-page composition, specifications, documentation, variants, cart controls, and related modules in Cellova form.
+- [x] Add explicit pending and approved research-account states so registration alone does not unlock gated catalog access.
+- [x] Replace placeholder order, checkout, and contact routes with functional Cellova browser-state or provider-handoff behavior.
+- [x] Restore product specifications, multiple-lot COA selection support, and visible purchase mutation errors.
+- [x] Validate original-feature parity against the supplied archive and package a corrected Cellova ZIP.
+- [x] Audit every restored Cellova route against the supplied storefront route map and record the validation result.
+- [x] Document the production approval-service boundary and verify gated preview behavior for pending and public routes.
+- [x] Confirm the persisted route-audit and approval-boundary documents and verify all restored routes against the route map.
+- [x] Capture explicit pending-account access behavior and confirm public pages remain available while protected pages remain blocked.
+- [x] Validate collection detail and browser-record order routes explicitly against the restored route map.
+- [x] Re-run and record pending-account protected-versus-public route verification after the shared access-decision coverage change.
+- [x] Add a real Cellova research collection and validate its collection-detail route against the provider-backed catalog.
+- [x] Render and test prepared browser-order history and detail views with an approved-access decision fixture.
+- [x] Render provider-backed collection detail content with an approved-access fixture and record the result.
+- [x] Confirm rendering tests for prepared order history and order detail with actual browser-order data.
+- [x] Render the provider-backed Cellova collection detail under an approved-access fixture and record its content result.
+- [x] Re-run the expanded prepared-order history and detail rendering test file and confirm both cases execute.
+- [x] Verify collection-detail content renders while the Cellova research gate is hidden for an explicit approved-access fixture.

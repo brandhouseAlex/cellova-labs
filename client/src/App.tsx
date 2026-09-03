@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { CartPanel } from "./components/storefront/CartPanel";
 import { SiteFooter } from "./components/storefront/SiteFooter";
 import { SiteHeader } from "./components/storefront/SiteHeader";
+import { ResearchGate } from "./components/storefront/ResearchGate";
 import {
   AccountPage,
   AccessPortalPage,
@@ -17,6 +18,21 @@ import {
   ProductDetailPage,
   ResearchAccessPage,
 } from "./pages/StorefrontPages";
+import {
+  AboutPage,
+  AccountDashboardPage,
+  CartPage,
+  CheckoutPage,
+  CollectionDetailPage,
+  CollectionsPage,
+  ContactPage,
+  ExtendedPolicyPage,
+  OrderDetailPage,
+  OrdersPage,
+  ProductsPage,
+} from "./pages/StorefrontParityPages";
+import { FunctionalCheckoutPage, FunctionalContactPage, FunctionalOrderDetailPage, FunctionalOrdersPage } from "./pages/FunctionalFlowPages";
+import { FunctionalCollectionDetailPage } from "./pages/FunctionalCollectionPage";
 import NotFound from "./pages/NotFound";
 import { CELLLOVA_SITE } from "./lib/cellova";
 
@@ -26,11 +42,21 @@ function StorefrontRoutes() {
       <Route path="/" component={HomePage} />
       <Route path="/catalog" component={CatalogPage} />
       <Route path="/catalog/:handle" component={ProductDetailPage} />
+      <Route path="/products" component={ProductsPage} />
+      <Route path="/products/:handle" component={ProductDetailPage} />
+      <Route path="/collections" component={CollectionsPage} />
+      <Route path="/collections/:handle" component={FunctionalCollectionDetailPage} />
       <Route path="/coa-library" component={CoaLibraryPage} />
       <Route path="/research-access" component={ResearchAccessPage} />
       <Route path="/access" component={AccessPortalPage} />
-      <Route path="/account" component={AccountPage} />
-      <Route path="/policies/:policy" component={PolicyPage} />
+      <Route path="/account/orders/:id" component={FunctionalOrderDetailPage} />
+      <Route path="/account/orders" component={FunctionalOrdersPage} />
+      <Route path="/account" component={AccountDashboardPage} />
+      <Route path="/cart" component={CartPage} />
+      <Route path="/checkout" component={FunctionalCheckoutPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/contact" component={FunctionalContactPage} />
+      <Route path="/policies/:policy" component={ExtendedPolicyPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -54,6 +80,7 @@ function App() {
           <StorefrontRoutes />
           <SiteFooter />
           <CartPanel />
+          <ResearchGate />
           <Toaster />
         </TooltipProvider>
       </ThemeProvider>

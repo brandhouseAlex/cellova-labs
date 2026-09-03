@@ -65,4 +65,17 @@ describe("Cellova COA normalization", () => {
 
     expect(product.lotDocumentation).toBeNull();
   });
+
+  it("normalizes and orders all complete published lot records when the provider supplies them", () => {
+    const product = normalizeProduct({
+      ...baseProduct,
+      coaRecords: { value: JSON.stringify([
+        { lot_number: "CLV-2026-002", tested_date: "2026-09-04", laboratory: "Cellova Analytical", identity_ms: "Conforms", purity_hplc: "99.5%", net_content: "5 mg", endotoxin: "< 0.1 EU/mg", heavy_metals: "< 10 ppm", pdf: "https://example.com/lot-2.pdf", status: "available" },
+        { lot_number: "CLV-DRAFT", tested_date: "2026-09-05", laboratory: "Cellova Analytical", identity_ms: "Conforms", purity_hplc: "99.5%", net_content: "5 mg", endotoxin: "< 0.1 EU/mg", heavy_metals: "< 10 ppm", pdf: "https://example.com/draft.pdf", status: "draft" },
+      ]) },
+    });
+
+    expect(product.lotDocumentations.map(lot => lot.lotNumber)).toEqual(["CLV-2026-002", "CLV-2026-001"]);
+    expect(product.lotDocumentation?.lotNumber).toBe("CLV-2026-002");
+  });
 });
