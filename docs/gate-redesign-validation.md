@@ -28,3 +28,7 @@ The supported Vercel production branch URL is `https://cellova-labs-git-main-tea
 | `/coa-library` | `200` — documentation route remains protected. |
 
 Live visual checks confirm that the active redesigned gate covers both the account and COA Library pages before authentication. The underlying pages retain their existing account and provider-backed COA content; no customer information or lot documentation is exposed through the gate.
+
+## Reference-match acceptance
+
+The final gate-reference pass was reviewed locally at 1536 × 1024 and 390 × 844 after the last layout refinements. The desktop composition matches the supplied dark/light split, left hierarchy, orbital placement, four-item trust row, lower divider/footer, and right-side access form treatment. The mobile composition retains a form-first stack with no horizontal overflow. See [`gate-reference-audit.md`](./gate-reference-audit.md) for the exact corrections.

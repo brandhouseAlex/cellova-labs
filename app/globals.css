@@ -626,3 +626,29 @@ a[class*="px-"][class*="py-"]:not(.rounded-full):active { transform: scale(.98);
 @media (max-width: 1023px) { .gate-orbit-field { right: -9rem; width: min(88vw, 39rem); top: 50%; opacity: .66; }.gate-left { min-height: 39rem; } }
 @media (max-width: 639px) { .gate-right { min-height: auto; }.gate-left { min-height: 42rem; }.gate-orbit-field { right: -13rem; top: 47%; width: 37rem; opacity: .54; }.gate-community-note { margin-top: 2.1rem; }.gate-segmented__button { min-height: 3.25rem; font-size: .71rem; }.gate-form-panel { max-width: none; } }
 @media (prefers-reduced-motion: reduce) { .gate-orbit, .gate-orbit-node, .gate-orbit-core, .gate-form, .animate-gate-enter, .animate-gate-panel-enter { animation: none !important; }.gate-orbit-field { transform: translateY(-46%); } }
+
+/* Reference-match refinements for the 1536px Cellova access composition. */
+@media (min-width: 1024px) {
+  .gate-right { box-shadow: none; }
+  .gate-form-panel { margin-top: -0.45rem; }
+  .gate-form { gap: 1.45rem; }
+  .gate-orbit-field {
+    top: clamp(7.7rem, 13.6vh, 8.7rem);
+    right: clamp(-5.5rem, -5.3vw, -5rem);
+    width: min(31vw, 29rem);
+    transform: none;
+    opacity: .92;
+  }
+  .gate-left .gate-eyebrow--dark { margin-top: 0; }
+  .gate-left .gate-community-note { max-width: 36rem; margin-top: .55rem; padding-top: 1.45rem; }
+  .gate-left .gate-community-note svg { width: 1.3rem; height: 1.3rem; }
+  .gate-left .gate-community-note { font-size: .86rem; }
+  .gate-left .grid { border-color: rgba(255,255,255,.16); }
+  .gate-left .grid > div { min-height: 12.4rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+  .gate-left .grid > div > svg { width: 2.25rem; height: 2.25rem; }
+  .gate-left .grid > div > p:first-of-type { margin-top: 1.05rem; }
+  .gate-left .grid > div > p:last-of-type { margin-top: .42rem; font-size: .73rem; line-height: 1.4rem; }
+  .gate-segmented { margin-top: 1.875rem; }
+  .gate-segmented__button { min-height: 3.5rem; }
+  .gate-consent { min-height: 5.25rem; }
+}

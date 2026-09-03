@@ -79,20 +79,20 @@ export function ResearchGate() {
 
   return (
     <div role="dialog" aria-modal="true" aria-labelledby="research-gate-title" className="gate-shell fixed inset-0 z-[90] overflow-y-auto bg-[#12141C]">
-      <div className="gate-layout grid min-h-[100svh] lg:grid-cols-2">
-        <section className="gate-right order-1 flex min-h-[100svh] items-center bg-[#F3F4F1] px-5 py-10 sm:px-10 lg:order-2 lg:px-[clamp(3rem,7vw,9rem)]">
-          <div className="gate-form-panel w-full max-w-[34rem] animate-gate-panel-enter">
+      <div className="gate-layout grid min-h-[100svh] lg:grid-cols-[53.6%_46.4%]">
+        <section className="gate-right order-1 flex min-h-[100svh] items-center bg-[#F3F4F1] px-5 py-10 sm:px-10 lg:order-2 lg:px-[clamp(3.5rem,3.8vw,5rem)]">
+          <div className="gate-form-panel w-full max-w-[34.5rem] animate-gate-panel-enter">
             <p className="gate-eyebrow flex items-center gap-2"><GateIcon name="lock" className="h-4 w-4" /> Private catalog access</p>
-            <h1 id="research-gate-title" className="mt-5 font-display text-[clamp(2rem,3vw,3.1rem)] font-bold leading-[1.05] tracking-[-0.05em] text-ink">
+            <h1 id="research-gate-title" className="mt-7 font-display text-[clamp(2rem,2.1vw,2.05rem)] font-bold leading-[1.08] tracking-[-0.055em] text-ink">
               {isRegister ? "Join the Cellova Research Community" : "Welcome Back to Cellova Labs"}
             </h1>
-            <p className="mt-4 max-w-[31rem] text-[15px] leading-7 text-slate">
+            <p className="mt-4 max-w-[29rem] text-[15px] leading-7 text-slate">
               {isRegister
                 ? "Create your account to access our curated catalog of research-grade peptides and compounds."
                 : "Sign in to access your account and explore our curated catalog of research-grade peptides and compounds."}
             </p>
 
-            <div role="tablist" aria-label="Cellova account access" className="gate-segmented mt-8 grid grid-cols-2 rounded-[7px] border border-line bg-white/55 p-1">
+            <div role="tablist" aria-label="Cellova account access" className="gate-segmented mt-6 grid grid-cols-2 rounded-[7px] border border-line bg-white/55 p-1">
               <button type="button" role="tab" aria-selected={!isRegister} onClick={() => selectMode("login")} className={cn("gate-segmented__button", !isRegister && "gate-segmented__button--active")}>
                 <GateIcon name="user" className="h-5 w-5" /> Log In
               </button>
@@ -101,7 +101,7 @@ export function ResearchGate() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="gate-form mt-8" key={mode}>
+            <form onSubmit={handleSubmit} className="gate-form mt-7" key={mode}>
               {isRegister ? <div className="grid gap-5 sm:grid-cols-2">
                 <GateField label="First name" name="firstName" autoComplete="given-name" required />
                 <GateField label="Last name" name="lastName" autoComplete="family-name" required />
@@ -122,7 +122,7 @@ export function ResearchGate() {
               </div> : null}
 
               {error ? <p role="alert" className="rounded-[7px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p> : null}
-              <button type="submit" disabled={!canSubmitGate(mode, acknowledged, busy)} className="gate-submit gate-submit--primary w-full rounded-[7px] px-5 py-[1.05rem] text-sm font-bold uppercase tracking-[0.04em] text-[#12141C] disabled:cursor-not-allowed disabled:opacity-45">
+              <button type="submit" disabled={!canSubmitGate(mode, acknowledged, busy)} className="gate-submit gate-submit--primary w-full rounded-[7px] px-5 py-[1.1rem] text-sm font-bold uppercase tracking-[0.04em] text-[#12141C] disabled:cursor-not-allowed disabled:opacity-45">
                 {busy ? "Please wait…" : isRegister ? "Create Your Research Account  →" : "Log In to Your Account  →"}
               </button>
 
@@ -132,7 +132,7 @@ export function ResearchGate() {
               </label>
             </form>
 
-            <nav aria-label="Policies" className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate">
+            <nav aria-label="Policies" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate">
               <Link href="/policies/terms" className="transition-colors hover:text-ink">Terms of Use</Link>
               <span aria-hidden="true" className="text-line">|</span>
               <Link href="/policies/privacy" className="transition-colors hover:text-ink">Privacy Policy</Link>
@@ -142,23 +142,23 @@ export function ResearchGate() {
           </div>
         </section>
 
-        <section className="gate-left order-2 relative isolate flex min-h-[670px] overflow-hidden bg-[#12141C] px-6 py-9 text-paper sm:px-10 sm:py-12 lg:order-1 lg:min-h-[100svh] lg:px-[clamp(3rem,6.6vw,8rem)] lg:py-[clamp(3rem,6vh,6rem)]">
+        <section className="gate-left order-2 relative isolate flex min-h-[670px] overflow-hidden bg-[#12141C] px-6 py-9 text-paper sm:px-10 sm:py-12 lg:order-1 lg:min-h-[100svh] lg:px-[clamp(3.5rem,4.25vw,4.5rem)] lg:py-[clamp(3.5rem,6.2vh,4.5rem)]">
           <div className="grid-texture pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
           <ResearchOrbit />
           <div className="relative z-10 flex w-full flex-col animate-gate-enter">
-            <div className="relative h-[4rem] w-[13rem] sm:h-[4.8rem] sm:w-[17.5rem]">
+            <div className="relative h-[3.9rem] w-[14.5rem] sm:h-[4.2rem] sm:w-[15.5rem]">
               <Image src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663938836977/GMzYeVeHFFlNlfwo.webp" alt="Cellova Labs" fill priority sizes="280px" className="object-contain object-left" />
             </div>
-            <div className="mt-16 max-w-[25rem] lg:mt-[clamp(4rem,10vh,9rem)]">
+            <div className="mt-16 max-w-[21rem] lg:mt-[clamp(4.7rem,9.2vh,6.7rem)]">
               <p className="gate-eyebrow gate-eyebrow--dark flex items-center gap-2"><GateIcon name="shield" className="h-4 w-4" /> Research access only</p>
-              <h2 className="mt-7 font-display text-[clamp(3rem,5.1vw,5.6rem)] font-bold leading-[0.94] tracking-[-0.065em] text-paper">
+              <h2 className="mt-7 font-display text-[clamp(3.2rem,3.35vw,3.65rem)] font-bold leading-[0.98] tracking-[-0.065em] text-paper">
                 Join the<br />Cellova<br />Research<br /><span className="text-brand">Community.</span>
               </h2>
               <span className="mt-7 block h-px w-12 bg-brand" />
               <p className="mt-6 max-w-[22rem] text-[15px] leading-7 text-[#D8DCE3] sm:text-base">Access a curated research catalog with organized documentation, lot-specific testing, and resources built for research.</p>
             </div>
-            <div className="mt-auto pt-12"><CredentialGrid /></div>
-            <p className="gate-community-note mt-9 flex max-w-[31rem] items-start gap-3 border-t border-white/15 pt-6 text-sm leading-6 text-[#D8DCE3]"><GateIcon name="shield" className="mt-0.5 h-5 w-5 shrink-0 text-brand" />A research-focused community built around clarity, documentation, and quality.</p>
+            <div className="mt-auto pt-10 lg:mt-12 lg:max-w-[36rem] lg:pt-0"><CredentialGrid /></div>
+            <p className="gate-community-note mt-9 flex max-w-[31rem] items-start gap-3 border-t border-white/15 pt-6 text-sm leading-6 text-[#D8DCE3] lg:max-w-[36rem]"><GateIcon name="shield" className="mt-0.5 h-5 w-5 shrink-0 text-brand" />A research-focused community built around clarity, documentation, and quality.</p>
           </div>
         </section>
       </div>
@@ -167,7 +167,7 @@ export function ResearchGate() {
 }
 
 function GateField({ label, icon, endAdornment, ...input }: { label: string; name: string; type?: string; autoComplete?: string; placeholder?: string; minLength?: number; required?: boolean; icon?: string; endAdornment?: ReactNode }) {
-  return <label className="block"><span className="mb-2.5 block text-[11px] font-bold uppercase tracking-[0.14em] text-ink">{label}</span><span className="gate-input-shell flex items-center gap-3 rounded-[7px] border border-line bg-white px-4 py-[0.95rem] transition-all duration-200">{icon ? <GateIcon name={icon} className="h-5 w-5 shrink-0 text-silver" /> : null}<input {...input} className="min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-silver" />{endAdornment}</span></label>;
+  return <label className="block"><span className="mb-3.5 block text-[11px] font-bold uppercase tracking-[0.14em] text-ink">{label}</span><span className="gate-input-shell flex items-center gap-3 rounded-[7px] border border-line bg-white px-4 py-[1.2rem] transition-all duration-200">{icon ? <GateIcon name={icon} className="h-5 w-5 shrink-0 text-silver" /> : null}<input {...input} className="min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-silver" />{endAdornment}</span></label>;
 }
 
 function CredentialGrid() {

@@ -34,3 +34,11 @@
 - [x] Read back the active production URL documentation to confirm the saved gate validation record.
 - [x] Visually verify the protected product, collection, account, and COA routes on the active post-redesign Vercel deployment.
 - [x] Record that the existing provider has no live `research-peptides` collection record and leave provider catalog data unchanged during the gate-only redesign.
+- [x] Compare the live Cellova gate to the supplied reference and document exact layout, scale, spacing, and alignment deltas.
+- [x] Match the reference desktop split, left-panel content proportions, orbital placement, trust-item grid, and bottom divider/footer treatment.
+- [x] Match the reference right-panel form geometry, headline width, segmented tabs, fields, consent card, and legal-link alignment.
+- [x] Preserve the existing login, registration, consent, password, session, and protected-route behavior through the visual refinement.
+- [x] Recheck desktop and mobile renderings, validate the production build, and push the reference-matched gate to Vercel.
+- [x] Persist a reference-delta audit documenting the desktop split, left hierarchy, orbital anchor, trust row, footer, form geometry, and legal-link corrections.
+- [x] Record final desktop and mobile visual acceptance evidence for the refined Cellova gate.
+- [ ] Commit, push, and verify the post-refinement gate deployment on Vercel.
