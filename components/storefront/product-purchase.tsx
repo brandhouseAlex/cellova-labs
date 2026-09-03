@@ -1,0 +1,16 @@
+"use client";
+
+import { Minus, Plus, ShoppingBag } from "lucide-react";
+import { useMemo, useState } from "react";
+import type { Product, ProductVariant } from "@/lib/commerce/types";
+import { formatMoney } from "@/lib/commerce/format";
+import { useCart } from "./cart-provider";
+
+export function ProductPurchase({ product }: { product: Product }) {
+  const [selected, setSelected] = useState<Record<string, string>>(() => Object.fromEntries(product.options.map((option) => [option.name, option.values[0] ?? ""]))); const [quantity, setQuantity] = useState(1); const { addItem, loading } = useCart();
+  const variant = useMemo<ProductVariant | undefined>(() => product.variants.find((entry) => product.options.every((option) => entry.selectedOptions.some((selectedOption) => selectedOption.name === option.name && selectedOption.value === selected[option.name]))) ?? product.variants[0], [product, selected]);
+  const selectOption = (name: string, value: string) => setSelected((current) => ({ ...current, [name]: value }));
+  return <div className="mt-8 border-t border-[color:var(--line)] pt-6"><div className="flex items-end justify-between gap-4"><div><p className="eyebrow">Selected format</p><p className="mt-2 font-display text-2xl text-[color:var(--indigo)]">{variant ? formatMoney(variant.price) : "Unavailable"}</p></div>{variant?.availableForSale ? <span className="rounded bg-[#eaf1ec] px-2 py-1 font-mono text-[0.58rem] uppercase tracking-[0.08em] text-[#2d653e]">Available</span> : <span className="rounded bg-[#eceef2] px-2 py-1 font-mono text-[0.58rem] uppercase tracking-[0.08em] text-[color:var(--muted)]">Unavailable</span>}</div>
+    {product.options.map((option) => <fieldset key={option.name} className="mt-6"><legend className="font-mono text-[0.64rem] uppercase tracking-[0.08em] text-[color:var(--indigo)]">{option.name}</legend><div className="mt-3 flex flex-wrap gap-2">{option.values.map((value) => <button key={value} onClick={() => selectOption(option.name, value)} className={`rounded-md border px-3 py-2 text-sm transition-colors ${selected[option.name] === value ? "border-[color:var(--ink)] bg-[color:var(--ink)] text-white" : "border-[color:var(--line)] bg-white text-[color:var(--indigo)] hover:border-[color:var(--indigo)]"}`}>{value}</button>)}</div></fieldset>)}
+    <div className="mt-8 flex gap-3"><div className="flex h-12 items-center rounded-md border border-[color:var(--line)] bg-white"><button onClick={() => setQuantity((value) => Math.max(1, value - 1))} aria-label="Decrease quantity" className="grid h-full w-10 place-items-center"><Minus size={14} /></button><span className="w-7 text-center font-mono text-sm">{quantity}</span><button onClick={() => setQuantity((value) => Math.min(10, value + 1))} aria-label="Increase quantity" className="grid h-full w-10 place-items-center"><Plus size={14} /></button></div><button disabled={!variant?.availableForSale || loading} onClick={() => variant && addItem(variant.id, quantity)} className="button-primary flex-1 disabled:opacity-45">{loading ? "Updating cart" : "Add to cart"}<ShoppingBag size={16} /></button></div>{!variant && <p className="mt-3 text-sm text-[#8e3c2d]">This option combination is not currently available.</p>}</div>;
+}

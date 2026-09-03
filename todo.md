@@ -1,0 +1,28 @@
+# Project TODO
+
+- [x] Replace the starter scaffold with a clean, current Next.js App Router architecture that is deployable on Vercel without legacy runtime declarations.
+- [x] Configure the Cellova brand system using the approved Paper, Ink, Indigo, Slate, and Spark tokens, plus Sora, Inter, and IBM Plex Mono typography.
+- [x] Add the approved Cellova Labs logo through managed static asset storage and use only approved logo treatments with required clear space.
+- [x] Implement the global public storefront shell with an accessible announcement bar, desktop navigation, intentional mobile navigation, search entry point, account entry point, cart entry point, and premium footer.
+- [x] Create a product-led responsive homepage with hero, quality callouts, format categories, dynamically sourced featured products, and contained product imagery.
+- [x] Define normalized provider-neutral commerce models for products, variants, images, collections, carts, cart items, customers, consent, and COA data.
+- [x] Implement an environment-selected commerce provider boundary with Shopify and Medusa adapter structures and no provider-specific public URLs.
+- [x] Implement server-safe Shopify Storefront, Admin, customer, metafield, metaobject, cart, and checkout handoff interfaces without exposing privileged credentials.
+- [x] Implement a Next-native Shopify Storefront adapter with normalized shared types and a provider-neutral cart context.
+- [x] Provide a Medusa adapter contract and configuration documentation that maps to the same normalized commerce interface.
+- [x] Create reusable product cards and dynamic catalog, category collection, and shop-all experiences with search, responsive filters, sorting, progressive loading, and customer-safe unavailable states.
+- [x] Create a dynamic product-detail experience with contained images, variant selector, quantity controls, add-to-cart, quality callouts, structured specifications, and optional documentation tabs.
+- [x] Implement a provider-neutral cart drawer/page with line-item management, quantity updates, subtotal, variant details, error states, and provider checkout handoff.
+- [x] Build optional product-level COA displays and a searchable COA Library derived from available provider records without empty, missing, or broken COA entries.
+- [x] Build secure customer registration, login, logout, catalog-gating, custom registration fields, and durable consent capture flows that map to the active commerce/customer provider instead of client-side flags.
+- [x] Add responsive layouts and accessible interaction states for desktop, tablet, and mobile across the storefront, catalog, product, cart, COA, and customer flows.
+- [x] Implement performance-conscious motion, semantic metadata, canonical routes, product structured data, sitemap, robots rules, and public-page SEO safeguards.
+- [x] Add customer-safe failure states for provider unavailability, product and collection not found, invalid variants, cart failures, missing images, missing metadata, authentication failures, and unavailable catalog access.
+- [x] Write deployment and provider handoff documentation including required environment variables, metafield/metaobject mappings, outstanding Shopify configuration, Medusa switching needs, and security boundaries.
+- [x] Add and run automated unit tests, TypeScript checks, linting, and the production build.
+- [x] Scan the complete repository for prohibited legacy brand references, Liquid or Shopify theme files, secrets, and unsafe Vercel configuration.
+- [ ] Create a delivery ZIP archive and push the clean, credential-free source history and archive to https://github.com/brandhouseAlex/cellova-labs.
+- [x] Add a centralized provider-neutral Shopify metaobject fallback for product documentation and COA retrieval.
+- [x] Implement progressive catalog loading behind the provider-neutral catalog interface instead of a fixed listing cap.
+- [x] Run and document a repository-wide secret-pattern compliance scan before delivery.
+- [x] Document the final repository credential-pattern scan results in the delivery handoff.

@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { LockKeyhole } from "lucide-react";
+
+export function CatalogGate() { return <section className="section"><div className="container"><div className="surface mx-auto max-w-2xl px-7 py-14 text-center sm:px-12"><LockKeyhole size={28} strokeWidth={1.35} className="mx-auto text-[color:var(--spark)]" /><p className="eyebrow mt-6">Catalog access</p><h1 className="font-display mt-3 text-3xl tracking-tight text-[color:var(--indigo)]">Please sign in to access the catalog.</h1><p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-[color:var(--muted)]">Account access is verified with the active commerce customer system. No browser-only access flag is used.</p><Link href="/account" className="button-primary mt-7">Sign in or register</Link></div></div></section>; }

@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { CatalogExplorer } from "@/components/storefront/catalog-explorer";
+import { CatalogGate } from "@/components/storefront/catalog-gate";
+import { requireCatalogAccess } from "@/lib/commerce/gate";
+import { getCommerceAdapter } from "@/lib/commerce/provider";
+
+export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> { const { handle } = await params; try { const collection = await (await getCommerceAdapter()).getCollection(handle); return collection ? { title: collection.title, description: collection.description || `Explore the ${collection.title} selection.` } : {}; } catch { return {}; } }
+export default async function CollectionPage({ params }: { params: Promise<{ handle: string }> }) { if (!(await requireCatalogAccess())) return <CatalogGate />; const { handle } = await params; const commerce = await getCommerceAdapter(); const collection = await commerce.getCollection(handle).catch(() => null); if (!collection) notFound(); const page = await commerce.getProductPage({ first: 12, collectionHandle: handle }).catch(() => ({ products: [], nextCursor: null, hasNextPage: false })); return <section className="section"><div className="container"><p className="eyebrow">Format collection</p><h1 className="font-display mt-3 text-4xl tracking-[-0.045em] text-[color:var(--indigo)] sm:text-5xl">{collection.title}</h1>{collection.description && <p className="mt-4 max-w-2xl text-sm leading-7 text-[color:var(--muted)]">{collection.description}</p>}<div className="mt-10"><CatalogExplorer products={page.products} collectionTitle={collection.title} collectionHandle={handle} initialNextCursor={page.nextCursor} initialHasNextPage={page.hasNextPage} /></div></div></section>; }
