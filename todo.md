@@ -11,4 +11,4 @@
 - [x] Exercise a dynamic product, collection, COA Library, and cart flow in the copied Next.js storefront and record the results.
 - [x] Run a focused source and configuration-template audit for embedded tokens, private credentials, and legacy provider identifiers.
 - [x] Confirm `.env.example` contains placeholder-only Shopify, Medusa, and payment settings; the sole Shopify domain reference in source is a validation example, not a configured store.
-- [ ] Replace the Cellova GitHub repository contents with the tested extracted Next.js application and confirm its Vercel detection readiness.
+- [x] Replace the Cellova GitHub repository contents with the tested extracted Next.js application and confirm its Vercel detection readiness.
