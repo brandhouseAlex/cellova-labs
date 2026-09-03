@@ -12,10 +12,14 @@
 - [x] Create Cellova COA Library and product lot documentation interfaces backed by separate-store-ready data contracts.
 - [x] Write Cellova Shopify customer and COA/product metafield setup documentation.
 - [x] Add Cellova metadata, structured data, canonical handling, robots, sitemap guidance, favicon, and social-preview configuration.
-- [ ] Remove all legacy terminology, identifiers, contact details, assets, comments, and technical references from the finished Cellova codebase.
+- [x] Remove all legacy terminology, identifiers, contact details, assets, comments, and technical references from the finished Cellova codebase.
 - [x] Cover the Cellova commerce configuration and key rendering behavior with Vitest tests.
-- [ ] Test build, responsive desktop/mobile presentation, and remaining-reference audit; save a delivery checkpoint.
-- [ ] Push the completed independent Cellova codebase to the selected Cellova Labs GitHub repository without modifying any pre-existing storefront.
+- [x] Test build, responsive desktop/mobile presentation, and remaining-reference audit; save a delivery checkpoint.
+- [x] Push the completed independent Cellova codebase to the selected Cellova Labs GitHub repository without modifying any pre-existing storefront.
+- [x] Audit for legacy domains, emails, phone values, store IDs, asset filenames, and integration identifiers beyond brand-name matches.
+- [x] Verify that no legacy contacts or unmanaged assets remain in public source, documentation, or deployment configuration.
+- [x] Run a scoped legacy audit across source, documentation, scripts, and configuration with runtime logs excluded.
+- [x] Verify every public-facing Cellova asset path is managed and no contact or integration identifiers are inherited.
 - [x] Provide deployment guidance for creating the separate Vercel project and its environment variables; do not modify a pre-existing deployment infrastructure.
 - [x] Add clear user-facing cart failure feedback for unsuccessful Shopify cart mutations.
 - [x] Extend the Cellova catalog contract with complete, separate-store COA lot data and PDF support.
