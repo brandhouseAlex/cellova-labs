@@ -4,29 +4,28 @@
 
 This source repository is a headless Next.js storefront intended for a distinct Vercel project. The commerce platform provides products, collections, product images, variants, carts, checkout, customer records, and product documentation. Public URLs remain Cellova URLs regardless of the selected provider.
 
+> **Provider ownership:** This source does not contain, provision, or fall back to any project-provisioned Shopify store. It connects only when the Cellova team supplies the explicit `CELLOVA_*` provider variables in its own Vercel project.
+
 The provider is chosen by a single server environment value:
 
 ```text
-COMMERCE_PROVIDER=shopify
+CELLOVA_COMMERCE_PROVIDER=shopify
 ```
 
 Changing it to `medusa` switches the selection seam; the public routes and UI types remain unchanged. A complete Medusa integration still needs the endpoint, authentication scheme, and normalized mapping described below.
 
 ## Environment variables
 
-Configure the following values in the Vercel project rather than committing credentials. The `NEXT_PUBLIC_*` Shopify compatibility values are supported by the server implementation to meet platform conventions, but server-only values are preferred. Never expose an Admin token in a browser bundle.
+Configure the following values in the Cellova-managed Vercel project rather than committing credentials. The storefront does not provision, select, or contain a Shopify store, and it has no public provider aliases. Never expose an Admin token in a browser bundle.
 
 | Variable | Scope | Provider | Required when | Purpose |
 | --- | --- | --- | --- | --- |
-| `COMMERCE_PROVIDER` | Server | All | Always | Selects `shopify` or `medusa`. |
+| `CELLOVA_COMMERCE_PROVIDER` | Server | All | Always | Selects `shopify` or `medusa`; the Cellova team owns this choice in Vercel. |
 | `NEXT_PUBLIC_SITE_URL` | Public | All | Production | Canonical base URL for metadata, sitemap, and structured data. |
-| `SHOPIFY_STORE_DOMAIN` | Server | Shopify | Shopify active | Store domain for server Storefront and Admin calls. |
-| `SHOPIFY_STOREFRONT_API_ACCESS_TOKEN` | Server | Shopify | Shopify active | Storefront token for catalog, cart, and customer requests. |
-| `SHOPIFY_API_VERSION` | Server | Shopify | Shopify active | Pinned Storefront and Admin API version. |
-| `SHOPIFY_ADMIN_ACCESS_TOKEN` | Server-only | Shopify | Customer registration metadata active | Privileged customer metafield write token. |
-| `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN` | Public compatibility | Shopify | Optional fallback | Supported compatibility alias; do not prefer it for a new deployment. |
-| `NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN` | Public compatibility | Shopify | Optional fallback | Supported compatibility alias; do not prefer it for a new deployment. |
-| `NEXT_PUBLIC_SHOPIFY_API_VERSION` | Public compatibility | Shopify | Optional fallback | Supported compatibility alias. |
+| `CELLOVA_SHOPIFY_STORE_DOMAIN` | Server | Shopify | Shopify active | Cellova-managed Shopify store domain for server Storefront and Admin calls. |
+| `CELLOVA_SHOPIFY_STOREFRONT_TOKEN` | Server | Shopify | Shopify active | Cellova-managed Storefront token for catalog, cart, and customer requests. |
+| `CELLOVA_SHOPIFY_API_VERSION` | Server | Shopify | Shopify active | Pinned Storefront and Admin API version. |
+| `CELLOVA_SHOPIFY_ADMIN_TOKEN` | Server-only | Shopify | Customer registration metadata active | Cellova-managed least-privilege Admin token for durable customer metafield writes. |
 | `CATALOG_GATE_ENABLED` | Server | All | Optional | Set `true` to require a signed commerce customer session for catalog pages. |
 | `CELLOVA_CUSTOMER_SESSION_TTL_SECONDS` | Server | All | Optional | Signed customer-session cookie lifetime; defaults to 14 days. |
 | `CELLOVA_SHOPIFY_METAFIELD_NAMESPACE` | Server | Shopify | Documentation or registration metadata active | Central namespace used by all mapped product and customer fields. |
@@ -73,15 +72,15 @@ Product COA UI is hidden when the normalized record contains no actual COA resul
 
 The following setup remains outside the website source:
 
-1. Claim the connected Shopify store in the project integration settings, configure payment and checkout behavior, and publish approved products to the connected sales channel.
-2. Create the `Vials`, `Capsules`, `Serums`, and `Nasal Sprays` collections with the chosen provider-managed handles. Add products, variants, real images, inventory availability, and prices in Shopify.
+1. In the Cellova-owned Shopify account connected to Vercel, configure payment and checkout behavior, then publish approved products to the chosen sales channel.
+2. Create the `Vials`, `Capsules`, `Serums`, and `Nasal Sprays` collections with the chosen provider-managed handles. Add products, variants, real images, inventory availability, and prices in the Cellova-owned Shopify account.
 3. Create and populate the product and customer metafields in the preceding table. Configure the related environment keys with the actual namespace and keys before enabling documentation or registration metadata writes.
 4. Ensure the Storefront token has the scopes needed for catalog, cart, and customer access. Enable the Shopify customer-account flow compatible with Storefront customer access-token operations.
-5. Create a least-privilege Admin API token for customer metafield writes, store it only in `SHOPIFY_ADMIN_ACCESS_TOKEN`, and set `CATALOG_GATE_ENABLED=true` only after the sign-in flow has been tested in production.
+5. Create a least-privilege Admin API token for customer metafield writes, store it only in `CELLOVA_SHOPIFY_ADMIN_TOKEN`, and set `CATALOG_GATE_ENABLED=true` only after the sign-in flow has been tested in production.
 
 ## Medusa provider switch
 
-To activate Medusa, implement the guarded methods in `lib/commerce/medusa/adapter.ts` and `lib/commerce/customer-provider.ts` with server-only Medusa API calls. Map Medusa responses into `lib/commerce/types.ts`, including carts, checkout URL, product documentation, COA data, customer registration, consent evidence, and authenticated customer lookup. Set `COMMERCE_PROVIDER=medusa` only after those functions, error handling, and production tests are complete. No page, component, or public route should need a rewrite.
+To activate Medusa, implement the guarded methods in `lib/commerce/medusa/adapter.ts` and `lib/commerce/customer-provider.ts` with server-only Medusa API calls. Map Medusa responses into `lib/commerce/types.ts`, including carts, checkout URL, product documentation, COA data, customer registration, consent evidence, and authenticated customer lookup. Set `CELLOVA_COMMERCE_PROVIDER=medusa` only after those functions, error handling, and production tests are complete. No page, component, or public route should need a rewrite.
 
 ## Safety and deployment checks
 

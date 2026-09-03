@@ -3,9 +3,9 @@ import "server-only";
 import { customerMetafieldMap, hasCompleteCustomerConsentMapping } from "./metafields";
 import { CommerceError, type CustomerProfile, type CustomerRegistration } from "../types";
 
-const apiVersion = process.env.SHOPIFY_API_VERSION ?? process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION ?? "2025-04";
-const domain = process.env.SHOPIFY_STORE_DOMAIN ?? process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
-const storefrontToken = process.env.SHOPIFY_STOREFRONT_API_ACCESS_TOKEN ?? process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
+const apiVersion = process.env.CELLOVA_SHOPIFY_API_VERSION ?? "2025-04";
+const domain = process.env.CELLOVA_SHOPIFY_STORE_DOMAIN;
+const storefrontToken = process.env.CELLOVA_SHOPIFY_STOREFRONT_TOKEN;
 
 async function storefrontRequest<T>(query: string, variables: Record<string, unknown>): Promise<T> {
   if (!domain || !storefrontToken) throw new CommerceError("Account services are temporarily unavailable.", "configuration");
@@ -17,7 +17,7 @@ async function storefrontRequest<T>(query: string, variables: Record<string, unk
 function customerError(errors: Array<{ message: string }> | undefined) { if (errors?.length) throw new CommerceError("We could not complete that request. Please check your information and try again.", "invalid"); }
 
 async function writeRegistrationMetadata(customerId: string, registration: CustomerRegistration) {
-  const adminToken = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+  const adminToken = process.env.CELLOVA_SHOPIFY_ADMIN_TOKEN;
   if (!domain || !adminToken || !hasCompleteCustomerConsentMapping()) throw new CommerceError("Registration is awaiting secure customer record configuration. Please contact Cellova Labs support.", "configuration");
   const values = [
     ["company", registration.company, "single_line_text_field"], ["state", registration.state, "single_line_text_field"], ["intendedUse", registration.intendedUse, "single_line_text_field"],
@@ -31,7 +31,7 @@ async function writeRegistrationMetadata(customerId: string, registration: Custo
 
 export async function registerCustomer(registration: CustomerRegistration) {
   if (!registration.consentAccepted || !registration.consentVersion) throw new CommerceError("Consent is required to register.", "invalid");
-  if (!domain || !process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || !hasCompleteCustomerConsentMapping()) throw new CommerceError("Registration is awaiting secure customer record configuration. Please contact Cellova Labs support.", "configuration");
+  if (!domain || !process.env.CELLOVA_SHOPIFY_ADMIN_TOKEN || !hasCompleteCustomerConsentMapping()) throw new CommerceError("Registration is awaiting secure customer record configuration. Please contact Cellova Labs support.", "configuration");
   const data = await storefrontRequest<{ customerCreate: { customer: { id: string } | null; customerUserErrors: { message: string }[] } }>("mutation CustomerCreate($input: CustomerCreateInput!) { customerCreate(input: $input) { customer { id } customerUserErrors { message } } }", { input: { firstName: registration.firstName, lastName: registration.lastName, email: registration.email, phone: registration.phone || undefined, password: registration.password } });
   customerError(data.customerCreate.customerUserErrors); if (!data.customerCreate.customer) throw new CommerceError("We could not create your customer record. Please try again.");
   await writeRegistrationMetadata(data.customerCreate.customer.id, registration);

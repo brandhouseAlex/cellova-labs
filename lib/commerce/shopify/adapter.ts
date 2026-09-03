@@ -4,9 +4,9 @@ import { configuredCoaMetaobjectType, configuredProductMetafields, productMetafi
 import type { Cart, CartItem, COAData, Collection, CommerceAdapter, Money, Product, ProductDocumentation, ProductImage, ProductPage, ProductVariant } from "../types";
 import { CommerceError } from "../types";
 
-const apiVersion = process.env.SHOPIFY_API_VERSION ?? process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION ?? "2025-04";
-const storeDomain = process.env.SHOPIFY_STORE_DOMAIN ?? process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
-const storefrontToken = process.env.SHOPIFY_STOREFRONT_API_ACCESS_TOKEN ?? process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
+const apiVersion = process.env.CELLOVA_SHOPIFY_API_VERSION ?? "2025-04";
+const storeDomain = process.env.CELLOVA_SHOPIFY_STORE_DOMAIN;
+const storefrontToken = process.env.CELLOVA_SHOPIFY_STOREFRONT_TOKEN;
 const endpoint = storeDomain ? `https://${storeDomain}/api/${apiVersion}/graphql.json` : "";
 
 type RawMoney = Money;

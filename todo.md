@@ -27,3 +27,7 @@
 - [x] Run and document a repository-wide secret-pattern compliance scan before delivery.
 - [x] Document the final repository credential-pattern scan results in the delivery handoff.
 - [x] Document the preserved pre-existing repository history exception, scan all reachable Git history for credential patterns, and record the GitHub delivery-asset location.
+- [x] Remove all built-in Shopify-store-specific wiring, configuration references, and generated integration artifacts from the Cellova storefront source.
+- [x] Make Shopify and Medusa integrations depend exclusively on user-managed Vercel environment variables and endpoints, with no development-store fallback.
+- [x] Revise the deployment and QA handoff to state that Cellova does not provision or depend on a Shopify store and only consumes the provider configured by the user.
+- [x] Revalidate the provider-neutral storefront and push the corrected source and delivery archive to the Cellova Labs GitHub repository.
