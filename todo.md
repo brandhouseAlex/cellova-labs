@@ -12,3 +12,20 @@
 - [x] Run a focused source and configuration-template audit for embedded tokens, private credentials, and legacy provider identifiers.
 - [x] Confirm `.env.example` contains placeholder-only Shopify, Medusa, and payment settings; the sole Shopify domain reference in source is a validation example, not a configured store.
 - [x] Replace the Cellova GitHub repository contents with the tested extracted Next.js application and confirm its Vercel detection readiness.
+- [x] Inspect the exact Cellova Vercel deployment URL and capture the current platform-level 404 behavior.
+- [x] Verify the committed Next.js root route, app directory, package root, Next configuration, middleware, and repository structure.
+- [x] Identify and correct the current Vercel Root Directory, framework/build/output, or configuration mismatch without changing the site design or legacy storefront infrastructure.
+- [x] Configure the current Vercel deployment URL as the Cellova public site URL through deployment configuration.
+- [x] Push the minimum deployment fix and verify the exact Vercel URL plus root, product, collection, login, and account routes after redeploy.
+- [x] Audit the existing gate, authentication, consent, password, and Shopify customer integration before visual changes.
+- [x] Use the supplied dark-background Cellova logo in the redesigned gate without altering the source asset.
+- [x] Build a reusable reduced-motion-safe orbital graphic with slow CSS/SVG animation and no stock or product imagery.
+- [x] Implement the true desktop 50/50 Cellova Ink and Paper gate layout with responsive tablet and mobile behavior.
+- [x] Restyle the login and full registration forms without removing fields, validation, consent capture, timestamps, or customer metafields.
+- [x] Preserve gate persistence, protected catalog behavior, login, logout, forgot-password, and Shopify customer integration.
+- [x] Add regression coverage for consent blocking, access persistence, and gate route protection where the existing test setup permits.
+- [x] Verify desktop and mobile layouts, reduced motion, accessibility, TypeScript, lint, and production build results.
+- [ ] Commit and push the verified gate redesign to the existing Vercel production branch.
+- [ ] Document the supported Cellova production URL and confirm root, product, collection, account, COA, and gate routes on that active URL.
+- [ ] Add regression coverage for restoring an authenticated Cellova session from local browser storage.
+- [ ] Explicitly verify the gate under reduced-motion settings and keyboard-focused accessibility interactions.
