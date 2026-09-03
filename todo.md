@@ -57,7 +57,7 @@
 - [x] Render the provider-backed Cellova collection detail under an approved-access fixture and record its content result.
 - [x] Re-run the expanded prepared-order history and detail rendering test file and confirm both cases execute.
 - [x] Verify collection-detail content renders while the Cellova research gate is hidden for an explicit approved-access fixture.
-- [ ] Inspect the connected GitHub branch, remote, and Vercel-required source configuration.
+- [x] Inspect the connected GitHub branch, remote, and Vercel-required source configuration.
 - [x] Add any required Vercel-compatible source configuration without modifying the application’s commerce or access behavior.
 - [x] Verify the Vercel serverless entry, rewrites, and shared application factory persist and build cleanly.
-- [ ] Commit and push the finalized Cellova source to the connected GitHub repository for Vercel deployment.
+- [x] Commit and push the finalized Cellova source to the connected GitHub repository for Vercel deployment.
