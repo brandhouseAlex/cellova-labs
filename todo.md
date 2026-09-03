@@ -25,7 +25,12 @@
 - [x] Preserve gate persistence, protected catalog behavior, login, logout, forgot-password, and Shopify customer integration.
 - [x] Add regression coverage for consent blocking, access persistence, and gate route protection where the existing test setup permits.
 - [x] Verify desktop and mobile layouts, reduced motion, accessibility, TypeScript, lint, and production build results.
-- [ ] Commit and push the verified gate redesign to the existing Vercel production branch.
-- [ ] Document the supported Cellova production URL and confirm root, product, collection, account, COA, and gate routes on that active URL.
-- [ ] Add regression coverage for restoring an authenticated Cellova session from local browser storage.
-- [ ] Explicitly verify the gate under reduced-motion settings and keyboard-focused accessibility interactions.
+- [x] Commit and push the verified gate redesign to the existing Vercel production branch.
+- [x] Document the supported Cellova production URL and confirm root, product, collection, account, COA, and gate routes on that active URL.
+- [x] Add regression coverage for restoring an authenticated Cellova session from local browser storage.
+- [x] Explicitly verify the gate under reduced-motion settings and keyboard-focused accessibility interactions.
+- [x] Record the active supported Vercel production URL in the gate validation document.
+- [x] Verify root, product, collection, account, COA, and gate rendering on the active post-redesign Vercel deployment.
+- [x] Read back the active production URL documentation to confirm the saved gate validation record.
+- [x] Visually verify the protected product, collection, account, and COA routes on the active post-redesign Vercel deployment.
+- [x] Record that the existing provider has no live `research-peptides` collection record and leave provider catalog data unchanged during the gate-only redesign.

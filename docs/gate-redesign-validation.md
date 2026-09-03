@@ -13,3 +13,18 @@ The project’s gate policy and interaction suite confirms that protected catalo
 ## Motion
 
 The orbital field uses CSS transforms and opacity only, with slow independent ring rotations and node pulses. The global reduced-motion rules plus gate-specific override remove these animations while retaining the static composition.
+
+## Active deployment verification
+
+The supported Vercel production branch URL is `https://cellova-labs-git-main-team-wolfe-e1a668ed.vercel.app/`. The historical hash deployment URL previously shared for the project is not treated as a supported production address because it is immutable and belongs to an older deployment.
+
+| Route | Result on active post-redesign deployment |
+| --- | --- |
+| `/` | `200` — redesigned research-access gate is rendered. |
+| `/products/bpc-157-10mg` | Live visual verification confirms the protected product page remains covered by the redesigned gate. |
+| `/collections` | `200` — collection index remains protected. |
+| `/collections/research-peptides` | The redesigned gate remains visible over this dynamic path. The underlying collection reports its existing provider-level “Collection Not Found” result because the active provider has no matching live record; the gate redesign did not alter provider catalog data. |
+| `/account` | `200` — account route remains protected. |
+| `/coa-library` | `200` — documentation route remains protected. |
+
+Live visual checks confirm that the active redesigned gate covers both the account and COA Library pages before authentication. The underlying pages retain their existing account and provider-backed COA content; no customer information or lot documentation is exposed through the gate.
