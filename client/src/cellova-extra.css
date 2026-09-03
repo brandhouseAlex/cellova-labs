@@ -1,0 +1,44 @@
+/* Focused operational states and centralized interaction tokens for Cellova. */
+:root {
+  --cellova-radius-control: .4rem;
+  --cellova-radius-card: .7rem;
+  --cellova-radius-feature: .85rem;
+  --cellova-motion-press: 150ms;
+  --cellova-motion-enter: 250ms;
+  --cellova-motion-image: 340ms;
+}
+.button { border-radius: var(--cellova-radius-control); transition-duration: var(--cellova-motion-press); }
+.product-card { border-radius: var(--cellova-radius-card); }
+.hero-image-field, .product-detail__image { border-radius: var(--cellova-radius-feature); }
+.product-card__image, .cart-panel { transition-duration: var(--cellova-motion-image); }
+.cart-panel { animation-duration: var(--cellova-motion-enter); }
+.cart-error { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .55rem; margin: 1rem 1.6rem 0; padding: .72rem .78rem; border: 1px solid #8c6e3e; background: #3b3440; color: #f7dfb8; font-size: .75rem; }
+.cart-error button { display: grid; width: 1.5rem; height: 1.5rem; place-items: center; border: 0; background: transparent; color: #f7dfb8; }
+.coa-pdf-link { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; padding: .5rem .65rem; background: var(--spark); color: var(--ink); font-size: .68rem; font-weight: 700; white-space: nowrap; }
+.coa-pdf-link:hover { background: #ffc05d; }
+.lot-documentation { margin-top: 1.25rem; padding: 1.35rem; border: 1px solid var(--line); background: #fff; }
+.lot-documentation__heading { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: .7rem; }
+.lot-documentation__heading h2 { margin-bottom: 0; font-size: 1.4rem; }
+.lot-documentation dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); }
+.lot-documentation dl > div { display: grid; gap: .24rem; padding: .7rem 0; border-bottom: 1px solid var(--line); }
+.lot-documentation dt { color: var(--slate); font-family: "IBM Plex Mono", monospace; font-size: .61rem; letter-spacing: .05em; text-transform: uppercase; }
+.lot-documentation dd { margin: 0; color: var(--ink); font-size: .78rem; font-weight: 600; }
+@media (max-width: 620px) { .lot-documentation__heading { display: grid; }.lot-documentation dl { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .coa-pdf-link { width: fit-content; } }
+.access-portal { padding-block: clamp(4rem, 8vw, 7.5rem); }
+.access-portal__grid { display: grid; grid-template-columns: .88fr 1.12fr; align-items: start; gap: clamp(3rem, 8vw, 7.5rem); }
+.access-portal__intro h1 { font-size: clamp(2.7rem, 5vw, 4.35rem); }
+.access-portal__intro > p:not(.eyebrow) { color: #5f6678; }
+.access-portal__notes { display: grid; gap: .75rem; margin-top: 1.8rem; }
+.access-portal__notes p { display: flex; gap: .6rem; align-items: center; margin: 0; color: var(--indigo); font-weight: 600; }
+.access-portal__notes svg { color: #b26e09; }
+.access-card { padding: clamp(1.5rem, 4vw, 3rem); background: var(--indigo); color: var(--paper); }
+.access-card__tabs { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 1.5rem; border-bottom: 1px solid #656c85; }
+.access-card__tabs button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .75rem; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #cfd3df; font-size: .75rem; font-weight: 700; }
+.access-card__tabs button.is-active { border-bottom-color: var(--spark); color: var(--paper); }
+.access-card h2 { color: var(--paper); font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.access-card form { display: grid; gap: 1rem; }
+.access-card label { display: grid; gap: .36rem; color: #dfe1e7; font-size: .75rem; font-weight: 600; }
+.access-card input { width: 100%; min-height: 43px; border: 1px solid #656c85; border-radius: .25rem; background: #343b5d; color: var(--paper); outline: 0; padding: .65rem .7rem; }
+.access-card input:focus { border-color: var(--spark); }
+@media (max-width: 860px) { .access-portal__grid { grid-template-columns: 1fr; } }

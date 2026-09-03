@@ -1,0 +1,27 @@
+# Project TODO
+
+- [x] Replace the starter screen with the Cellova Labs storefront shell and responsive site navigation.
+- [x] Implement centralized Cellova color, typography, radius, focus, and motion tokens from the supplied brand guide.
+- [x] Apply the supplied Cellova Labs wordmark and generated calibration mark through managed asset URLs only.
+- [x] Build the asymmetric Cellova homepage hero, research category pathways, and documentation-led sections.
+- [x] Recreate the source storefront’s product grid, product details, status treatments, and specification-first product view using the Shopify commerce scaffold.
+- [x] Implement Cellova-branded cart behavior, checkout handoff, loading states, and empty/error treatment.
+- [x] Register the injected Shopify commerce router and environment exports required by the storefront scaffold.
+- [x] Configure all site, Shopify, contact, analytics, and tracking values through documented environment variables without embedding legacy credentials.
+- [x] Create Cellova-branded catalog access, registration, login, account, and research-use notice interfaces with isolated browser-state keys.
+- [x] Create Cellova COA Library and product lot documentation interfaces backed by separate-store-ready data contracts.
+- [x] Write Cellova Shopify customer and COA/product metafield setup documentation.
+- [x] Add Cellova metadata, structured data, canonical handling, robots, sitemap guidance, favicon, and social-preview configuration.
+- [ ] Remove all legacy terminology, identifiers, contact details, assets, comments, and technical references from the finished Cellova codebase.
+- [x] Cover the Cellova commerce configuration and key rendering behavior with Vitest tests.
+- [ ] Test build, responsive desktop/mobile presentation, and remaining-reference audit; save a delivery checkpoint.
+- [ ] Push the completed independent Cellova codebase to the selected Cellova Labs GitHub repository without modifying any pre-existing storefront.
+- [x] Provide deployment guidance for creating the separate Vercel project and its environment variables; do not modify a pre-existing deployment infrastructure.
+- [x] Add clear user-facing cart failure feedback for unsuccessful Shopify cart mutations.
+- [x] Extend the Cellova catalog contract with complete, separate-store COA lot data and PDF support.
+- [x] Add rendering-level regression coverage for the Cellova lot documentation panel.
+- [x] Register the Cellova wordmark and calibration mark through managed web storefront assets.
+- [x] Centralize reusable Cellova radius and motion tokens for the storefront’s final visual layer.
+- [x] Remove hardcoded Cellova fallback URLs from canonical and sitemap outputs in favor of deployment configuration.
+- [x] Add distinct Cellova-branded login and registration access interfaces without submitting customer data before credentials are configured.
+- [x] Verify the separate Vercel runbook is present and complete before final delivery.
