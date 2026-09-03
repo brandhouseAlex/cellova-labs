@@ -10,4 +10,10 @@ export const ENV = {
   shopifyStoreDomain: process.env.SHOPIFY_STORE_DOMAIN ?? "",
   shopifyStorefrontApiAccessToken:
     process.env.SHOPIFY_STOREFRONT_API_ACCESS_TOKEN ?? "",
+  commerceProvider: process.env.COMMERCE_PROVIDER ?? "shopify",
+  medusaBackendUrl: process.env.MEDUSA_BACKEND_URL ?? "",
+  medusaPublishableKey: process.env.MEDUSA_PUBLISHABLE_KEY ?? "",
+  medusaRegionId: process.env.MEDUSA_REGION_ID ?? "",
+  medusaCurrencyCode: process.env.MEDUSA_CURRENCY_CODE ?? "",
+  medusaCheckoutUrl: process.env.MEDUSA_CHECKOUT_URL ?? "",
 };

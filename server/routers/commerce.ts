@@ -2,23 +2,12 @@
  * Commerce router — backend-agnostic tRPC surface for the storefront.
  *
  * The router is intentionally thin: zod validates input, then delegates to the
- * named functions exported from `server/_core/shopify`. If we ever swap
- * commerce backends, only `_core/shopify.ts` + `_core/shopifyNormalize.ts`
- * change — this router stays put.
+ * selected server-side commerce provider. Shopify and Medusa return the same
+ * normalized contract, so this router and the React storefront stay unchanged.
  */
 
 import { z } from "zod";
-import {
-  addCartLines,
-  createCart,
-  getCart,
-  getCollectionByHandle,
-  getProductByHandle,
-  listCollections,
-  listProducts,
-  removeCartLines,
-  updateCartLines,
-} from "../_core/shopify";
+import { getCommerceProvider } from "../commerce/provider";
 import { publicProcedure, router } from "../_core/trpc";
 
 const cartLineInputSchema = z.object({
@@ -44,36 +33,36 @@ export const commerceRouter = router({
           .optional()
       )
       .query(async ({ input }) => {
-        return listProducts(input ?? {});
+        return getCommerceProvider().listProducts(input ?? {});
       }),
     byHandle: publicProcedure
       .input(z.object({ handle: z.string().min(1) }))
       .query(async ({ input }) => {
-        return getProductByHandle(input.handle);
+        return getCommerceProvider().getProductByHandle(input.handle);
       }),
   }),
   collections: router({
     list: publicProcedure
       .input(z.object({ first: z.number().int().min(1).max(50).optional() }).optional())
       .query(async ({ input }) => {
-        return listCollections(input?.first);
+        return getCommerceProvider().listCollections(input?.first);
       }),
     byHandle: publicProcedure
       .input(z.object({ handle: z.string().min(1) }))
       .query(async ({ input }) => {
-        return getCollectionByHandle(input.handle);
+        return getCommerceProvider().getCollectionByHandle(input.handle);
       }),
   }),
   cart: router({
     create: publicProcedure
       .input(z.object({ lines: z.array(cartLineInputSchema).min(1).max(50) }))
       .mutation(async ({ input }) => {
-        return createCart(input.lines);
+        return getCommerceProvider().createCart(input.lines);
       }),
     get: publicProcedure
       .input(z.object({ cartId: z.string().min(1) }))
       .query(async ({ input }) => {
-        return getCart(input.cartId);
+        return getCommerceProvider().getCart(input.cartId);
       }),
     addLines: publicProcedure
       .input(
@@ -83,7 +72,7 @@ export const commerceRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        return addCartLines(input.cartId, input.lines);
+        return getCommerceProvider().addCartLines(input.cartId, input.lines);
       }),
     updateLines: publicProcedure
       .input(
@@ -100,12 +89,12 @@ export const commerceRouter = router({
 
         let cart = null;
         if (toUpdate.length) {
-          cart = await updateCartLines(input.cartId, toUpdate);
+          cart = await getCommerceProvider().updateCartLines(input.cartId, toUpdate);
         }
         if (toRemove.length) {
-          cart = await removeCartLines(input.cartId, toRemove);
+          cart = await getCommerceProvider().removeCartLines(input.cartId, toRemove);
         }
-        if (!cart) cart = await getCart(input.cartId);
+        if (!cart) cart = await getCommerceProvider().getCart(input.cartId);
         return cart;
       }),
     removeLines: publicProcedure
@@ -116,7 +105,7 @@ export const commerceRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        return removeCartLines(input.cartId, input.lineIds);
+        return getCommerceProvider().removeCartLines(input.cartId, input.lineIds);
       }),
   }),
 });

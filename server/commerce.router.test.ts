@@ -18,12 +18,14 @@ const fetchMock = vi.fn();
 beforeEach(() => {
   fetchMock.mockReset();
   vi.stubGlobal("fetch", fetchMock);
+  process.env.COMMERCE_PROVIDER = "shopify";
   process.env.SHOPIFY_STORE_DOMAIN = "test.myshopify.com";
   process.env.SHOPIFY_STOREFRONT_API_ACCESS_TOKEN = "test-token";
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  delete process.env.COMMERCE_PROVIDER;
 });
 
 function ok(data: unknown) {

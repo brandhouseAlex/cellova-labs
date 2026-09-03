@@ -29,3 +29,10 @@
 - [x] Remove hardcoded Cellova fallback URLs from canonical and sitemap outputs in favor of deployment configuration.
 - [x] Add distinct Cellova-branded login and registration access interfaces without submitting customer data before credentials are configured.
 - [x] Verify the separate Vercel runbook is present and complete before final delivery.
+- [x] Define a shared commerce-provider contract for catalog, cart, checkout, and customer-access operations.
+- [x] Make Shopify and Medusa selectable through a single server-side commerce provider setting.
+- [x] Add a Medusa adapter with documented endpoint and publishable-key configuration.
+- [x] Retain the current Shopify adapter behind the same provider-neutral interface.
+- [x] Add provider-selection and adapter-contract Vitest coverage.
+- [x] Document how to switch between Shopify and Medusa without changing storefront UI code.
+- [x] Validate the refactor and package the complete updated Cellova project as a ZIP archive.

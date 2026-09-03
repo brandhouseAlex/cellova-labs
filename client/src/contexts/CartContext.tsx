@@ -179,7 +179,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const proceedToCheckout = useCallback(() => {
     if (!cart?.checkoutUrl) return;
-    // checkoutUrl already has channel=online_store appended server-side.
+    // The active commerce provider supplies its own checkout handoff URL.
     window.open(cart.checkoutUrl, "_blank", "noopener,noreferrer");
   }, [cart]);
 
