@@ -1,63 +1,14 @@
-# Project TODO
+# Cellova Labs Next.js Source Replacement
 
-- [x] Replace the starter screen with the Cellova Labs storefront shell and responsive site navigation.
-- [x] Implement centralized Cellova color, typography, radius, focus, and motion tokens from the supplied brand guide.
-- [x] Apply the supplied Cellova Labs wordmark and generated calibration mark through managed asset URLs only.
-- [x] Build the asymmetric Cellova homepage hero, research category pathways, and documentation-led sections.
-- [x] Recreate the source storefront’s product grid, product details, status treatments, and specification-first product view using the Shopify commerce scaffold.
-- [x] Implement Cellova-branded cart behavior, checkout handoff, loading states, and empty/error treatment.
-- [x] Register the injected Shopify commerce router and environment exports required by the storefront scaffold.
-- [x] Configure all site, Shopify, contact, analytics, and tracking values through documented environment variables without embedding legacy credentials.
-- [x] Create Cellova-branded catalog access, registration, login, account, and research-use notice interfaces with isolated browser-state keys.
-- [x] Create Cellova COA Library and product lot documentation interfaces backed by separate-store-ready data contracts.
-- [x] Write Cellova Shopify customer and COA/product metafield setup documentation.
-- [x] Add Cellova metadata, structured data, canonical handling, robots, sitemap guidance, favicon, and social-preview configuration.
-- [x] Remove all legacy terminology, identifiers, contact details, assets, comments, and technical references from the finished Cellova codebase.
-- [x] Cover the Cellova commerce configuration and key rendering behavior with Vitest tests.
-- [x] Test build, responsive desktop/mobile presentation, and remaining-reference audit; save a delivery checkpoint.
-- [x] Push the completed independent Cellova codebase to the selected Cellova Labs GitHub repository without modifying any pre-existing storefront.
-- [x] Audit for legacy domains, emails, phone values, store IDs, asset filenames, and integration identifiers beyond brand-name matches.
-- [x] Verify that no legacy contacts or unmanaged assets remain in public source, documentation, or deployment configuration.
-- [x] Run a scoped legacy audit across source, documentation, scripts, and configuration with runtime logs excluded.
-- [x] Verify every public-facing Cellova asset path is managed and no contact or integration identifiers are inherited.
-- [x] Provide deployment guidance for creating the separate Vercel project and its environment variables; do not modify a pre-existing deployment infrastructure.
-- [x] Add clear user-facing cart failure feedback for unsuccessful Shopify cart mutations.
-- [x] Extend the Cellova catalog contract with complete, separate-store COA lot data and PDF support.
-- [x] Add rendering-level regression coverage for the Cellova lot documentation panel.
-- [x] Register the Cellova wordmark and calibration mark through managed web storefront assets.
-- [x] Centralize reusable Cellova radius and motion tokens for the storefront’s final visual layer.
-- [x] Remove hardcoded Cellova fallback URLs from canonical and sitemap outputs in favor of deployment configuration.
-- [x] Add distinct Cellova-branded login and registration access interfaces without submitting customer data before credentials are configured.
-- [x] Verify the separate Vercel runbook is present and complete before final delivery.
-- [x] Define a shared commerce-provider contract for catalog, cart, checkout, and customer-access operations.
-- [x] Make Shopify and Medusa selectable through a single server-side commerce provider setting.
-- [x] Add a Medusa adapter with documented endpoint and publishable-key configuration.
-- [x] Retain the current Shopify adapter behind the same provider-neutral interface.
-- [x] Add provider-selection and adapter-contract Vitest coverage.
-- [x] Document how to switch between Shopify and Medusa without changing storefront UI code.
-- [x] Validate the refactor and package the complete updated Cellova project as a ZIP archive.
-- [x] Inventory every supplied storefront route, navigation element, account flow, access gate, and product-detail module.
-- [x] Recreate the original site’s complete public and gated route set using Cellova branding and independent data.
-- [x] Implement functional catalog gating, registration, sign-in, approval status, and account behavior before catalog access.
-- [x] Match original product-page composition, specifications, documentation, variants, cart controls, and related modules in Cellova form.
-- [x] Add explicit pending and approved research-account states so registration alone does not unlock gated catalog access.
-- [x] Replace placeholder order, checkout, and contact routes with functional Cellova browser-state or provider-handoff behavior.
-- [x] Restore product specifications, multiple-lot COA selection support, and visible purchase mutation errors.
-- [x] Validate original-feature parity against the supplied archive and package a corrected Cellova ZIP.
-- [x] Audit every restored Cellova route against the supplied storefront route map and record the validation result.
-- [x] Document the production approval-service boundary and verify gated preview behavior for pending and public routes.
-- [x] Confirm the persisted route-audit and approval-boundary documents and verify all restored routes against the route map.
-- [x] Capture explicit pending-account access behavior and confirm public pages remain available while protected pages remain blocked.
-- [x] Validate collection detail and browser-record order routes explicitly against the restored route map.
-- [x] Re-run and record pending-account protected-versus-public route verification after the shared access-decision coverage change.
-- [x] Add a real Cellova research collection and validate its collection-detail route against the provider-backed catalog.
-- [x] Render and test prepared browser-order history and detail views with an approved-access decision fixture.
-- [x] Render provider-backed collection detail content with an approved-access fixture and record the result.
-- [x] Confirm rendering tests for prepared order history and order detail with actual browser-order data.
-- [x] Render the provider-backed Cellova collection detail under an approved-access fixture and record its content result.
-- [x] Re-run the expanded prepared-order history and detail rendering test file and confirm both cases execute.
-- [x] Verify collection-detail content renders while the Cellova research gate is hidden for an explicit approved-access fixture.
-- [x] Inspect the connected GitHub branch, remote, and Vercel-required source configuration.
-- [x] Add any required Vercel-compatible source configuration without modifying the application’s commerce or access behavior.
-- [x] Verify the Vercel serverless entry, rewrites, and shared application factory persist and build cleanly.
-- [x] Commit and push the finalized Cellova source to the connected GitHub repository for Vercel deployment.
+- [x] Preserve the supplied original Next.js storefront as an untouched local baseline and inventory its architecture.
+- [x] Replace the prior Cellova project source with an independent copy of the original Next.js storefront while preserving the Cellova repository metadata.
+- [x] Rebrand copied source text, configuration comments, metadata, assets, component references, and documentation from the legacy brand to Cellova Labs.
+- [x] Replace legacy design tokens with the official Cellova Ink, Paper, Slate, Indigo, Spark, Sora, Inter, and IBM Plex Mono system.
+- [x] Replace legacy logo/image paths with the supplied Cellova wordmark and update favicon metadata.
+- [x] Verify the original route structure, gating, cart, product, collection, COA Library, and dynamic Shopify/Medusa provider abstraction remain intact.
+- [x] Run dependency installation, TypeScript validation, linting, and the native production Next.js build.
+- [x] Audit source files case-insensitively for legacy branding, legacy asset names, Liquid/theme files, credentials, and obsolete Vercel configuration.
+- [x] Exercise a dynamic product, collection, COA Library, and cart flow in the copied Next.js storefront and record the results.
+- [x] Run a focused source and configuration-template audit for embedded tokens, private credentials, and legacy provider identifiers.
+- [x] Confirm `.env.example` contains placeholder-only Shopify, Medusa, and payment settings; the sole Shopify domain reference in source is a validation example, not a configured store.
+- [ ] Replace the Cellova GitHub repository contents with the tested extracted Next.js application and confirm its Vercel detection readiness.

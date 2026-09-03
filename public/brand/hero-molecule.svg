@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" fill="none" role="img" aria-label="Abstract molecular orbital illustration">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68A038" stop-opacity="0.16"/>
+      <stop offset="0.6" stop-color="#68A038" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#68A038" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="orbitStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#282828" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#68A038" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <circle cx="450" cy="450" r="430" fill="url(#glow)"/>
+  <g stroke="url(#orbitStroke)" stroke-width="2" fill="none">
+    <ellipse cx="450" cy="450" rx="380" ry="150"/>
+    <ellipse cx="450" cy="450" rx="380" ry="150" transform="rotate(30 450 450)"/>
+    <ellipse cx="450" cy="450" rx="380" ry="150" transform="rotate(60 450 450)"/>
+    <ellipse cx="450" cy="450" rx="380" ry="150" transform="rotate(90 450 450)"/>
+    <ellipse cx="450" cy="450" rx="380" ry="150" transform="rotate(120 450 450)"/>
+    <ellipse cx="450" cy="450" rx="380" ry="150" transform="rotate(150 450 450)"/>
+  </g>
+  <g stroke="#282828" stroke-opacity="0.14" stroke-width="1" fill="none">
+    <circle cx="450" cy="450" r="300"/>
+    <circle cx="450" cy="450" r="210"/>
+  </g>
+  <circle cx="450" cy="450" r="34" fill="#68A038"/>
+  <circle cx="450" cy="450" r="34" fill="none" stroke="#4E7D29" stroke-width="3" opacity="0.3"/>
+  <circle cx="450" cy="450" r="52" fill="none" stroke="#68A038" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="830" cy="450" r="14" fill="#282828"/>
+  <circle cx="70" cy="450" r="14" fill="#282828"/>
+  <circle cx="640" cy="121" r="11" fill="#68A038"/>
+  <circle cx="260" cy="779" r="11" fill="#68A038"/>
+  <circle cx="260" cy="121" r="9" fill="#282828" opacity="0.8"/>
+  <circle cx="640" cy="779" r="9" fill="#282828" opacity="0.8"/>
+  <circle cx="450" cy="70" r="7" fill="#68A038" opacity="0.9"/>
+  <circle cx="450" cy="830" r="7" fill="#68A038" opacity="0.9"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#282828"/>
+      <stop offset="1" stop-color="#333330"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#cbg)"/>
+  <g opacity="0.06" stroke="#F4F5F2" stroke-width="1">
+    <path d="M0 150 H1600 M0 300 H1600 M0 450 H1600 M0 600 H1600 M0 750 H1600"/>
+    <path d="M200 0 V900 M400 0 V900 M600 0 V900 M800 0 V900 M1000 0 V900 M1200 0 V900 M1400 0 V900"/>
+  </g>
+  <g stroke="#86BF4A" stroke-width="2" fill="none" opacity="0.85">
+    <circle cx="1180" cy="330" r="150"/>
+    <circle cx="1180" cy="330" r="105"/>
+    <circle cx="1180" cy="330" r="60"/>
+    <circle cx="1180" cy="330" r="14" fill="#86BF4A"/>
+    <circle cx="1330" cy="330" r="9" fill="#86BF4A"/>
+    <circle cx="1030" cy="330" r="9" fill="#86BF4A"/>
+  </g>
+  <text x="120" y="640" font-family="Inter, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="0.02em" fill="#F4F5F2">Popular Products</text>
+  <rect x="120" y="680" width="90" height="6" fill="#86BF4A"/>
+  <text x="120" y="740" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="0.3em" fill="#9A9F98">CELLOVA LABS — RESEARCH USE ONLY</text>
+</svg>
