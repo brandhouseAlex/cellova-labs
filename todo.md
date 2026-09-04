@@ -47,7 +47,7 @@
 - [x] Add the four-item assurance strip and research-formats section with image placeholders and dynamic category routes.
 - [x] Preserve the global research gate, navigation, catalog, account, and commerce behavior while adding the homepage sections.
 - [x] Verify desktop/mobile layouts, keyboard access, placeholder semantics, navigation actions, TypeScript, lint, and build results.
-- [ ] Checkpoint, push, and verify the homepage update on the active Vercel production branch.
+- [x] Checkpoint, push, and verify the homepage update on the active Vercel production branch.
 - [x] Add rendering-level coverage for research-format placeholder labels and their working category destinations.
 - [x] Capture and review the authenticated protected homepage at desktop and mobile viewports without changing gate behavior.
 - [x] Re-verify post-homepage catalog, account, cart, and checkout route protection and commerce navigation behavior.
