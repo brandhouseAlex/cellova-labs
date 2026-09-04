@@ -69,4 +69,4 @@
 - [x] Redesign the About page and compress the mobile footer to a two-column link layout.
 - [x] Replace remaining public storefront section surfaces with the standard Cellova Paper token while preserving the research-access gate treatment.
 - [x] Apply the shared typography scale and leading Spark-dot eyebrow treatment to the remaining public page and catalog section headers.
-- [ ] Verify responsive layouts, keyboard behavior, dynamic data preservation, TypeScript, lint, tests, production build, GitHub, and Vercel deployment.
+- [x] Verify responsive layouts, keyboard behavior, dynamic data preservation, TypeScript, lint, tests, production build, GitHub, and Vercel deployment.

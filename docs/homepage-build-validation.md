@@ -48,3 +48,5 @@ The latest refinement pass was checked on the local native Next.js preview at **
 | COA Library and About | The COA page uses the requested batch-specific Cellova copy and the Library code lists every complete assigned COA independently. The public About page has the new Cellova research-context composition. |
 
 Final automated validation passed: TypeScript check, five Vitest files with nine tests, ESLint, and the native production build.
+
+The post-refinement suite now includes a keyboard regression test for the desktop PDP documentation tablist. Focus plus native Enter activation changes the selected state from Certificate of Analysis to FDA Disclosure & Intended Use, while the responsive mobile composition remains intentionally stacked.
