@@ -55,7 +55,7 @@ export function CatalogToolbar({
     "focus:border-brand focus:outline-none disabled:opacity-50"
   );
 
-  return <section className="rounded-[16px] border border-line bg-[#F3F4F1] p-5 shadow-[0_16px_34px_-34px_rgba(32,32,32,0.45)] sm:p-6 lg:p-7" aria-label="Catalog filters">
+  return <section className="rounded-[16px] border border-line bg-paper p-5 shadow-[0_16px_34px_-34px_rgba(32,32,32,0.45)] sm:p-6 lg:p-7" aria-label="Catalog filters">
     <div className="grid gap-5 lg:grid-cols-[1.1fr_.88fr_.95fr] lg:items-end">
       <form role="search" onSubmit={submitSearch}>
         <label htmlFor="catalog-search" className="mb-2.5 block text-xs font-semibold uppercase tracking-[0.08em] text-slate">Search</label>

@@ -41,14 +41,6 @@ export default async function ProductPage({ params }: Props) {
   const product = await commerce.getProductByHandle(handle);
   if (!product) notFound();
 
-  const relatedQuery = product.collections[0]
-    ? { collection: product.collections[0], perPage: 12 as const }
-    : product.productType
-      ? { productType: product.productType, perPage: 12 as const }
-      : null;
-  const related = relatedQuery
-    ? (await commerce.getProducts(relatedQuery)).items.filter((item) => item.id !== product.id).slice(0, 8)
-    : [];
   const featured = (await commerce.getProducts({ perPage: 8 as const, sort: "alphabetical" })).items
     .filter((item) => item.id !== product.id)
     .slice(0, 5);
@@ -75,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
             <h1 className="mt-4 max-w-xl font-display text-4xl font-semibold tracking-[-0.045em] text-ink sm:text-[2.65rem]">{product.title}</h1>
             <p className="mt-4 max-w-xl text-[15px] leading-7 text-slate">{product.description}</p>
-            <div className="mt-7 grid gap-2 rounded-[12px] border border-[#D8DCE3] bg-gradient-to-br from-white via-[#FBFCFA] to-[#FFF1DB] p-3 text-sm shadow-[0_14px_26px_-28px_rgba(32,32,32,0.42)] sm:grid-cols-3 sm:gap-0">
+            <div className="mt-7 grid gap-2 rounded-[12px] border border-[#D8DCE3] bg-gradient-to-br from-paper via-[#F7F7F4] to-[#FFF1DB] p-3 text-sm shadow-[0_14px_26px_-28px_rgba(32,32,32,0.42)] sm:grid-cols-3 sm:gap-0">
               <QualityBadge icon="shield" label="Quality Standards" detail="Maintained to the highest level" />
               <QualityBadge icon="check" label="Third-Party Tested" detail="Independently verified for purity & identity" />
               <QualityBadge icon="flag" label="USA Made" detail="Proudly manufactured in the USA" />
@@ -86,7 +78,6 @@ export default async function ProductPage({ params }: Props) {
         </div>
         <ProductInformationTabs product={product} />
         <ServiceCards />
-        <RelatedProducts products={related} />
         <RelatedProducts products={featured} title="Featured Products" eyebrow="Catalog selection" headingId="featured-products-heading" variant="featured" />
       </div>
     </div>
@@ -102,12 +93,11 @@ function QualityBadge({ icon, label, detail }: { icon: "shield" | "check" | "fla
 function Reassurance({ icon, label }: { icon: "truck" | "box" | "flask"; label: string }) { return <span className="flex flex-col items-center gap-2 px-2 text-center leading-4 sm:flex-row sm:items-start sm:text-left"><QualityIcon name={icon} className="h-6 w-6 shrink-0 text-brand-deep" /><span>{label}</span></span>; }
 function ServiceCards() {
   const cards = [
-    ["truck", "Next Day Shipping (M-T)", "Orders placed before 12pm EST Monday–Thursday ship out the next day."],
+    ["truck", "Next-Day Shipping", "Orders placed before 12pm EST (M–F) ship the next business day for faster turnaround"],
     ["box", "On Time Delivery", "Multiple shipping options for reliable, on-time delivery."],
     ["flask", "Standards Matter", "Manufactured in cGMP-compliant facilities to high laboratory standards."],
-    ["support", "US Based Support", "Need help? We're here to help."],
   ] as const;
-  return <section className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4" aria-label="Service commitments">{cards.map(([icon, title, body]) => <article key={title} className="relative overflow-hidden rounded-[11px] border border-line bg-paper p-5 shadow-[0_15px_28px_-25px_rgba(32,32,32,0.46)]"><div className="pointer-events-none absolute inset-x-0 bottom-0 h-7 bg-gradient-to-t from-brand-tint/75 to-transparent" /><div className="relative flex gap-3"><QualityIcon name={icon} className="mt-0.5 h-7 w-7 shrink-0 text-brand-deep" /><div><h3 className="text-sm font-semibold text-ink">{title}</h3><p className="mt-2 text-xs leading-5 text-slate">{body}</p></div></div></article>)}</section>;
+  return <section className="mt-7 grid gap-3 sm:grid-cols-3" aria-label="Service commitments">{cards.map(([icon, title, body]) => <article key={title} className="relative overflow-hidden rounded-[11px] border border-line bg-paper p-5 shadow-[0_15px_28px_-25px_rgba(32,32,32,0.46)]"><div className="pointer-events-none absolute inset-x-0 bottom-0 h-7 bg-gradient-to-t from-brand-tint/75 to-transparent" /><div className="relative flex gap-3"><QualityIcon name={icon} className="mt-0.5 h-7 w-7 shrink-0 text-brand-deep" /><div><h3 className="text-sm font-semibold text-ink">{title}</h3><p className="mt-2 text-xs leading-5 text-slate">{body}</p></div></div></article>)}</section>;
 }
 function QualityIcon({ name, className }: { name: string; className?: string }) { if (name === "support") return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true"><path d="M5 18.25A8.1 8.1 0 1 1 19 18.25L21 21l-4.35-1.1a8.1 8.1 0 0 1-11.65-1.65Z" /><path d="M8.25 12h.01M12 12h.01M15.75 12h.01" /></svg>; const paths: Record<string, string> = { shield: "M12 3 19 6v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z", check: "m5 12 4 4L19 6", flag: "M5 21V4m0 1h12l-2.4 3.5L17 12H5", flask: "M9 3h6M10 3v6L5 18a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3M8 15h8", truck: "M3 6h11v10H3zM14 9h4l3 3v4h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z", box: "m4 7 8-4 8 4v10l-8 4-8-4ZM4 7l8 4 8-4M12 11v10" }; return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true"><path d={paths[name] ?? paths.shield} /></svg>; }
 function UsaFlagIcon({ className }: { className?: string }) { return <svg viewBox="0 0 24 16" className={className} aria-label="USA flag" role="img"><rect width="24" height="16" rx="1.5" fill="#fff" stroke="#8B93A7" strokeWidth="0.6" /><path d="M0 2h24M0 6h24M0 10h24M0 14h24" stroke="#B22234" strokeWidth="1.7" /><rect width="10.5" height="8.4" rx="1" fill="#2D3452" /><circle cx="2.5" cy="2" r="0.55" fill="#fff" /><circle cx="5.2" cy="2" r="0.55" fill="#fff" /><circle cx="7.9" cy="2" r="0.55" fill="#fff" /><circle cx="3.85" cy="4.2" r="0.55" fill="#fff" /><circle cx="6.55" cy="4.2" r="0.55" fill="#fff" /><circle cx="2.5" cy="6.4" r="0.55" fill="#fff" /><circle cx="5.2" cy="6.4" r="0.55" fill="#fff" /><circle cx="7.9" cy="6.4" r="0.55" fill="#fff" /></svg>; }

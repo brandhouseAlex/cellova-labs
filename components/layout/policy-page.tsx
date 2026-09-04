@@ -12,7 +12,7 @@ export function PolicyPage({
   children: ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden bg-[#F3F4F1] py-12 sm:py-16">
+    <div className="relative overflow-hidden bg-paper py-12 sm:py-16">
       <div className="grid-texture-light pointer-events-none absolute inset-0 opacity-55" aria-hidden="true" />
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Breadcrumbs
@@ -20,7 +20,7 @@ export function PolicyPage({
         />
         <header className="mt-8 border-b border-brand/30 pb-8">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">Cellova Labs</p>
+            <p className="section-eyebrow">Cellova Labs</p>
             <span className="h-3 w-px bg-silver" aria-hidden="true" />
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate">Policy document</p>
           </div>

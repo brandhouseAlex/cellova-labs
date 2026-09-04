@@ -34,3 +34,17 @@ The authenticated local flow was explicitly exercised in sequence after the home
 | Checkout | Checkout control activated and navigated to `/checkout`. |
 
 This confirms that the new homepage content does not interrupt the existing authenticated catalog and mock-provider cart flow.
+
+## Refinement-pass validation
+
+The latest refinement pass was checked on the local native Next.js preview at **1280 × 720** and **375 × 812**. The desktop review covered the homepage, About, COA Library, and `/products/bpc-157`; the small-screen review covered the About, COA Library, and BPC-157 routes.
+
+| Surface | Verified refinement |
+| --- | --- |
+| Homepage | Hero proof chips now read **USA Made**, **Third-party tested**, and **COAs available**; the service band has three cards, uses **Next-Day Shipping** wording, and presents a flask icon for Standards Matter. Research Ordering is absent. |
+| Navigation and footer | **Sprays** appears after Serums. The supplied Cellova dark-background wordmark loads from the native public brand path. Mobile navigation/footer link groups form two columns per row. |
+| Product grids and PDP | Product cards use rounded image frames and a non-overlapping **RUO** marker. BPC-157 displays the simplified indigo-outlined gallery, circular icon-only cart launcher behavior, no “You may also research” rail, and featured cards with live product images. |
+| Product information | At the mobile breakpoint, Certificate of Analysis (when available), Storage Instructions, and FDA Disclosure render as vertically stacked documentation panels. |
+| COA Library and About | The COA page uses the requested batch-specific Cellova copy and the Library code lists every complete assigned COA independently. The public About page has the new Cellova research-context composition. |
+
+Final automated validation passed: TypeScript check, five Vitest files with nine tests, ESLint, and the native production build.

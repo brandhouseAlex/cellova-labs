@@ -26,8 +26,8 @@ export function ProductGallery({
   const selected = media[selectedIndex] ?? null;
 
   return (
-    <div className="rounded-[12px] border border-[#D8DCE3] bg-paper p-3 shadow-[0_20px_42px_-34px_rgba(32,32,32,0.35)]">
-      <div className="relative aspect-[1.05/1] overflow-hidden rounded-[9px] border border-[#D8DCE3] bg-[#F3F4F1]">
+    <div>
+      <div className="relative aspect-[1.05/1] overflow-hidden rounded-[14px] border-2 border-ink-soft/75 bg-paper shadow-[0_18px_34px_-25px_rgba(45,52,82,0.42)]">
         {hasCoa ? <span className="absolute left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-brand/10 bg-[#FFF1DB] px-3 py-1.5 text-[11px] font-semibold text-brand-deep shadow-sm backdrop-blur-sm"><VerifiedIcon className="h-3.5 w-3.5" />COA Verified</span> : null}
         {selected ? (
           <Image
@@ -54,7 +54,7 @@ export function ProductGallery({
       </div>
 
       {media.length > 1 ? (
-        <div className="mt-3 flex gap-3 overflow-x-auto px-1 pb-1" aria-label="Product image gallery">
+        <div className="mt-4 flex gap-3 overflow-x-auto px-1 pb-1" aria-label="Product image gallery">
           {media.map((image, index) => (
             <button
               key={image.url}

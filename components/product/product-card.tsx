@@ -25,8 +25,6 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
 
   const singleVariant = product.variants.length === 1 ? product.variants[0] : null;
   const canAddDirectly = Boolean(singleVariant?.availableForSale && isAuthenticated);
-  const variantLabel = singleVariant?.title && !/^default title$/i.test(singleVariant.title) ? ` – ${singleVariant.title}` : "";
-
   async function addToCart() {
     if (!singleVariant || !canAddDirectly) return;
     setError(null);
@@ -41,7 +39,7 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
     <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] border border-line bg-paper p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
       <Link
         href={`/products/${product.handle}`}
-        className="relative block aspect-[.88/1] overflow-hidden rounded-[8px] bg-paper"
+        className="relative block aspect-[.88/1] overflow-hidden rounded-[12px] border border-ink-soft/15 bg-paper"
         aria-label={`View ${product.title}`}
       >
         {presentationImage ? (
@@ -57,18 +55,16 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
             Image pending
           </span>
         )}
-        <span className="absolute left-3 top-3">
-          <ResearchUseBadge />
-        </span>
       </Link>
 
       <div className="flex flex-1 flex-col pt-4 text-center">
+        <ResearchUseBadge className="mb-3 self-center" />
         <h3 className="min-h-[2.75rem] font-display text-[15px] font-semibold leading-5 tracking-tight text-ink sm:text-base">
           <Link
             href={`/products/${product.handle}`}
             className="transition-colors hover:text-brand"
           >
-            {product.title}{variantLabel}
+            {product.title}
           </Link>
         </h3>
         <div className="mt-auto pt-2">

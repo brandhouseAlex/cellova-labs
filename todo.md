@@ -59,3 +59,14 @@
 - [x] Continue the same authenticated flow through a real product, Add to Cart, cart review, and checkout preparation.
 - [x] Document the full homepage-to-checkout path before marking commerce preservation complete.
 - [x] Read back the homepage-to-checkout verification table and confirm the recorded flow is persisted.
+- [x] Audit hero, navigation, product grid, product detail, COA, footer, About, and global responsive implementation points.
+- [x] Replace the hero proof-chip set with USA Made, remove U.S.-Based Support, and update the shipping and standards-matter content.
+- [x] Apply the Cellova Paper background, standardized typography scale, orange section dots, and approved brand colors across site surfaces.
+- [x] Add Sprays to the header navigation and use the supplied dark Cellova logo in the footer.
+- [x] Refine product grid image and RUO badge styling, preserve ecommerce product names, and correct mobile badge placement.
+- [x] Refine product detail imagery, sticky cart affordance, tabs, featured products, related-section removal, and mobile information layout.
+- [x] Update the COA Library introduction and display every available COA record per product.
+- [x] Redesign the About page and compress the mobile footer to a two-column link layout.
+- [x] Replace remaining public storefront section surfaces with the standard Cellova Paper token while preserving the research-access gate treatment.
+- [x] Apply the shared typography scale and leading Spark-dot eyebrow treatment to the remaining public page and catalog section headers.
+- [ ] Verify responsive layouts, keyboard behavior, dynamic data preservation, TypeScript, lint, tests, production build, GitHub, and Vercel deployment.

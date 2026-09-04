@@ -34,18 +34,8 @@ export function Badge({
 
 export function ResearchUseBadge({ className }: { className?: string }) {
   return (
-    <Badge tone="brand" className={className}>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-3 w-3"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path d="M9 3h6M10 3v6.3L4.7 18a2 2 0 0 0 1.8 3h11a2 2 0 0 0 1.8-3L14 9.3V3" />
-      </svg>
-      Research Use Only
+    <Badge tone="brand" className={cn("rounded-full border border-brand/20 px-2.5 py-1 text-[10px] tracking-[0.16em]", className)}>
+      RUO
     </Badge>
   );
 }
@@ -124,7 +114,7 @@ export function SectionHeading({
       {eyebrow ? (
         <p
           className={cn(
-            "mb-3 text-xs font-semibold uppercase tracking-[0.28em]",
+            "mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] before:h-2 before:w-2 before:rounded-full before:bg-brand before:content-['']",
             dark ? "text-brand-bright" : "text-brand"
           )}
         >

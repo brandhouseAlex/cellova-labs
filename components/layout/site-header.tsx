@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: "/collections/vials", label: "Vials" },
   { href: "/collections/capsules", label: "Capsules" },
   { href: "/collections/serums", label: "Serums" },
+  { href: "/collections/sprays", label: "Sprays" },
   { href: "/products", label: "Shop All" },
   { href: "/coa-library", label: "COA Library" },
 ];

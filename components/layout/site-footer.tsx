@@ -6,6 +6,7 @@ const SHOP_LINKS = [
   { href: "/collections/vials", label: "Vials" },
   { href: "/collections/capsules", label: "Capsules" },
   { href: "/collections/serums", label: "Serums" },
+  { href: "/collections/sprays", label: "Sprays" },
 ];
 
 const COMPANY_LINKS = [
@@ -26,16 +27,16 @@ const POLICY_LINKS = [
 export function SiteFooter() {
   return (
     <footer className="site-footer border-t border-ink/10 bg-ink text-paper">
-      <div className="home-page-container py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
-          <div className="lg:col-span-2">
+      <div className="home-page-container py-10 sm:py-14">
+        <div className="grid grid-cols-2 gap-x-7 gap-y-8 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-6">
+          <div className="col-span-full lg:col-span-2">
             <Link
               href="/"
               aria-label="Cellova Labs — home"
               className="relative block h-12 w-[190px]"
             >
               <Image
-                src="/brand/cellova-wordmark.webp"
+                src="/brand/cellova-dark-wordmark.webp"
                 alt="Cellova Labs"
                 fill
                 className="object-contain object-left"

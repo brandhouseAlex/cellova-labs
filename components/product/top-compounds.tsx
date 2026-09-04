@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { CommerceCollection, CommerceProduct } from "@/lib/commerce/types";
 import { cn, formatMoney } from "@/lib/utils";
+import { ResearchUseBadge } from "@/components/ui/primitives";
 
 /**
  * Cellova's collection-led product browser. Collections and products arrive
@@ -49,7 +50,7 @@ export function TopCompounds({
   return (
     <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
       <aside className="lg:pt-1">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">Featured Research Compounds</p>
+        <p className="section-eyebrow">Featured Research Compounds</p>
         <h3 className="mt-4 max-w-[13rem] font-display text-3xl font-semibold leading-[1.05] tracking-tight text-ink">Top Compounds in Demand</h3>
         <p className="mt-4 max-w-[13rem] text-sm leading-relaxed text-slate">Browse the active research collections currently available in the catalog.</p>
 
@@ -108,10 +109,11 @@ function CompactProductCard({ product }: { product: CommerceProduct }) {
 
   return (
     <article className="group flex min-h-[320px] flex-col overflow-hidden rounded-[8px] border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-[0_18px_36px_-22px_rgba(40,40,40,0.4)]">
-      <Link href={`/products/${product.handle}`} className="relative block h-40 overflow-hidden bg-gradient-to-b from-brand-tint/65 to-paper" aria-label={`View ${product.title}`}>
+      <Link href={`/products/${product.handle}`} className="relative m-2 block h-40 overflow-hidden rounded-[10px] border border-ink-soft/15 bg-gradient-to-b from-brand-tint/65 to-paper" aria-label={`View ${product.title}`}>
         {product.featuredImage ? <Image src={product.featuredImage.url} alt={product.featuredImage.altText} fill sizes="(min-width: 1280px) 20vw, (min-width: 640px) 40vw, 90vw" className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.05]" /> : <span className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.18em] text-silver">Image pending</span>}
       </Link>
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-4 pt-2">
+        <ResearchUseBadge className="mb-3 self-start" />
         <h4 className="font-display text-base font-semibold tracking-tight text-ink"><Link href={`/products/${product.handle}`} className="transition-colors hover:text-brand-deep">{product.title}</Link></h4>
         <p className={cn("mt-1 text-xs font-medium", firstAvailableVariant ? "text-brand-deep" : "text-slate")}>{strength}</p>
         <p className="mt-3 text-sm font-semibold text-ink">{isSinglePrice ? formatMoney(priceRange.minVariantPrice) : `${formatMoney(priceRange.minVariantPrice)} – ${formatMoney(priceRange.maxVariantPrice)}`}</p>
