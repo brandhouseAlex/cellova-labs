@@ -1,124 +1,38 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 
-/**
- * Research Formats style: one continuous warm editorial grid. The selector
- * controls real collection destinations and swaps only approved supplied
- * product images; Sprays is intentionally image-free until an asset is given.
- */
-type FormatKey = "vials" | "capsules" | "serums" | "sprays";
+const FORMATS = [
+  { title: "Vials", description: "Precision-filled lyophilized peptides", href: "/collections/vials", shape: "vial" },
+  { title: "Capsules", description: "Convenient research support", href: "/collections/capsules", shape: "capsule" },
+  { title: "Serums", description: "High-purity liquid formulations", href: "/collections/serums", shape: "serum" },
+  { title: "Nasal Sprays", description: "Advanced delivery solutions", href: "/collections/sprays", shape: "spray" },
+] as const;
 
-type Format = {
-  key: FormatKey;
-  label: string;
-  title: string;
-  description: string;
-  href: string;
-  image?: { src: string; alt: string };
-};
-
-const FORMATS: Format[] = [
-  {
-    key: "vials",
-    label: "Vials",
-    title: "Vials",
-    description: "Sterile, precision-filled vials. Standard 5 and 10mL vials with grey caps. Batch-specific COAs included.",
-    href: "/collections/vials",
-    image: { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663522951213/QyMAAuIDmmIjZeMl.png", alt: "Cellova Labs Melanotan 2 vial" },
-  },
-  {
-    key: "capsules",
-    label: "Capsules",
-    title: "Capsules",
-    description: "Precision-formulated capsules designed for consistency and reliable handling. Available across a growing range of research compounds and formulations.",
-    href: "/collections/capsules",
-    image: { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663522951213/CGXxlUPWLNpWtnzW.png", alt: "Cellova Labs Formula 2331 capsules" },
-  },
-  {
-    key: "serums",
-    label: "Serums",
-    title: "Serums",
-    description: "Precision-formulated research serums produced with carefully selected ingredients and consistent quality standards.",
-    href: "/collections/serums",
-    image: { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663522951213/fQNkDlplnhOlslbs.png", alt: "Cellova Labs GHK-Cu peptide serum" },
-  },
-  {
-    key: "sprays",
-    label: "Sprays",
-    title: "Sprays",
-    description: "Precision-formulated spray products designed for consistent dispensing and dependable research applications.",
-    href: "/collections/sprays",
-  },
-];
-
-const FORMAT_ICON_SPRITE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663522951213/rzZdLoyAYywglUVs.png";
-
-const FORMAT_ICON_CROPS: Record<FormatKey, { className: string; position: string }> = {
-  vials: { className: "h-[63px] w-[46px]", position: "-16px -14px" },
-  capsules: { className: "h-[65px] w-[50px]", position: "-14px -108px" },
-  serums: { className: "h-[65px] w-[39px]", position: "-22px -189px" },
-  sprays: { className: "h-[72px] w-[47px]", position: "-18px -272px" },
-};
-
-/** Uses the user-supplied original icon artwork as a constrained sprite crop. */
-function FormatIcon({ type }: { type: FormatKey }) {
-  const crop = FORMAT_ICON_CROPS[type];
-  return <span aria-hidden="true" className={`research-format-icon-sprite block shrink-0 ${crop.className}`} style={{ backgroundImage: `url(${FORMAT_ICON_SPRITE})`, backgroundPosition: crop.position }} />;
+function FormatPlaceholder({ shape, title }: { shape: (typeof FORMATS)[number]["shape"]; title: string }) {
+  const art = {
+    vial: <><rect x="34" y="21" width="32" height="52" rx="4" /><path d="M38 21V13h24v8M36 35h28" /><rect x="38" y="10" width="24" height="5" rx="2" fill="currentColor" stroke="none" /></>,
+    capsule: <><rect x="28" y="20" width="44" height="54" rx="9" /><path d="M30 34h40M40 20v-8h20v8" /><rect x="34" y="42" width="32" height="18" rx="2" /></>,
+    serum: <><path d="M41 16h18v14h5v44H36V30h5z" /><path d="M41 16h18M38 32h24M43 8h14v8" /><circle cx="50" cy="51" r="7" /></>,
+    spray: <><path d="M39 30h23v44H39zM45 30V19h11v11M48 16h16M64 18v9H52" /><path d="M42 43h17" /></>,
+  } as const;
+  return <div role="img" aria-label={`${title} image placeholder`} className="flex h-28 items-end justify-center text-[#B5BBC8] sm:h-32"><svg viewBox="0 0 100 90" className="h-full w-24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{art[shape]}</svg></div>;
 }
 
 export function ResearchFormats() {
-  const [activeKey, setActiveKey] = useState<FormatKey>("vials");
-  const [leaving, setLeaving] = useState(false);
-  const timerRef = useRef<number | undefined>(undefined);
-  const active = FORMATS.find((format) => format.key === activeKey) ?? FORMATS[0];
-
-  useEffect(() => () => window.clearTimeout(timerRef.current), []);
-
-  function selectFormat(nextKey: FormatKey) {
-    if (nextKey === activeKey || leaving) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setActiveKey(nextKey);
-      return;
-    }
-    setLeaving(true);
-    timerRef.current = window.setTimeout(() => {
-      setActiveKey(nextKey);
-      setLeaving(false);
-    }, 180);
-  }
-
-  return <section className="research-formats bg-[#F3F4F1]" aria-labelledby="research-formats-heading">
-    <div className="home-page-container grid grid-cols-1 overflow-hidden border-r border-[#D8DCE3] lg:h-[33rem] lg:grid-cols-[1.18fr_.72fr_1.9fr]">
-      <div className="research-format-intro flex flex-col justify-center border-b border-[#D8DCE3] px-6 py-12 sm:px-10 lg:border-b-0 lg:px-0 lg:pr-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.19em] text-[#D48624]">Research Formats</p>
-        <h2 id="research-formats-heading" className="mt-5 font-display text-[2.55rem] font-semibold leading-[1.02] tracking-[-0.052em] text-ink sm:text-5xl">Multiple Formats.<br /><span className="text-[#F2A63C]">One Standard.</span></h2>
-        <p className="mt-5 max-w-sm text-base leading-[1.6] text-slate sm:text-lg">Engineered for researchers. Backed by our uncompromising quality standard.</p>
-        <Link href="/products" className="research-formats-explore group mt-8 inline-flex w-fit items-center gap-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#D48624]">Explore Formats <span className="research-formats-arrow text-xl leading-none" aria-hidden="true">→</span></Link>
+  return <section className="border-y border-[#ECECE8] bg-white py-10 sm:py-14" aria-labelledby="research-formats-heading">
+    <div className="home-page-container grid gap-8 lg:grid-cols-[24.5%_75.5%] lg:gap-10">
+      <div className="lg:pt-2">
+        <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.12em] text-[#3D4250]"><span className="h-2.5 w-2.5 rounded-full bg-[#F16D16]" />Research Formats</p>
+        <h2 id="research-formats-heading" className="mt-4 font-display text-[clamp(2.4rem,3.35vw,3.35rem)] font-bold leading-[1.02] tracking-[-.055em] text-[#12151F]">Multiple formats.<br /><span className="text-[#364A8A]">One standard.</span></h2>
+        <p className="mt-3 max-w-[15rem] text-[15px] font-medium leading-6 text-[#69707D]">Choose the format that works best for your research.</p>
+        <Link href="/products" className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-[7px] border border-[#D9D9D5] bg-white px-4 text-sm font-bold text-[#333844] transition-colors hover:border-[#F16D16] hover:bg-[#FFF3E8]">View All Products <span aria-hidden="true">→</span></Link>
       </div>
-
-      <div className="grid grid-cols-2 border-b border-[#D8DCE3] sm:grid-cols-4 lg:grid-cols-1 lg:border-b-0 lg:border-l">
-        {FORMATS.map((format) => {
-          const isActive = format.key === activeKey;
-          return <button key={format.key} type="button" onClick={() => selectFormat(format.key)} aria-pressed={isActive} className={`research-format-selector relative flex min-h-20 items-center gap-3 border-b border-r border-[#D8DCE3] px-5 py-4 text-left last:border-b-0 sm:border-r-0 sm:px-6 lg:min-h-0 lg:border-r-0 lg:px-7 ${isActive ? "research-format-selector--active" : ""}`}>
-            <span className="research-format-icon"><FormatIcon type={format.key} /></span>
-            <span className="text-sm font-semibold uppercase tracking-[0.04em] text-ink">{format.label}</span>
-            <span className="research-format-arrow ml-auto text-2xl font-light text-[#D48624]" aria-hidden="true">›</span>
-          </button>;
-        })}
-      </div>
-
-      <div className={`research-format-visual relative min-h-[23rem] overflow-hidden border-t border-[#D8DCE3] bg-[radial-gradient(ellipse_at_65%_50%,#fff_0%,#ECEEF2_51%,#D8DCE3_100%)] sm:min-h-[28rem] lg:min-h-0 lg:border-l lg:border-t-0 ${leaving ? "research-format-visual--leaving" : ""}`} key={`visual-${active.key}`}>
-        {active.image ? <Image src={active.image.src} alt={active.image.alt} fill unoptimized sizes="(min-width: 1024px) 52vw, 100vw" className="research-format-image object-cover object-center" /> : <div className="research-format-empty flex h-full items-center justify-center p-10 text-center"><div><span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[#D48624]/20 bg-white/55 text-[#D48624]"><FormatIcon type="sprays" /></span><p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-[#626B82]">Spray collection</p></div></div>}
-        <div className="research-format-overlay absolute left-0 top-0 z-10 max-w-md p-6 sm:p-8 lg:p-9">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#D48624]">Research format</p>
-          <h3 className="mt-3 font-display text-3xl font-semibold tracking-[-0.045em] text-ink sm:text-4xl">{active.title}</h3>
-          <p className="mt-3 max-w-sm text-sm leading-6 text-[#2D3452] sm:text-base">{active.description}</p>
-          <Link href={active.href} className="research-format-learn group mt-5 inline-flex w-fit items-center gap-3 rounded-[4px] border border-[#D48624] bg-white/70 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#D48624] transition-colors duration-200 hover:border-[#D48624] hover:bg-[#FFF1DB]">Learn More <span className="research-formats-arrow text-lg leading-none" aria-hidden="true">→</span></Link>
-        </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {FORMATS.map((format) => <Link key={format.title} href={format.href} className="group flex min-h-[15rem] flex-col rounded-[13px] border border-[#E2E3E6] bg-[#FCFCFC] p-5 text-center transition-all hover:-translate-y-0.5 hover:border-[#F4BD8F] hover:shadow-[0_12px_25px_-20px_rgba(34,38,48,.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F16D16]">
+          <FormatPlaceholder shape={format.shape} title={format.title} />
+          <h3 className="mt-3 font-display text-xl font-bold tracking-[-.035em] text-[#252A35]">{format.title}</h3>
+          <p className="mt-1 min-h-10 text-xs font-medium leading-4 text-[#6D7380]">{format.description}</p>
+          <span className="mt-auto pt-3 text-xl text-[#F16D16] transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </Link>)}
       </div>
     </div>
   </section>;

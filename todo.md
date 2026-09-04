@@ -42,3 +42,20 @@
 - [x] Persist a reference-delta audit documenting the desktop split, left hierarchy, orbital anchor, trust row, footer, form geometry, and legal-link corrections.
 - [x] Record final desktop and mobile visual acceptance evidence for the refined Cellova gate.
 - [x] Commit, push, and verify the post-refinement gate deployment on Vercel.
+- [x] Audit the existing homepage, navigation, reusable product sections, and current responsive styles before homepage changes.
+- [x] Build a Cellova reference-matched hero with a labeled image placeholder, research proof chips, and working catalog/COA actions.
+- [x] Add the four-item assurance strip and research-formats section with image placeholders and dynamic category routes.
+- [x] Preserve the global research gate, navigation, catalog, account, and commerce behavior while adding the homepage sections.
+- [x] Verify desktop/mobile layouts, keyboard access, placeholder semantics, navigation actions, TypeScript, lint, and build results.
+- [ ] Checkpoint, push, and verify the homepage update on the active Vercel production branch.
+- [x] Add rendering-level coverage for research-format placeholder labels and their working category destinations.
+- [x] Capture and review the authenticated protected homepage at desktop and mobile viewports without changing gate behavior.
+- [x] Re-verify post-homepage catalog, account, cart, and checkout route protection and commerce navigation behavior.
+- [x] Run focused keyboard checks for the new hero CTAs and research-format cards, including visible focus and Enter activation.
+- [x] Verify the research gate remains visible on protected catalog, account, cart, and checkout routes after the homepage update.
+- [x] Exercise a preserved authenticated commerce path from the homepage through catalog, cart, and checkout preparation.
+- [x] Verify keyboard focus and Enter activation for View COA Library and the remaining Capsules, Serums, and Nasal Sprays format cards.
+- [x] From an authenticated homepage session, activate Browse Peptides and record navigation to the catalog.
+- [x] Continue the same authenticated flow through a real product, Add to Cart, cart review, and checkout preparation.
+- [x] Document the full homepage-to-checkout path before marking commerce preservation complete.
+- [x] Read back the homepage-to-checkout verification table and confirm the recorded flow is persisted.

@@ -1,78 +1,72 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
-import { HeroOrbit } from "@/components/home/hero-orbit";
 import { HomeProductGrid } from "@/components/home/home-product-grid";
 import { ResearchFormats } from "@/components/home/research-formats";
 import { TransparencyCoa } from "@/components/home/transparency-coa";
 import { CatalogToDelivery } from "@/components/home/catalog-to-delivery";
 
-/**
- * Homepage restoration style: an editorial warm-cream field, large left HTML
- * copy, exact supplied product media on the right, and restrained Cellova-amber
- * scientific orbit motion. The trust strip is intentionally attached below.
- */
 export const metadata = buildMetadata({
   title: "Cellova Labs — Research-Grade Peptides & Laboratory Materials",
-  description:
-    "Cellova Labs supplies research-grade peptides, blends, and laboratory materials with independent third-party analytical verification. Research use only.",
+  description: "Cellova Labs supplies research-grade peptides, blends, and laboratory materials with independent third-party analytical verification. Research use only.",
   path: "/",
 });
 
-const TRUST_CREDENTIALS = [
-  { value: "99%+", label: "Purity Guaranteed", icon: "shield" },
-  { value: "Third-Party", label: "Tested", icon: "flask" },
-  { value: "USA", label: "Manufactured in Texas", icon: "pin" },
-  { value: "COAs", label: "On Every Batch", icon: "document" },
+const ASSURANCES = [
+  { title: "Same-Day Shipping", detail: "Orders placed before 12pm EST (M–F) ship the same business day for faster turnaround.", icon: "truck" },
+  { title: "On-Time Delivery", detail: "Choose from dependable shipping options with tracked delivery across U.S. orders.", icon: "parcel" },
+  { title: "Standards Matter", detail: "Quality-focused materials and disciplined testing help support reliable research outcomes.", icon: "scope" },
+  { title: "U.S.-Based Support", detail: "Need help? Our team is here to assist with products, shipping, and documentation questions.", icon: "headset" },
 ] as const;
 
-function TrustIcon({ name }: { name: (typeof TRUST_CREDENTIALS)[number]["icon"] }) {
-  const paths = {
-    shield: "M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3z M8.8 12.1l2.1 2.1 4.5-4.7",
-    flask: "M9 3h6M10 3v6L5.2 18a2 2 0 0 0 1.7 3h10.2a2 2 0 0 0 1.7-3L14 9V3M8.1 16h7.8",
-    pin: "M20 10c0 5.1-8 11-8 11S4 15.1 4 10a8 8 0 1 1 16 0ZM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
-    document: "M7 3h7l5 5v13H7zM14 3v5h5M10 13h5M10 17h5",
+function AssuranceIcon({ icon }: { icon: (typeof ASSURANCES)[number]["icon"] }) {
+  const content = {
+    truck: <><path d="M3 6h11v10H3z" /><path d="M14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /></>,
+    parcel: <><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" /><path d="M4.5 7.8 12 12l7.5-4.2M12 12v9" /></>,
+    scope: <><path d="M9 3h5M11.5 3v5.4l-3.6 3.6a4.5 4.5 0 0 0 6.4 6.4l1.7-1.7" /><path d="m13 10 2 2M4 21h16M8 17.5h7" /></>,
+    headset: <><path d="M4 14v-2a8 8 0 0 1 16 0v2" /><path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5ZM20 13h-3v6h2a1 1 0 0 0 1-1v-5ZM17 19c0 2-1.8 3-4 3h-1" /></>,
   } as const;
+  return <svg viewBox="0 0 24 24" className="h-8 w-8 text-[#D97612]" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{content[icon]}</svg>;
+}
 
-  return <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0 text-brand-bright sm:h-9 sm:w-9" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>;
+function HeroPlaceholder() {
+  return <div role="img" aria-label="Hero image placeholder" className="flex min-h-[23rem] items-center justify-center rounded-[20px] bg-[#D9DAE5] text-[#50566B] sm:min-h-[29rem] lg:min-h-0">
+    <div className="text-center">
+      <svg viewBox="0 0 80 68" className="mx-auto h-16 w-20" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="8" y="8" width="64" height="48" rx="5" /><circle cx="27" cy="25" r="5" /><path d="m14 50 18-17 10 10 12-15 12 22" /></svg>
+      <p className="mt-3 text-sm font-bold uppercase tracking-[.08em]">Hero Image</p>
+      <p className="mt-1 text-xs font-semibold">1920 × 1080</p>
+    </div>
+  </div>;
 }
 
 export default async function HomePage() {
   return <>
-    <section className="home-premium-hero relative isolate overflow-hidden border-b border-black/5 bg-[#F3F4F1]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_76%_48%,rgba(240,246,234,0.78),transparent_44%),linear-gradient(120deg,#F3F4F1_0%,#F3F4F1_49%,#FFF1DB_100%)]" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-y-0 left-0 w-[61%] bg-gradient-to-r from-[#F3F4F1] via-[#F3F4F1]/95 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-[20%] bg-gradient-to-t from-[#F3F4F1] via-[#F3F4F1]/90 to-transparent" />
-      </div>
-
-      <div className="pointer-events-none absolute inset-y-0 right-0 left-[48%] hidden overflow-hidden lg:block" aria-hidden="true"><HeroOrbit /></div>
-
-      <div className="home-page-container relative grid min-h-[40rem] grid-cols-1 py-14 lg:min-h-[40.5rem] lg:grid-cols-[45%_55%] lg:py-0">
-        <div className="relative z-30 flex max-w-xl flex-col justify-center lg:pb-10">
-          <p className="home-hero-enter home-hero-enter--1 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.19em] text-brand-deep sm:text-sm"><span>Advancing Research</span><span className="home-hero-separator" aria-hidden="true" /><span>Empowering Discovery</span></p>
-          <h1 className="home-hero-enter home-hero-enter--2 mt-7 font-display text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.055em] text-ink sm:text-6xl lg:text-[4.55rem]">Premium Compounds.<br /><span className="text-[#F2A63C]">Proven Purity.</span></h1>
-          <p className="home-hero-enter home-hero-enter--3 mt-7 max-w-[30rem] text-lg leading-[1.55] text-[#30322f] sm:text-xl">We provide premium research compounds and peptides manufactured in the USA and tested to the highest standards.</p>
-          <div className="home-hero-enter home-hero-enter--4 mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/products" className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-[5px] bg-[#F2A63C] px-7 text-sm font-semibold uppercase tracking-[0.08em] text-white shadow-[0_10px_20px_-15px_rgba(37,75,12,0.8)] transition-colors duration-200 hover:bg-[#3f6919] active:scale-[0.98]">Browse Catalog <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span></Link>
-            <Link href="/coa-library" className="inline-flex min-h-14 items-center justify-center rounded-[5px] border border-[#40423f]/70 bg-white/40 px-7 text-sm font-semibold uppercase tracking-[0.08em] text-ink transition-colors duration-200 hover:border-[#F2A63C] hover:bg-[#FFF1DB] active:scale-[0.98]">View COAs</Link>
+    <section className="border-b border-black/[.07] bg-[#F7F7F4]">
+      <div className="home-page-container grid gap-10 py-8 lg:min-h-[31.5rem] lg:grid-cols-[39%_61%] lg:items-center lg:gap-12 lg:py-5">
+        <div className="max-w-[31rem] lg:py-6">
+          <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.12em] text-[#30343F]"><span className="h-2.5 w-2.5 rounded-full bg-[#F27216]" />Research-Focused. Quality Driven.</p>
+          <h1 className="mt-5 font-display text-[clamp(3rem,4.2vw,5rem)] font-bold leading-[.98] tracking-[-.06em] text-[#11141F]">Precision you<br />can <span className="text-[#F16D16]">verify.</span></h1>
+          <p className="mt-5 max-w-[28rem] text-[15px] font-medium leading-7 text-[#59606D] sm:text-base">Premium quality peptides and compounds backed by third-party testing, transparent documentation, and dependable support for researchers nationwide.</p>
+          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Cellova quality assurances">
+            {["Lot-specific purity", "Third-party tested", "COAs available", "U.S.-based support"].map((item) => <li key={item} className="inline-flex items-center gap-2 rounded-full border border-[#D9D9D4] bg-white px-3 py-2 text-xs font-semibold text-[#474C57]"><span className="text-sm leading-none text-[#343944]">✓</span>{item}</li>)}
+          </ul>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/products" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] bg-[#F16D16] px-6 text-sm font-bold text-white shadow-[0_8px_16px_-12px_rgba(241,109,22,.8)] transition-colors hover:bg-[#D85D0C] active:scale-[.98]">Browse Peptides <span aria-hidden="true">→</span></Link>
+            <Link href="/coa-library" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] border border-[#D5D5D0] bg-white px-6 text-sm font-bold text-[#222630] transition-colors hover:border-[#F16D16] hover:bg-[#FFF3E8] active:scale-[.98]">View COA Library <span aria-hidden="true">→</span></Link>
           </div>
         </div>
-
-        <div className="home-product-stage relative z-20 mt-8 min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:mt-0 lg:min-h-0" aria-label="Future Cellova Labs product composition area">
-          <div className="home-hero-future-media absolute inset-0" aria-hidden="true" />
-        </div>
+        <HeroPlaceholder />
       </div>
     </section>
 
-    <section className="home-trust-strip relative overflow-hidden bg-[#12141C] text-[#F3F4F1]" aria-label="Cellova Labs quality credentials">
-      <div className="home-page-container grid grid-cols-2 lg:grid-cols-4">
-        {TRUST_CREDENTIALS.map((credential, index) => <div key={credential.value} className={`flex min-h-28 items-center gap-4 py-6 ${index > 0 ? "lg:border-l lg:border-[#3D466A] lg:pl-10" : ""} ${index > 1 ? "border-t border-[#3D466A] lg:border-t-0" : ""} ${index === 1 ? "border-l border-[#3D466A]" : ""} ${index % 2 === 0 ? "pr-3 lg:pr-10" : "pl-5 lg:pl-10"}`}>
-          <TrustIcon name={credential.icon} />
-          <p className="text-[11px] font-semibold uppercase leading-5 tracking-[0.1em] text-[#F3F4F1] sm:text-xs"><span className="block text-sm tracking-[0.08em] text-white">{credential.value}</span>{credential.label}</p>
-        </div>)}
+    <section className="bg-[#F7F7F4] pb-7 pt-2" aria-label="Cellova service assurances">
+      <div className="home-page-container grid overflow-hidden rounded-[4px] bg-[#F0F1F5] sm:grid-cols-2 lg:grid-cols-4">
+        {ASSURANCES.map((item, index) => <article key={item.title} className={`flex min-h-[8.2rem] gap-4 px-5 py-5 ${index > 0 ? "lg:border-l lg:border-[#D8DAE2]" : ""} ${index > 1 ? "border-t border-[#D8DAE2] lg:border-t-0" : ""} ${index === 1 ? "sm:border-l sm:border-[#D8DAE2] lg:border-l" : ""}`}>
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[15px] bg-white shadow-[0_4px_12px_rgba(20,25,38,.04)]"><AssuranceIcon icon={item.icon} /></span>
+          <div><h2 className="text-sm font-bold text-[#333844]">{item.title}</h2><p className="mt-1.5 text-xs font-medium leading-5 text-[#686F7D]">{item.detail}</p></div>
+        </article>)}
       </div>
-      <div className="home-scan-line pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#2D3452]" aria-hidden="true" />
     </section>
+
     <ResearchFormats />
     <HomeProductGrid />
     <TransparencyCoa />
