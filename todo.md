@@ -81,4 +81,5 @@
 - [x] Save, push, and verify the latest brand, imagery, RUO, and heading refinements on the GitHub main-branch Vercel deployment.
 - [x] Verify the live Vercel homepage, catalog, and product-detail routes visibly render supplied Research Formats imagery, fitted product media, top-left RUO badges, and shared Cellova heading treatment.
 - [x] Correct the production catalog and product-detail media rendering so supplied and provider images are visibly present within their fitted frames.
-- [ ] Prioritize above-the-fold catalog and PDP media loading, then re-verify visible image rendering on the live production routes.
+- [x] Prioritize above-the-fold catalog and PDP media loading, then re-verify visible image rendering on the live production routes.
+- [x] Capture and document final authenticated production screenshot evidence for supplied images, fitted product media, and top-left RUO placement on the homepage, catalog, and active PDP.
