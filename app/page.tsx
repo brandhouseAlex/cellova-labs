@@ -27,15 +27,14 @@ function AssuranceIcon({ icon }: { icon: (typeof ASSURANCES)[number]["icon"] }) 
 
 export function HeroProductImage() {
   return (
-    <div
-      role="img"
-      aria-label="Cellova Labs research product lineup"
-      className="min-h-[23rem] overflow-hidden rounded-[20px] bg-[#E9ECEB] bg-cover bg-center shadow-[0_20px_42px_-30px_rgba(45,52,82,.55)] sm:min-h-[29rem] lg:min-h-[29rem]"
-      style={{
-        backgroundImage:
-          "url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663938836977/soQIwZUdfXIdMSCv.png)",
-      }}
-    />
+    <div className="relative min-h-[23rem] overflow-hidden rounded-[20px] bg-[#E9ECEB] shadow-[0_20px_42px_-30px_rgba(45,52,82,.55)] sm:min-h-[29rem] lg:min-h-[29rem]">
+      {/* eslint-disable-next-line @next/next/no-img-element -- supplied campaign visual is served directly to avoid image-optimizer rendering delays. */}
+      <img
+        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663938836977/soQIwZUdfXIdMSCv.png"
+        alt="Cellova Labs research product lineup"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+    </div>
   );
 }
 
