@@ -1,97 +1,119 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+
+const DOCUMENTATION_POINTS = [
+  { label: "COA by lot", icon: "document" },
+  { label: "Identity & purity testing", icon: "flask" },
+  { label: "Endotoxin & heavy metals testing", icon: "shield" },
+  { label: "Available when you need it", icon: "archive" },
+] as const;
+
+type DocumentationIconName = (typeof DOCUMENTATION_POINTS)[number]["icon"];
 
 /**
- * Transparency style: a quiet charcoal laboratory dossier whose real supplied
- * COA is the focal proof point. The verification path repeats softly while in view.
+ * Homepage documentation panel. The supplied COA remains the primary proof
+ * visual; the surrounding papers and contour bands are structural only.
  */
-type StepIcon = "identity" | "purity" | "screened" | "released";
+export function TransparencyCoa() {
+  return (
+    <section
+      className="bg-[#F7F7F4] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      aria-labelledby="transparency-heading"
+    >
+      <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[18px] bg-[#111B2F] px-6 py-9 text-paper shadow-[0_22px_46px_-34px_rgba(18,20,28,0.78)] sm:px-10 sm:py-12 lg:min-h-[474px] lg:px-14 lg:py-14">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-80"
+          aria-hidden="true"
+        >
+          <span className="absolute -bottom-[54%] left-[29%] h-[145%] w-[70%] rounded-[50%] border-[82px] border-[#22304A]/75" />
+          <span className="absolute -bottom-[60%] left-[42%] h-[155%] w-[73%] rounded-[50%] border-[60px] border-[#1B2840]/80" />
+          <span className="absolute -right-[11%] -top-[35%] h-[100%] w-[68%] rounded-[48%] border-[72px] border-[#263653]/55" />
+        </div>
 
-const STEPS: { number: string; title: string; description: string; icon: StepIcon }[] = [
-  { number: "01", title: "Identity Confirmed", description: "Mass spectrometry confirms structure and molecular weight.", icon: "identity" },
-  { number: "02", title: "Purity Verified", description: "HPLC analysis confirms ≥99% active compound.", icon: "purity" },
-  { number: "03", title: "Contaminants Screened", description: "Endotoxin tested and heavy metals screened.", icon: "screened" },
-  { number: "04", title: "Batch Released", description: "COA issued and archived for full traceability.", icon: "released" },
-];
+        <div className="relative grid gap-10 lg:grid-cols-[minmax(0,.87fr)_minmax(0,1.13fr)] lg:items-center lg:gap-12">
+          <div className="max-w-[34rem]">
+            <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.23em] text-[#C8CFDB]">
+              <span className="h-3 w-3 rounded-full bg-[#F2A63C]" aria-hidden="true" />
+              Documentation first
+            </p>
+            <h2
+              id="transparency-heading"
+              className="mt-5 font-display text-[2.25rem] font-semibold leading-[.98] tracking-[-0.045em] text-paper sm:text-5xl"
+            >
+              Complete Transparency.
+              <span className="block text-[#F2A63C]">Every Lot.</span>
+            </h2>
+            <p className="mt-5 max-w-[31rem] text-[1rem] leading-7 text-[#C8CFDB] sm:text-[1.05rem]">
+              Every lot is backed by third-party testing and organized documentation—because clarity is part of our standard.
+            </p>
 
-function TimelineIcon({ icon }: { icon: StepIcon }) {
-  const shapes: Record<StepIcon, React.ReactNode> = {
-    identity: <><circle cx="7" cy="7" r="2" /><circle cx="17" cy="6" r="2" /><circle cx="12" cy="17" r="2" /><path d="m8.7 8.2 2.4 7M15.2 7.4l-2.1 7.6M9 7.1l6 .7" /></>,
-    purity: <><path d="M4 19V5M4 19h16" /><path d="m7 15 3-4 3 2 5-7" /><path d="M15 6h3v3" /></>,
-    screened: <><path d="M12 3 20 6v5c0 5.2-3.5 8.7-8 10-4.5-1.3-8-4.8-8-10V6l8-3Z" /><path d="m8.5 12 2.3 2.3 4.8-5" /></>,
-    released: <><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v5h4M10 13h5M10 17h5" /></>,
-  };
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7" aria-hidden="true">{shapes[icon]}</svg>;
+            <ul className="mt-7 grid gap-3" aria-label="Documentation standards">
+              {DOCUMENTATION_POINTS.map((point) => (
+                <li key={point.label} className="flex items-center gap-3 text-sm font-medium text-[#D8DEEA] sm:text-[0.97rem]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[7px] bg-[#22304A] text-[#F2A63C]">
+                    <DocumentationIcon name={point.icon} className="h-4.5 w-4.5" />
+                  </span>
+                  {point.label}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/coa-library"
+              className="group mt-8 inline-flex min-h-12 items-center gap-4 rounded-[7px] bg-[#F2A63C] px-6 text-sm font-semibold text-[#12141C] shadow-[0_12px_24px_-16px_rgba(242,166,60,.85)] transition-colors hover:bg-[#F8BA55] active:scale-[0.98]"
+            >
+              View COA Library
+              <span className="text-xl leading-none transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-[710px] lg:min-h-[380px]">
+            <div className="pointer-events-none absolute left-[8%] top-[6%] h-[80%] w-[71%] rotate-[-8deg] rounded-[3px] bg-[#E9EDEF] shadow-[0_18px_32px_-20px_rgba(0,0,0,.72)]" aria-hidden="true" />
+            <div className="pointer-events-none absolute left-[15%] top-[3%] h-[86%] w-[73%] rotate-[-3deg] rounded-[3px] bg-[#F8F9F8] shadow-[0_20px_34px_-22px_rgba(0,0,0,.8)]" aria-hidden="true" />
+            <div className="relative ml-auto w-[94%] rotate-[2deg] overflow-hidden rounded-[4px] border border-[#DEE4EC] bg-white shadow-[0_26px_44px_-22px_rgba(0,0,0,.82)] lg:w-[88%]">
+              <Image
+                src="/brand/sermorelin-coa.png"
+                alt="Sermorelin 10mg Certificate of Analysis from Bioviridian"
+                width={715}
+                height={466}
+                priority
+                sizes="(min-width: 1024px) 49vw, 92vw"
+                className="h-auto w-full object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-export function TransparencyCoa() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activeCount, setActiveCount] = useState(0);
-  const [reduced, setReduced] = useState(false);
-  const [inView, setInView] = useState(false);
-  const visibleStepCount = reduced ? STEPS.length : activeCount;
+function DocumentationIcon({
+  name,
+  className,
+}: {
+  name: DocumentationIconName;
+  className?: string;
+}) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    className,
+    "aria-hidden": true,
+  };
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReduced(media.matches);
-    apply();
-    media.addEventListener("change", apply);
-    return () => media.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    if (reduced) return;
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setInView(true);
-    }, { threshold: 0.35 });
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [reduced]);
-
-  useEffect(() => {
-    if (!inView || reduced) return;
-    let delays: number[] = [];
-    const runCycle = () => {
-      setActiveCount(0);
-      delays = [220, 980, 1740, 2500].map((delay, index) => window.setTimeout(() => setActiveCount(index + 1), delay));
-    };
-    runCycle();
-    const interval = window.setInterval(runCycle, 6000);
-    return () => {
-      window.clearInterval(interval);
-      delays.forEach((id) => window.clearTimeout(id));
-    };
-  }, [inView, reduced]);
-
-  return <section ref={sectionRef} className={`home-transparency relative isolate overflow-hidden bg-ink py-12 text-white sm:py-12 ${visibleStepCount ? "home-transparency--active" : ""} ${reduced ? "home-transparency--reduced" : ""}`} aria-labelledby="transparency-heading">
-    <div className="home-transparency-contours pointer-events-none absolute inset-0 opacity-55" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="none" className="h-full w-full fill-none"><path d="M-60 677c196-94 256 89 465-34s306-60 455 31 289 80 640-87" /><path d="M-120 735c199-94 267 108 481-24 209-129 301-54 457 38 146 86 285 64 669-108" /><path d="M-20 780c188-82 269 120 450 9 216-132 307-58 454 33 152 93 287 50 606-112" /></svg></div>
-    <div className="home-page-container relative grid gap-10 lg:grid-cols-[.98fr_1.02fr_1fr] lg:items-center lg:gap-8">
-      <div className="home-transparency-copy max-w-md">
-        <p className="transparency-enter transparency-enter--1 section-eyebrow !text-[#F2A63C]">Transparency you can trust.</p>
-        <h2 id="transparency-heading" className="transparency-enter transparency-enter--2 mt-6 font-display text-[2.7rem] font-semibold leading-[1.02] tracking-[-0.052em] sm:text-5xl">True Quality.<br /><span className="text-[#F2A63C]">Full Transparency.</span></h2>
-        <p className="transparency-enter transparency-enter--3 mt-5 text-[1.02rem] leading-7 text-white">We believe trust is earned through openness. Every batch is tested, verified, and documented—so you know exactly what you&apos;re working with. No guesswork. No shortcuts. Just uncompromising transparency.</p>
-        <Link href="/coa-library" className="transparency-enter transparency-enter--4 group mt-10 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#F8C36A]">View Sample COA <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span></Link>
-      </div>
-
-      <div className="home-real-coa mx-auto w-full max-w-[23rem] lg:max-w-[25rem]"><Image src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663522951213/MajTRvncRPVLyVtJ.png" alt="Cellova Labs Certificate of Analysis sample document" width={1110} height={1304} priority unoptimized className="h-auto w-full object-contain" style={{ imageRendering: "auto" }} /></div>
-
-      <div className="home-verification relative mx-auto w-full max-w-xl lg:pl-8">
-        <div className="home-verification-line" aria-hidden="true"><span className="home-verification-signal" /></div>
-        <ol className="space-y-6 sm:space-y-7">
-          {STEPS.map((step, index) => {
-            const active = visibleStepCount > index;
-            return <li key={step.number} className={`home-verification-step relative grid grid-cols-[4.4rem_1fr] gap-5 sm:grid-cols-[5.1rem_1fr] sm:gap-7 ${active ? "home-verification-step--active" : ""}`}>
-              <div className="relative z-10 flex items-center justify-center"><span className="home-verification-icon flex h-[4rem] w-[4rem] items-center justify-center rounded-full border sm:h-[4.5rem] sm:w-[4.5rem]"><TimelineIcon icon={step.icon} /></span></div>
-              <div className="pt-1.5"><div className="flex items-center gap-4"><span className="font-display text-3xl font-medium leading-none tracking-[-0.04em] text-white/45 sm:text-4xl">{step.number}</span><span className="home-verification-rule h-px w-10 bg-[#F2A63C]/30 sm:w-12" /></div><h3 className="mt-2.5 text-lg font-semibold text-white/65 sm:text-xl">{step.title}</h3><p className="mt-2 max-w-sm text-sm leading-6 text-white/55 sm:text-base">{step.description}</p></div>
-            </li>;
-          })}
-        </ol>
-      </div>
-    </div>
-  </section>;
+  if (name === "document") {
+    return <svg {...common}><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v5h4M10 13h5M10 17h5" /></svg>;
+  }
+  if (name === "flask") {
+    return <svg {...common}><path d="M10 3h4M11 3v6l-5.1 8.2A2.4 2.4 0 0 0 8 21h8a2.4 2.4 0 0 0 2.1-3.8L13 9V3" /><path d="M8.5 15h7" /></svg>;
+  }
+  if (name === "shield") {
+    return <svg {...common}><path d="M12 3 20 6v5c0 5.2-3.5 8.7-8 10-4.5-1.3-8-4.8-8-10V6l8-3Z" /><path d="m8.5 12 2.3 2.3 4.8-5" /></svg>;
+  }
+  return <svg {...common}><path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5z" /><path d="m4 8.5 8 4.5 8-4.5M12 13v7" /></svg>;
 }

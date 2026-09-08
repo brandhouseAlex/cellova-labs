@@ -66,3 +66,7 @@ An approved, non-personal temporary research-access session was used solely to c
 The first four product cards on homepage, catalog, and collection grids now explicitly prioritize their image requests. A repeat authenticated Vercel review confirmed that the initial catalog row visibly loaded its product images (including the BPC-157 supplied image) within the square frames and preserved the top-left RUO labels. The live BPC-157 product gallery remained visibly loaded, centered, and fully framed by the Indigo outline.
 
 The final authenticated screenshot route log is maintained in [`docs/live-production-visual-verification.md`](./live-production-visual-verification.md).
+
+## Documentation-first transparency section
+
+The previous animated transparency timeline was replaced with the supplied documentation-first composition. The new section retains a direct, accessible **View COA Library** action and uses the supplied Sermorelin 10mg Certificate of Analysis as the proof visual, framed by a three-sheet document stack. Desktop and mobile checks confirm that the dark Indigo panel, Spark CTA, documentation points, and actual COA remain visible and readable at both breakpoints. The new component regression test asserts the COA visual, documentation content, and COA Library destination; the full suite now passes with **11 tests**.

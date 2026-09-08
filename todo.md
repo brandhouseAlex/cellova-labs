@@ -83,3 +83,6 @@
 - [x] Correct the production catalog and product-detail media rendering so supplied and provider images are visibly present within their fitted frames.
 - [x] Prioritize above-the-fold catalog and PDP media loading, then re-verify visible image rendering on the live production routes.
 - [x] Capture and document final authenticated production screenshot evidence for supplied images, fitted product media, and top-left RUO placement on the homepage, catalog, and active PDP.
+- [x] Replace the homepage Transparency section with the supplied documentation-first composition while retaining an accessible COA Library action.
+- [x] Stage the supplied mockup and actual COA images as managed production assets without modifying their visual content.
+- [ ] Add coverage, validate the replacement at desktop and mobile breakpoints, and publish the update to GitHub and Vercel.
