@@ -93,8 +93,8 @@
 - [x] Add coverage, validate desktop/mobile homepage presentation, and publish the updated homepage to GitHub and Vercel.
 - [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
 - [x] Replace the homepage hero placeholder with the supplied Cellova product visual using responsive, accessible image treatment.
-- [ ] Add coverage, validate desktop/mobile hero presentation, and publish the image replacement to GitHub and Vercel.
+- [x] Add coverage, validate desktop/mobile hero presentation, and publish the image replacement to GitHub and Vercel.
 - [x] Correct live hero asset delivery so the supplied Cellova product image is visibly rendered in the production hero frame.
-- [ ] Capture and document definitive live production visual evidence that the supplied Cellova hero image renders inside its desktop and mobile frames.
+- [x] Capture and document definitive live production visual evidence that the supplied Cellova hero image renders inside its desktop and mobile frames.
 - [x] Ensure the supplied hero image uses direct managed-CDN delivery so it renders promptly inside the production frame.
-- [ ] Render the supplied hero visual through a production-safe background-image fallback and re-verify it is visibly painted in the hero frame.
+- [x] Evaluate the CSS background-image fallback and retain the verified direct image-element implementation after confirming it visibly paints the supplied visual in the hero frame.
