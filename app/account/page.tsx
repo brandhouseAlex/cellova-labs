@@ -31,7 +31,7 @@ function AccountPageInner() {
   return (
     <>
       <header className={isAuthenticated ? "" : "text-center"}>
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
+        <p className="section-eyebrow">
           Cellova Labs Research Network
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink">

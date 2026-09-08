@@ -70,3 +70,12 @@
 - [x] Replace remaining public storefront section surfaces with the standard Cellova Paper token while preserving the research-access gate treatment.
 - [x] Apply the shared typography scale and leading Spark-dot eyebrow treatment to the remaining public page and catalog section headers.
 - [x] Verify responsive layouts, keyboard behavior, dynamic data preservation, TypeScript, lint, tests, production build, GitHub, and Vercel deployment.
+- [x] Audit and align homepage and Research Formats color usage to the specified Spark, Indigo, and Slate palette.
+- [x] Stage the four supplied Cellova product images and use them in Research Formats and applicable product presentation without changing provider catalog data.
+- [x] Standardize public heading typography to the Cellova display font and consistent heading scale.
+- [x] Refine catalog and PDP product imagery to fill their media frames appropriately while preserving product visibility.
+- [x] Position the RUO product-grid badge at the top-left of each product image with responsive-safe spacing.
+- [x] Audit and normalize all public heading and heading-like section-label treatments to the shared Cellova display typography system.
+- [x] Add coverage, visually verify desktop/mobile presentation, and publish the update to GitHub and Vercel.
+- [x] Complete a final public header and section-eyebrow audit across all storefront routes, applying shared Cellova typography where needed.
+- [ ] Save, push, and verify the latest brand, imagery, RUO, and heading refinements on the GitHub main-branch Vercel deployment.

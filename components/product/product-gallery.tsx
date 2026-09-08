@@ -27,7 +27,7 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-[1.05/1] overflow-hidden rounded-[14px] border-2 border-ink-soft/75 bg-paper shadow-[0_18px_34px_-25px_rgba(45,52,82,0.42)]">
+      <div className="relative aspect-square overflow-hidden rounded-[14px] border-2 border-[#2D3452] bg-paper shadow-[0_18px_34px_-25px_rgba(45,52,82,0.42)]">
         {hasCoa ? <span className="absolute left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-brand/10 bg-[#FFF1DB] px-3 py-1.5 text-[11px] font-semibold text-brand-deep shadow-sm backdrop-blur-sm"><VerifiedIcon className="h-3.5 w-3.5" />COA Verified</span> : null}
         {selected ? (
           <Image
@@ -36,7 +36,7 @@ export function ProductGallery({
             fill
             priority
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="relative z-10 object-contain p-[6%]"
+            className="relative z-10 object-contain object-center"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">Product image unavailable</span>
@@ -67,7 +67,7 @@ export function ProductGallery({
                 selectedIndex === index ? "border-brand ring-2 ring-brand/15" : "border-line hover:border-brand/50"
               )}
             >
-              <Image src={image.url} alt="" fill sizes="96px" className="object-contain p-2" />
+              <Image src={image.url} alt="" fill sizes="96px" className="object-contain object-center" />
             </button>
           ))}
         </div>

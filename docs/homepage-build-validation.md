@@ -50,3 +50,11 @@ The latest refinement pass was checked on the local native Next.js preview at **
 Final automated validation passed: TypeScript check, five Vitest files with nine tests, ESLint, and the native production build.
 
 The post-refinement suite now includes a keyboard regression test for the desktop PDP documentation tablist. Focus plus native Enter activation changes the selected state from Certificate of Analysis to FDA Disclosure & Intended Use, while the responsive mobile composition remains intentionally stacked.
+
+## Brand and supplied-media alignment
+
+The latest visual pass replaces the Research Formats placeholders with the four supplied Cellova product images: Ipamorelin for Vials, BPC-157 for Capsules, Noctura for Serums, and NAD+ Nasal Spray for Nasal Sprays. This is a presentation-only mapping: catalog titles, prices, variants, availability, and provider records remain unchanged.
+
+The homepage hero, assurance strip, and Research Formats section now consistently use **Spark `#F2A63C`**, **Indigo `#2D3452`**, and **Slate `#8B93A7`** as the visible brand accents. Desktop and mobile screenshot reviews confirmed that the Research Formats imagery remains contained and legible, product media uses zero padding inside its square frames, and every product-grid RUO marker sits at the image’s top-left without overlapping primary product details.
+
+The public heading audit found no remaining H1–H6 elements with a `font-mono` or `font-sans` override. The prior policy-document H3 mono exception now uses the shared Cellova Sora display stack, while metadata, badge, and technical labels deliberately remain in their compact non-heading styles.

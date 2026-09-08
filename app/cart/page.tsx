@@ -12,7 +12,7 @@ export default function CartPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
+        <p className="section-eyebrow">
           Order
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink">

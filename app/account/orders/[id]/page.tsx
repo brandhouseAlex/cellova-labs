@@ -89,7 +89,7 @@ export default function OrderDetailPage({
 
       <header className="mt-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
+          <p className="section-eyebrow">
             Order {confirmedOrder.orderNumber}
           </p>
           <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">

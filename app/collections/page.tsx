@@ -22,7 +22,7 @@ export default async function CollectionsPage() {
       />
 
       <header className="mt-8 max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
+        <p className="section-eyebrow">
           Catalog
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink">
@@ -53,7 +53,7 @@ export default async function CollectionsPage() {
               ) : null}
             </div>
             <div className="absolute inset-x-0 bottom-0 border-t border-white/15 bg-gradient-to-t from-ink via-ink/92 to-transparent p-5 pt-16">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#F8C36A]">Collection record · {collection.handle.replace(/[-_]+/g, " ")}</p>
+              <p className="section-eyebrow !text-[#F2A63C]">Collection record · {collection.handle.replace(/[-_]+/g, " ")}</p>
               <h2 className="font-display text-lg font-semibold text-paper">
                 {collection.title}
               </h2>
@@ -64,7 +64,7 @@ export default async function CollectionsPage() {
             </div>
           </Link>
         ))}
-      </div> : <section className="mt-12 rounded-[12px] border border-line bg-mist p-8 sm:p-12"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Collection catalog</p><h2 className="mt-3 font-display text-2xl font-semibold text-ink">Collections are being prepared</h2><p className="mt-3 max-w-xl text-sm leading-6 text-slate">No active provider collections are available yet. Once collections are assigned in the connected commerce provider, they will appear here automatically.</p></section>}
+      </div> : <section className="mt-12 rounded-[12px] border border-line bg-mist p-8 sm:p-12"><p className="section-eyebrow">Collection catalog</p><h2 className="mt-3 font-display text-2xl font-semibold text-ink">Collections are being prepared</h2><p className="mt-3 max-w-xl text-sm leading-6 text-slate">No active provider collections are available yet. Once collections are assigned in the connected commerce provider, they will appear here automatically.</p></section>}
     </div>
   );
 }

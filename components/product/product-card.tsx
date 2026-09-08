@@ -39,7 +39,7 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
     <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] border border-line bg-paper p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
       <Link
         href={`/products/${product.handle}`}
-        className="relative block aspect-[.88/1] overflow-hidden rounded-[12px] border border-ink-soft/15 bg-paper"
+        className="relative block aspect-square overflow-hidden rounded-[12px] border border-ink-soft/30 bg-paper"
         aria-label={`View ${product.title}`}
       >
         {presentationImage ? (
@@ -48,17 +48,17 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
             alt={presentationImage.altText}
             fill
             sizes="(min-width: 1280px) 23vw, (min-width: 768px) 30vw, 48vw"
-            className="object-contain object-center p-2"
+            className="object-contain object-center"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">
             Image pending
           </span>
         )}
+        <ResearchUseBadge className="pointer-events-none absolute left-3 top-3 z-10" />
       </Link>
 
       <div className="flex flex-1 flex-col pt-4 text-center">
-        <ResearchUseBadge className="mb-3 self-center" />
         <h3 className="min-h-[2.75rem] font-display text-[15px] font-semibold leading-5 tracking-tight text-ink sm:text-base">
           <Link
             href={`/products/${product.handle}`}

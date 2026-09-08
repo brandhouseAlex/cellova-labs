@@ -19,7 +19,7 @@ export function QualityProcessWave() {
       <QualityRibbons />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#F8C36A]">Quality You Can Trust</p>
+          <p className="section-eyebrow !text-[#F2A63C]">Quality You Can Trust</p>
           <h2 id="quality-process-heading" className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-5xl">Every Batch. Every Time.</h2>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-[#D8DCE3]">Our documented release workflow is designed to ensure every research product is assessed against clear analytical and manufacturing checkpoints before fulfillment.</p>
         </div>

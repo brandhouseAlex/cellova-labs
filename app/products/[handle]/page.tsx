@@ -7,6 +7,7 @@ import { PurchasePanel } from "@/components/product/purchase-panel";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductInformationTabs } from "@/components/product/product-information-tabs";
 import { RelatedProducts } from "@/components/product/related-products";
+import { getPresentationImage } from "@/lib/commerce/presentation-image";
 
 /**
  * PDP style: a balanced, clinical ecommerce dossier. Product media, pricing,
@@ -45,7 +46,9 @@ export default async function ProductPage({ params }: Props) {
     .filter((item) => item.id !== product.id)
     .slice(0, 5);
   const hasCoa = [...(product.coas ?? []), product.coa].some((coa) => Boolean(coa && [coa.productName, coa.lotNumber, coa.testedDate, coa.laboratory, coa.identityMs, coa.purityHplc, coa.netContent, coa.endotoxin, coa.heavyMetals].every((value) => value?.trim())));
-  const galleryImages = product.images.length ? product.images : product.featuredImage ? [product.featuredImage] : [];
+  const presentationImage = getPresentationImage(product);
+  const providerGalleryImages = product.images.length ? product.images : product.featuredImage ? [product.featuredImage] : [];
+  const galleryImages = presentationImage ? [presentationImage, ...providerGalleryImages.filter((image) => image.url !== presentationImage.url)] : providerGalleryImages;
 
   return (
     <div className="bg-paper">

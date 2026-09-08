@@ -27,7 +27,7 @@ export function PolicyPage({
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{title}</h1>
           {updated ? <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.1em] text-slate">Record updated: {updated}</p> : null}
         </header>
-        <div className="mt-8 divide-y divide-line border-y border-line bg-paper/85 px-0 text-base leading-relaxed text-slate shadow-[0_18px_46px_-42px_rgba(32,32,32,0.4)] [&_section]:px-5 [&_section]:py-7 sm:[&_section]:px-8 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink [&_h3]:mt-5 [&_h3]:font-mono [&_h3]:text-xs [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-[0.1em] [&_h3]:text-brand-deep [&_p+p]:mt-2 [&_strong]:text-ink [&_ul]:mt-4 [&_ul]:space-y-3 [&_ul]:pl-5 [&_ul]:marker:text-brand">
+        <div className="mt-8 divide-y divide-line border-y border-line bg-paper/85 px-0 text-base leading-relaxed text-slate shadow-[0_18px_46px_-42px_rgba(32,32,32,0.4)] [&_section]:px-5 [&_section]:py-7 sm:[&_section]:px-8 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink [&_h3]:mt-5 [&_h3]:font-display [&_h3]:text-xs [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-[0.1em] [&_h3]:text-brand-deep [&_p+p]:mt-2 [&_strong]:text-ink [&_ul]:mt-4 [&_ul]:space-y-3 [&_ul]:pl-5 [&_ul]:marker:text-brand">
           {children}
         </div>
       </div>

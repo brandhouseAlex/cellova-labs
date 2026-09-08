@@ -87,7 +87,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
       />
 
       <header className="mt-8 max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand">Catalog</p>
+        <p className="section-eyebrow">Catalog</p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink">{collectionHeading(collection.handle, collection.title)}</h1>
         <p className="mt-4 text-base leading-relaxed text-slate">{collection.description || `Browse Cellova Labs ${collection.title.toLowerCase()} for laboratory research.`}</p>
       </header>
