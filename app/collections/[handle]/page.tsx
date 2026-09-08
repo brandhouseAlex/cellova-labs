@@ -114,8 +114,8 @@ export default async function CollectionPage({ params, searchParams }: Props) {
         </div>
       ) : (
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 xl:grid-cols-4 xl:gap-6">
-          {result.items.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {result.items.map((product, index) => (
+            <ProductCard key={product.id} product={product} prioritizeImage={index < 4} />
           ))}
         </div>
       )}

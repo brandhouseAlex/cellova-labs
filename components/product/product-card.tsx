@@ -14,7 +14,13 @@ import { getPresentationImage } from "@/lib/commerce/presentation-image";
  * Catalog style: an uncluttered clinical product card. All media and
  * purchasable information remain live normalized provider data.
  */
-export function ProductCard({ product }: { product: CommerceProduct }) {
+export function ProductCard({
+  product,
+  prioritizeImage = false,
+}: {
+  product: CommerceProduct;
+  prioritizeImage?: boolean;
+}) {
   const { addItem, isLoading } = useCart();
   const { isAuthenticated, isReady } = useAuth();
   const [error, setError] = useState<string | null>(null);
@@ -47,6 +53,7 @@ export function ProductCard({ product }: { product: CommerceProduct }) {
             src={presentationImage.url}
             alt={presentationImage.altText}
             fill
+            priority={prioritizeImage}
             sizes="(min-width: 1280px) 23vw, (min-width: 768px) 30vw, 48vw"
             className="object-contain object-center"
           />

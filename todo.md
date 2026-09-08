@@ -78,4 +78,7 @@
 - [x] Audit and normalize all public heading and heading-like section-label treatments to the shared Cellova display typography system.
 - [x] Add coverage, visually verify desktop/mobile presentation, and publish the update to GitHub and Vercel.
 - [x] Complete a final public header and section-eyebrow audit across all storefront routes, applying shared Cellova typography where needed.
-- [ ] Save, push, and verify the latest brand, imagery, RUO, and heading refinements on the GitHub main-branch Vercel deployment.
+- [x] Save, push, and verify the latest brand, imagery, RUO, and heading refinements on the GitHub main-branch Vercel deployment.
+- [x] Verify the live Vercel homepage, catalog, and product-detail routes visibly render supplied Research Formats imagery, fitted product media, top-left RUO badges, and shared Cellova heading treatment.
+- [x] Correct the production catalog and product-detail media rendering so supplied and provider images are visibly present within their fitted frames.
+- [ ] Prioritize above-the-fold catalog and PDP media loading, then re-verify visible image rendering on the live production routes.

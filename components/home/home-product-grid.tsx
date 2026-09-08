@@ -22,7 +22,7 @@ export async function HomeProductGrid() {
       </header>
 
       {result.items.length === 0 ? <div className="mt-10 border border-[#dfe4dc] bg-paper p-10 text-center text-sm text-slate">The catalog is being prepared for review.</div> : <><div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 xl:grid-cols-4 xl:gap-6">
-        {result.items.map((product) => <ProductCard key={product.id} product={product} />)}
+        {result.items.map((product, index) => <ProductCard key={product.id} product={product} prioritizeImage={index < 4} />)}
       </div><div className="mt-12 flex justify-center sm:mt-14"><Link href="/products" className="home-shop-all group inline-flex min-h-12 items-center justify-center gap-3 rounded-[5px] bg-[#F2A63C] px-7 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors duration-200 hover:bg-[#D48624] active:scale-[0.98]">Shop All <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span></Link></div></>}
     </div>
   </section>;
