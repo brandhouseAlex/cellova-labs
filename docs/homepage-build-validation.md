@@ -80,3 +80,9 @@ The Documentation First panel now uses the supplied AOD-9604 Certificate of Anal
 ## Hero campaign visual
 
 The homepage hero placeholder has been replaced with the supplied Cellova product-lineup image. The visual is delivered directly from the managed CDN in a contained, rounded media frame using a native image element and `object-cover` positioning. The final live Vercel desktop review visibly confirmed the KPV-led Cellova lineup paints in the right-hand hero frame. The accompanying component test asserts the accessible text alternative, direct supplied-image source, cover treatment, and the shared 29rem frame rules at small and desktop breakpoints. TypeScript, **12 Vitest tests**, ESLint, production build, and whitespace checks pass.
+
+## Streamlined product detail and research standards
+
+The product-detail page now omits platform placeholder variant presentation when a product has a single **Default Title** variant, including both the price suffix and selector. The redundant Quality Standards, facility/shipping benefit, and three-card service-assurance modules have been removed. A reference-aligned **Built for serious research** band now follows the documentation section, using a curved Indigo lead panel, outlined standards action, four equal research-support items, and a subtle molecular corner motif.
+
+An authenticated Vercel desktop review of `/products/bpc-157-10mg` confirmed that the removed sections and default title were absent, while the new standards band appeared immediately after the COA content. A **375 × 812** local provider-backed PDP screenshot confirmed that the information panels stack cleanly and the standards band becomes a legible 2 × 2 mobile rail without overflow. TypeScript, **14 Vitest tests**, ESLint, production build, a removed-copy audit, and whitespace checks pass.
