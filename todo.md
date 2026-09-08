@@ -90,5 +90,5 @@
 - [x] Align the Explore the catalog eyebrow color with the Research Formats eyebrow treatment.
 - [x] Replace the Documentation First COA with the supplied AOD-9604 document and slightly reduce the panel height.
 - [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
-- [ ] Add coverage, validate desktop/mobile homepage presentation, and publish the updated homepage to GitHub and Vercel.
+- [x] Add coverage, validate desktop/mobile homepage presentation, and publish the updated homepage to GitHub and Vercel.
 - [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
