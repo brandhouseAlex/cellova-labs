@@ -98,3 +98,7 @@
 - [x] Capture and document definitive live production visual evidence that the supplied Cellova hero image renders inside its desktop and mobile frames.
 - [x] Ensure the supplied hero image uses direct managed-CDN delivery so it renders promptly inside the production frame.
 - [x] Evaluate the CSS background-image fallback and retain the verified direct image-element implementation after confirming it visibly paints the supplied visual in the hero frame.
+- [x] Suppress default variant labels on product-detail pages when a product has only one default variant.
+- [x] Remove the product-detail Quality Standards, facility/shipping benefit, and shipping-assurance sections requested for deletion.
+- [x] Add the supplied Built for serious research standards band beneath the product documentation/COA section with responsive Cellova styling.
+- [ ] Add coverage, validate desktop/mobile product-detail presentation, and publish the streamlined PDP update to GitHub and Vercel.

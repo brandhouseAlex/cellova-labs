@@ -5,6 +5,7 @@ import type { CommerceProduct } from "@/lib/commerce/types";
 import { useCart } from "@/lib/auth/cart-store";
 import { useAuth } from "@/lib/auth/auth-store";
 import { formatMoney, cn } from "@/lib/utils";
+import { shouldSuppressDefaultVariantDetails } from "@/lib/commerce/variants";
 import Link from "next/link";
 
 /**
@@ -21,6 +22,7 @@ export function PurchasePanel({ product }: { product: CommerceProduct }) {
   );
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string | null>(null);
+  const hideDefaultVariantDetails = shouldSuppressDefaultVariantDetails(product);
 
   const variant = useMemo(
     () =>
@@ -74,14 +76,12 @@ export function PurchasePanel({ product }: { product: CommerceProduct }) {
       {variant ? (
         <p data-testid="selected-variant-price" className="font-display text-[2rem] font-semibold leading-none tracking-tight text-ink sm:text-[2.2rem]">
           {formatMoney(variant.price)}
-          <span className="ml-2 align-middle text-sm font-normal tracking-normal text-slate">
-            / {variant.title}
-          </span>
+          {!hideDefaultVariantDetails ? <span className="ml-2 align-middle text-sm font-normal tracking-normal text-slate">/ {variant.title}</span> : null}
         </p>
       ) : null}
 
       {/* Variant selector */}
-      {product.options.map((option) => (
+      {!hideDefaultVariantDetails ? product.options.map((option) => (
         <fieldset key={option.id}>
           <legend className="mb-3 text-sm font-semibold text-ink">
             {option.name}
@@ -110,7 +110,7 @@ export function PurchasePanel({ product }: { product: CommerceProduct }) {
             })}
           </div>
         </fieldset>
-      ))}
+      )) : null}
 
       <div>
         <label htmlFor="quantity" className="mb-3 block text-sm font-semibold text-ink">Quantity</label>
