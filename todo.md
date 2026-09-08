@@ -111,4 +111,4 @@
 - [x] Complete final desktop/mobile visual reconciliation of the post-price panel against the documented reference requirements without reopening the restricted attachment.
 - [x] Add a structural regression assertion for the documented integrated quantity/cart row and five-row fulfillment rail before final publication.
 - [x] Change only the PDP integrated purchase-card background to a near-white, low-opacity Cellova #8B93A7 blue-gray gradient.
-- [ ] Verify no purchase-card layout, spacing, typography, icon, border, content, or sizing changes accompany the gradient adjustment; publish the update to GitHub and Vercel.
+- [x] Verify no purchase-card layout, spacing, typography, icon, border, content, or sizing changes accompany the gradient adjustment; publish the update to GitHub and Vercel.

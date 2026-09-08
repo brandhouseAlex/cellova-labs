@@ -92,3 +92,7 @@ An authenticated Vercel desktop review of `/products/bpc-157-10mg` confirmed tha
 The post-price PDP area is now a single pale-blue purchase panel matching the supplied hierarchy: a white minus/quantity/plus control and Spark **ADD TO CART** action sit in the primary row, followed by a five-row fulfillment rail. The live Vercel BPC-157 desktop route visibly confirms the panel, labels, icon rail, and dynamic price/quantity/cart controls. The 375px mobile PDP view stacks the action row, retains the five clear shipping, UPS, checkout, and support rows, and preserves readable touch targets without horizontal overflow.
 
 Functional regression coverage verifies provider-backed variant price switching, quantity increments, selected variant cart identifiers, single-default-variant suppression, and unavailable stock behavior. TypeScript, **17 Vitest tests**, ESLint, production build, and whitespace checks pass.
+
+## Subtle purchase-card gradient
+
+Only the integrated quantity, cart, and fulfillment card background was updated. Its former medium blue fill is now a near-white diagonal wash using Cellova Slate **`#8B93A7`** at **10%** fading through **4.5%** opacity into **`#F7F7F4`**. A live Vercel BPC-157 review confirms the existing quantity control, Spark add-to-cart action, five fulfillment rows, typography, icons, borders, and dimensions remain unchanged. TypeScript, **17 Vitest tests**, ESLint, production build, and whitespace checks pass.
