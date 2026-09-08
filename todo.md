@@ -102,3 +102,10 @@
 - [x] Remove the product-detail Quality Standards, facility/shipping benefit, and shipping-assurance sections requested for deletion.
 - [x] Add the supplied Built for serious research standards band beneath the product documentation/COA section with responsive Cellova styling.
 - [x] Add coverage, validate desktop/mobile product-detail presentation, and publish the streamlined PDP update to GitHub and Vercel.
+- [x] Rebuild the PDP purchase area below the dynamic price as a connected quantity/cart row and blue fulfillment-information panel matching the supplied reference hierarchy.
+- [x] Preserve provider-backed variant, price, stock-state, and cart behavior while updating the purchase-panel composition.
+- [ ] Add regression coverage, validate desktop/mobile PDP purchase presentation, and publish the reference-aligned purchase-panel update to GitHub and Vercel.
+- [x] Reconcile the integrated quantity/cart row and blue fulfillment panel with the supplied reference hierarchy, spacing, and visible copy without re-reading the restricted attachment.
+- [x] Add functional regression coverage for variant selection, default-variant suppression, quantity updates, unavailable state, and provider-backed add-to-cart behavior.
+- [ ] Capture and document desktop/mobile PDP verification of the updated purchase area on an active product route.
+- [ ] Complete final desktop/mobile visual reconciliation of the post-price panel against the documented reference requirements without reopening the restricted attachment.
