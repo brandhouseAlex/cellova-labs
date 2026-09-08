@@ -1,21 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { HeroProductImage } from "./page";
 
-vi.mock("next/image", () => ({
-  default: ({ src, alt, priority, unoptimized, className }: { src: string; alt: string; priority?: boolean; unoptimized?: boolean; className?: string }) => (
-    <span role="img" aria-label={alt} data-src={src} data-priority={String(priority)} data-unoptimized={String(unoptimized)} data-class={className} />
-  ),
-}));
-
 describe("HeroProductImage", () => {
-  it("renders the supplied Cellova product visual as the prioritized accessible hero image", () => {
+  it("renders the supplied Cellova product visual as an accessible responsive hero background", () => {
     render(<HeroProductImage />);
 
     const image = screen.getByRole("img", { name: "Cellova Labs research product lineup" });
-    expect(image.getAttribute("data-src")).toContain("soQIwZUdfXIdMSCv.png");
-    expect(image.getAttribute("data-priority")).toBe("true");
-    expect(image.getAttribute("data-unoptimized")).toBe("true");
-    expect(image.getAttribute("data-class")).toContain("object-cover");
+    expect(image.getAttribute("style")).toContain("soQIwZUdfXIdMSCv.png");
+    expect(image.getAttribute("class")).toContain("bg-cover");
+    expect(image.getAttribute("class")).toContain("lg:min-h-[29rem]");
   });
 });
