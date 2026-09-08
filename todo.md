@@ -92,3 +92,5 @@
 - [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
 - [x] Add coverage, validate desktop/mobile homepage presentation, and publish the updated homepage to GitHub and Vercel.
 - [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
+- [ ] Replace the homepage hero placeholder with the supplied Cellova product visual using responsive, accessible image treatment.
+- [ ] Add coverage, validate desktop/mobile hero presentation, and publish the image replacement to GitHub and Vercel.

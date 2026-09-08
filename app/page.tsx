@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
+import Image from "next/image";
 import { HomeProductGrid } from "@/components/home/home-product-grid";
 import { ResearchFormats } from "@/components/home/research-formats";
 import { TransparencyCoa } from "@/components/home/transparency-coa";
@@ -25,14 +26,19 @@ function AssuranceIcon({ icon }: { icon: (typeof ASSURANCES)[number]["icon"] }) 
   return <svg viewBox="0 0 24 24" className="h-8 w-8 text-[#2D3452]" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{content[icon]}</svg>;
 }
 
-function HeroPlaceholder() {
-  return <div role="img" aria-label="Hero image placeholder" className="flex min-h-[23rem] items-center justify-center rounded-[20px] bg-[#8B93A7]/20 text-[#2D3452] sm:min-h-[29rem] lg:min-h-0">
-    <div className="text-center">
-      <svg viewBox="0 0 80 68" className="mx-auto h-16 w-20" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="8" y="8" width="64" height="48" rx="5" /><circle cx="27" cy="25" r="5" /><path d="m14 50 18-17 10 10 12-15 12 22" /></svg>
-      <p className="mt-3 text-sm font-bold uppercase tracking-[.08em]">Hero Image</p>
-      <p className="mt-1 text-xs font-semibold">1920 × 1080</p>
+export function HeroProductImage() {
+  return (
+    <div className="relative min-h-[23rem] overflow-hidden rounded-[20px] bg-[#E9ECEB] shadow-[0_20px_42px_-30px_rgba(45,52,82,.55)] sm:min-h-[29rem] lg:min-h-0">
+      <Image
+        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663938836977/soQIwZUdfXIdMSCv.png"
+        alt="Cellova Labs research product lineup"
+        fill
+        priority
+        sizes="(min-width: 1024px) 56vw, 100vw"
+        className="object-cover object-center"
+      />
     </div>
-  </div>;
+  );
 }
 
 export default async function HomePage() {
@@ -51,7 +57,7 @@ export default async function HomePage() {
             <Link href="/coa-library" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] border border-[#8B93A7]/55 bg-paper px-6 text-sm font-bold text-[#2D3452] transition-colors hover:border-[#F2A63C] hover:bg-[#F2A63C]/10 active:scale-[.98]">View COA Library <span aria-hidden="true">→</span></Link>
           </div>
         </div>
-        <HeroPlaceholder />
+        <HeroProductImage />
       </div>
     </section>
 
