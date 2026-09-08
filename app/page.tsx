@@ -28,7 +28,7 @@ function AssuranceIcon({ icon }: { icon: (typeof ASSURANCES)[number]["icon"] }) 
 
 export function HeroProductImage() {
   return (
-    <div className="relative min-h-[23rem] overflow-hidden rounded-[20px] bg-[#E9ECEB] shadow-[0_20px_42px_-30px_rgba(45,52,82,.55)] sm:min-h-[29rem] lg:min-h-0">
+    <div className="relative min-h-[23rem] overflow-hidden rounded-[20px] bg-[#E9ECEB] shadow-[0_20px_42px_-30px_rgba(45,52,82,.55)] sm:min-h-[29rem] lg:min-h-[29rem]">
       <Image
         src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663938836977/soQIwZUdfXIdMSCv.png"
         alt="Cellova Labs research product lineup"
