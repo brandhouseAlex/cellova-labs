@@ -34,6 +34,7 @@ export function HeroProductImage() {
         alt="Cellova Labs research product lineup"
         fill
         priority
+        unoptimized
         sizes="(min-width: 1024px) 56vw, 100vw"
         className="object-cover object-center"
       />

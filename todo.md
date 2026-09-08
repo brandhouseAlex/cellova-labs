@@ -96,3 +96,4 @@
 - [ ] Add coverage, validate desktop/mobile hero presentation, and publish the image replacement to GitHub and Vercel.
 - [x] Correct live hero asset delivery so the supplied Cellova product image is visibly rendered in the production hero frame.
 - [ ] Capture and document definitive live production visual evidence that the supplied Cellova hero image renders inside its desktop and mobile frames.
+- [x] Ensure the supplied hero image uses direct managed-CDN delivery so it renders promptly inside the production frame.

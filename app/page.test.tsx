@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from "vitest";
 import { HeroProductImage } from "./page";
 
 vi.mock("next/image", () => ({
-  default: ({ src, alt, priority, className }: { src: string; alt: string; priority?: boolean; className?: string }) => (
-    <span role="img" aria-label={alt} data-src={src} data-priority={String(priority)} data-class={className} />
+  default: ({ src, alt, priority, unoptimized, className }: { src: string; alt: string; priority?: boolean; unoptimized?: boolean; className?: string }) => (
+    <span role="img" aria-label={alt} data-src={src} data-priority={String(priority)} data-unoptimized={String(unoptimized)} data-class={className} />
   ),
 }));
 
@@ -15,6 +15,7 @@ describe("HeroProductImage", () => {
     const image = screen.getByRole("img", { name: "Cellova Labs research product lineup" });
     expect(image.getAttribute("data-src")).toContain("soQIwZUdfXIdMSCv.png");
     expect(image.getAttribute("data-priority")).toBe("true");
+    expect(image.getAttribute("data-unoptimized")).toBe("true");
     expect(image.getAttribute("data-class")).toContain("object-cover");
   });
 });
