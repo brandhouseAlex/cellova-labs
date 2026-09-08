@@ -86,3 +86,9 @@
 - [x] Replace the homepage Transparency section with the supplied documentation-first composition while retaining an accessible COA Library action.
 - [x] Stage the supplied mockup and actual COA images as managed production assets without modifying their visual content.
 - [x] Add coverage, validate the replacement at desktop and mobile breakpoints, and publish the update to GitHub and Vercel.
+- [x] Refine Multiple Formats cards with transparent-background imagery, visual-depth gradients, and Research Compounds-matched heading typography.
+- [x] Align the Explore the catalog eyebrow color with the Research Formats eyebrow treatment.
+- [x] Replace the Documentation First COA with the supplied AOD-9604 document and slightly reduce the panel height.
+- [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.
+- [ ] Add coverage, validate desktop/mobile homepage presentation, and publish the updated homepage to GitHub and Vercel.
+- [x] Correct the Multiple Formats transparent-style image sources so the visible product cutouts render reliably over the new depth gradients.

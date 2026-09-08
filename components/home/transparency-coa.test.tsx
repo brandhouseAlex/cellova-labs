@@ -15,7 +15,7 @@ describe("TransparencyCoa", () => {
     render(<TransparencyCoa />);
 
     expect(screen.getByRole("heading", { name: /complete transparency/i })).toBeTruthy();
-    expect(screen.getByRole("img", { name: /sermorelin 10mg certificate of analysis/i }).getAttribute("data-src")).toBe("/brand/sermorelin-coa.png");
+    expect(screen.getByRole("img", { name: /aod-9604 certificate of analysis/i }).getAttribute("data-src")).toBe("/brand/aod-9604-coa.png");
     expect(screen.getByRole("link", { name: /view coa library/i }).getAttribute("href")).toBe("/coa-library");
     expect(screen.getByText("Endotoxin & heavy metals testing")).toBeTruthy();
   });

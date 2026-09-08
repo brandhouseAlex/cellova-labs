@@ -15,7 +15,7 @@ export async function HomeProductGrid() {
     <div className="home-page-container">
       <header className="flex flex-col gap-7 border-b border-[#dfe4dc] pb-10 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
-          <p className="section-eyebrow">Explore the catalog</p>
+          <p className="section-eyebrow !text-[#2D3452]">Explore the catalog</p>
           <h2 id="home-catalog-title" className="mt-4 font-display text-4xl font-semibold tracking-[-0.045em] text-ink sm:text-5xl">Research Compounds</h2>
           <p className="mt-4 max-w-xl text-base leading-7 text-slate">Explore the complete Cellova Labs catalog of research compounds, peptides, and formulations.</p>
         </div>

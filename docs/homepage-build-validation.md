@@ -70,3 +70,9 @@ The final authenticated screenshot route log is maintained in [`docs/live-produc
 ## Documentation-first transparency section
 
 The previous animated transparency timeline was replaced with the supplied documentation-first composition. The new section retains a direct, accessible **View COA Library** action and uses the supplied Sermorelin 10mg Certificate of Analysis as the proof visual, framed by a three-sheet document stack. Desktop and mobile checks confirm that the dark Indigo panel, Spark CTA, documentation points, and actual COA remain visible and readable at both breakpoints. The new component regression test asserts the COA visual, documentation content, and COA Library destination; the full suite now passes with **11 tests**.
+
+## Multiple Formats and AOD-9604 COA refinement
+
+The Multiple Formats heading now uses the same Sora display family, 4xl/5xl responsive scale, semibold weight, and tracking system as **Research Compounds**. Each format card uses a managed PNG product cutout with an alpha background on a restrained Indigo, Slate, and Spark gradient field; the blend treatment keeps the visual background-free while retaining an accessible product image. The **Explore the catalog** eyebrow now uses the same Indigo color treatment as **Research Formats**.
+
+The Documentation First panel now uses the supplied AOD-9604 Certificate of Analysis as its proof visual. Its outer section and internal spacing have been tightened, reducing its desktop panel minimum height from 474px to 402px while maintaining readable documentation points and a mobile-safe COA frame. Desktop and 375px mobile screenshots show the cards and document panel remain contained, legible, and non-overlapping. TypeScript, **11 Vitest tests**, ESLint, production build, and whitespace checks pass.

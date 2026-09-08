@@ -7,7 +7,7 @@ vi.mock("next/link", () => ({
 }));
 
 vi.mock("next/image", () => ({
-  default: ({ alt }: { alt: string }) => <span role="img" aria-label={alt} />,
+  default: ({ alt, className, src }: { alt: string; className?: string; src: string }) => <span role="img" aria-label={alt} data-class={className} data-src={src} />,
 }));
 
 describe("ResearchFormats", () => {
@@ -15,14 +15,16 @@ describe("ResearchFormats", () => {
     render(<ResearchFormats />);
 
     const expected = [
-      ["Vials", "/collections/vials"],
-      ["Capsules", "/collections/capsules"],
-      ["Serums", "/collections/serums"],
-      ["Nasal Sprays", "/collections/sprays"],
+      ["Vials", "/collections/vials", "CVzBWYPsxZmtMOCa.png"],
+      ["Capsules", "/collections/capsules", "KxKqnhDyAfksyKUY.png"],
+      ["Serums", "/collections/serums", "wiWHkEBMMcYVKZaZ.png"],
+      ["Nasal Sprays", "/collections/sprays", "qqKBQCUxyHpGZTjm.png"],
     ] as const;
 
-    expected.forEach(([label, href]) => {
+    expected.forEach(([label, href, asset]) => {
       expect(screen.getByRole("img", { name: `Cellova Labs ${label} research format` })).toBeTruthy();
+      expect(screen.getByRole("img", { name: `Cellova Labs ${label} research format` }).getAttribute("data-class")).toContain("mix-blend-multiply");
+      expect(screen.getByRole("img", { name: `Cellova Labs ${label} research format` }).getAttribute("data-src")).toContain(asset);
       expect(screen.getByRole("link", { name: new RegExp(label, "i") }).getAttribute("href")).toBe(href);
     });
   });
