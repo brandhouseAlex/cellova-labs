@@ -112,3 +112,5 @@
 - [x] Add a structural regression assertion for the documented integrated quantity/cart row and five-row fulfillment rail before final publication.
 - [x] Change only the PDP integrated purchase-card background to a near-white, low-opacity Cellova #8B93A7 blue-gray gradient.
 - [x] Verify no purchase-card layout, spacing, typography, icon, border, content, or sizing changes accompany the gradient adjustment; publish the update to GitHub and Vercel.
+- [x] Replace only the integrated PDP purchase-card background with the exact 105-degree #8B93A7 gradient at 4%, 8%, and 15% opacity, and use a 16%-opacity Slate border.
+- [ ] Verify the product content above the purchase card and all card layout, spacing, typography, icons, content, and sizing remain unchanged; publish the correction to GitHub and Vercel.
