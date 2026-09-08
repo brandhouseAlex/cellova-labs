@@ -42,6 +42,9 @@ describe("PurchasePanel functional behavior", () => {
     addItem.mockResolvedValue();
     render(<PurchasePanel product={baseProduct} />);
 
+    expect(screen.getByTestId("pdp-purchase-panel")).toBeTruthy();
+    expect(screen.getByRole("group", { name: "Quantity" })).toBeTruthy();
+    expect(screen.getAllByTestId("fulfillment-row")).toHaveLength(5);
     expect(screen.getByTestId("selected-variant-price").textContent).toContain("$25.00");
     fireEvent.click(screen.getByRole("button", { name: "10 mg" }));
     expect(screen.getByTestId("selected-variant-price").textContent).toContain("$39.00");

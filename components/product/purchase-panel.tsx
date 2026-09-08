@@ -96,7 +96,7 @@ export function FulfillmentDetails() {
   return (
     <div className="mt-4 divide-y divide-[#BECBE2] border-t border-[#9FB0CD]">
       {FULFILLMENT_DETAILS.map(([icon, label, detail]) => (
-        <div key={label} className="grid grid-cols-[2rem_minmax(8.75rem,.95fr)_minmax(0,1.25fr)] items-center gap-2.5 py-3 text-sm sm:grid-cols-[2.5rem_minmax(12rem,.95fr)_minmax(0,1.25fr)] sm:gap-3.5 sm:py-3.5">
+        <div key={label} data-testid="fulfillment-row" className="grid grid-cols-[2rem_minmax(8.75rem,.95fr)_minmax(0,1.25fr)] items-center gap-2.5 py-3 text-sm sm:grid-cols-[2.5rem_minmax(12rem,.95fr)_minmax(0,1.25fr)] sm:gap-3.5 sm:py-3.5">
           <FulfillmentIcon name={icon} className="h-6 w-6 text-[#2D3452]" />
           <span className="font-semibold text-[#2D3452]">{label}</span>
           <span className="text-right leading-5 text-[#657493] sm:text-left">{detail}</span>
