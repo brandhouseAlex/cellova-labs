@@ -63,7 +63,7 @@ export function PurchasePanel({ product }: { product: CommerceProduct }) {
         </fieldset>
       )) : null}
 
-      <section data-testid="pdp-purchase-panel" className="overflow-hidden rounded-[12px] border border-[#CBD6E9] bg-[#E9EFFA] p-3.5 shadow-[0_16px_32px_-27px_rgba(18,20,28,.25)] sm:p-5">
+      <section data-testid="pdp-purchase-panel" className="overflow-hidden rounded-[12px] border border-[#CBD6E9] bg-[linear-gradient(135deg,rgba(139,147,167,0.10)_0%,rgba(139,147,167,0.045)_48%,rgba(247,247,244,0.98)_100%)] p-3.5 shadow-[0_16px_32px_-27px_rgba(18,20,28,.25)] sm:p-5">
         <div className="grid gap-3 sm:grid-cols-[minmax(12.5rem,.78fr)_minmax(0,1.22fr)]">
           <div role="group" aria-label="Quantity" className="flex items-center rounded-[8px] border border-[#C9D4E9] bg-paper shadow-[0_8px_18px_-18px_rgba(18,20,28,.5)]">
             <label htmlFor="quantity" className="sr-only">Quantity</label>
