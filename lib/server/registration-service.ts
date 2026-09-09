@@ -5,7 +5,7 @@ import { adminGraphql, ShopifyAdminError, throwOnUserErrors } from "@/lib/server
 const REGISTRATION_NAME = "Customer Registration";
 const REGISTRATION_REFERENCE = { namespace: "custom", key: "customer_registration", type: "metaobject_reference" } as const;
 
-export const INELIGIBLE_MESSAGE = "No completed account was found for this email. Please create an account first.";
+export const INELIGIBLE_MESSAGE = "We couldn’t find a registered account for this email. Please create an account first.";
 
 export interface RegistrationInput {
   firstName: string;

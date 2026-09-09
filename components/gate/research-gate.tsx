@@ -44,6 +44,9 @@ export function ResearchGate() {
             acceptsResearchUseTerms: acknowledged,
           }
         : { email, returnTo: new URLSearchParams(window.location.search).get("returnTo") };
+      if (isRegister) {
+        payload.returnTo = new URLSearchParams(window.location.search).get("returnTo");
+      }
       const response = await fetch(endpoint, {
         method: "POST",
         credentials: "include",
@@ -51,9 +54,12 @@ export function ResearchGate() {
         body: JSON.stringify(payload),
       });
       const result = (await response.json()) as { success?: boolean; eligible?: boolean; error?: string; authorizationUrl?: string };
-      if (isRegister && result.success) {
+      if (isRegister && result.success && result.authorizationUrl) {
+        window.location.assign(result.authorizationUrl);
+        return;
+      } else if (isRegister && result.success) {
         setMode("login");
-        setNotice("Your research account is ready. Log in to receive a secure Shopify email code.");
+        setNotice("Your research account is ready. Continue to receive your secure email verification code.");
       } else if (!isRegister && result.eligible && result.authorizationUrl) {
         window.location.assign(result.authorizationUrl);
         return;

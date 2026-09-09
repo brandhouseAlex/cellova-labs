@@ -63,6 +63,22 @@ describe("ResearchGate", () => {
       companyName: "Cellova Research",
       email: "ada@example.com",
       acceptsResearchUseTerms: true,
+      returnTo: null,
     });
+  });
+
+  it("uses the requested non-Shopify completion copy if authorization is unavailable", async () => {
+    const user = userEvent.setup();
+    render(<ResearchGate />);
+    await user.click(screen.getByRole("tab", { name: /create account/i }));
+    await user.type(screen.getByLabelText("First name"), "Ada");
+    await user.type(screen.getByLabelText("Last name"), "Lovelace");
+    await user.type(screen.getByLabelText("Phone number"), "+15550000000");
+    await user.type(screen.getByLabelText("Company name"), "Cellova Research");
+    await user.type(screen.getByLabelText("Email address"), "ada@example.com");
+    await user.click(screen.getByLabelText(/I confirm that I am 21/i));
+    await user.click(screen.getByRole("button", { name: /create your research account/i }));
+    expect(await screen.findByText("Your research account is ready. Continue to receive your secure email verification code.")).toBeTruthy();
+    expect(screen.queryByText(/Shopify/i)).toBeNull();
   });
 });

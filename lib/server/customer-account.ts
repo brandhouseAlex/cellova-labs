@@ -73,6 +73,7 @@ export interface OAuthStart {
 export async function startCustomerAccountAuthorization(email: string, returnTo?: string | null): Promise<OAuthStart> {
   const eligible = await findEligibleCustomerByEmail(email);
   if (!eligible) throw new CustomerAccountError("ineligible", "Customer registration is incomplete");
+  const normalizedEmail = eligible.email.trim().toLowerCase();
 
   const [config, verifier] = await Promise.all([getOpenIdConfiguration(), Promise.resolve(randomBase64Url(48))]);
   const state = randomBase64Url();
@@ -82,7 +83,7 @@ export async function startCustomerAccountAuthorization(email: string, returnTo?
     state,
     nonce,
     verifier,
-    email: eligible.email,
+    email: normalizedEmail,
     returnTo: sanitiseReturnPath(returnTo),
   };
   const authorizationUrl = new URL(config.authorization_endpoint);
@@ -92,7 +93,7 @@ export async function startCustomerAccountAuthorization(email: string, returnTo?
   authorizationUrl.searchParams.set("redirect_uri", customerAccountCallbackUrl());
   authorizationUrl.searchParams.set("state", state);
   authorizationUrl.searchParams.set("nonce", nonce);
-  authorizationUrl.searchParams.set("login_hint", eligible.email);
+  authorizationUrl.searchParams.set("login_hint", normalizedEmail);
   authorizationUrl.searchParams.set("code_challenge", await sha256Base64Url(verifier));
   authorizationUrl.searchParams.set("code_challenge_method", "S256");
   return { authorizationUrl: authorizationUrl.toString(), transactionCookie: await sealCookie(transaction, COOKIE_MAX_AGE.oauth) };

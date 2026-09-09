@@ -182,3 +182,7 @@
 - [x] Implement and validate the Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, a database, or another external storage service.
 - [x] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, existing storefront commerce regression behavior, and the user-confirmed live Customer Account email-code completion; publish the completed implementation.
 - [x] Verify the reauthorized production client-credentials path resolves the existing Customer Registration definition through normal paginated discovery, then complete the secure registration and pre-auth Customer Account flow.
+- [x] Replace the two specified customer-facing account messages without mentioning Shopify or changing generic eligibility behavior.
+- [x] Immediately initiate the existing Customer Account PKCE authorization flow after successful completed registration, preserving all cookie, state, eligibility, and route-protection controls.
+- [x] Include the normalized verified email as the Customer Account authorization `login_hint` for both returning login and post-registration authorization flows.
+- [x] Test the targeted registration/login redirects and auth regressions, then publish the scoped update to GitHub and Vercel.
