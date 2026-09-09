@@ -133,6 +133,6 @@
 - [x] Replace distorted PDP Research-Grade Materials and Storage Instructions icons with correct microscope and storage-safe icons.
 - [x] Add only a subtle blue-gray surface tint and drop shadow to the PDP Built for serious research standards band.
 - [x] Change only the PDP Download COA action to Indigo #2D3452.
-- [ ] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this coordinated storefront refinement to GitHub and Vercel.
+- [x] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this coordinated storefront refinement to GitHub and Vercel.
 - [x] Correct inconsistent live primary-gallery image rendering while retaining provider-only image selection, media fit, and all existing PDP layout/content.
-- [ ] Publish and live-verify the corrected primary-gallery fill positioning without any other PDP layout or content changes.
+- [x] Publish and live-verify the corrected primary-gallery fill positioning without any other PDP layout or content changes.
