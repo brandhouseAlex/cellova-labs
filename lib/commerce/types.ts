@@ -43,6 +43,8 @@ export interface CommerceVariant {
   compareAtPrice?: CommerceMoney | null;
   /** Maps option name -> selected value, e.g. { "Strength": "5 mg" } */
   selectedOptions: Record<string, string>;
+  /** Provider-assigned media for this specific purchasable variant, when available. */
+  image?: CommerceImage | null;
 }
 
 /** Structured, research-oriented specification fields. */

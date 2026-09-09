@@ -330,6 +330,7 @@ function productImage(handle: string, title: string) {
 }
 
 export const mockProducts: CommerceProduct[] = seeds.map((seed) => {
+  const providerImage = productImage(seed.handle, seed.title);
   const variants = seed.variants.map((v, i) => ({
     id: `${seed.handle}-variant-${i + 1}`,
     title: v.title,
@@ -338,6 +339,10 @@ export const mockProducts: CommerceProduct[] = seeds.map((seed) => {
     price: money(v.price),
     compareAtPrice: null,
     selectedOptions: { Strength: v.title },
+    image: {
+      ...providerImage,
+      altText: `${seed.title} — ${v.title} provider variant image`,
+    },
   }));
 
   const prices = variants.map((v) => parseFloat(v.price.amount));
@@ -352,8 +357,8 @@ export const mockProducts: CommerceProduct[] = seeds.map((seed) => {
     productType: seed.productType,
     tags: seed.tags,
     vendor: "Demo Commerce Provider",
-    featuredImage: productImage(seed.handle, seed.title),
-    images: [productImage(seed.handle, seed.title)],
+    featuredImage: providerImage,
+    images: [providerImage],
     options: [
       {
         id: `${seed.handle}-opt-strength`,

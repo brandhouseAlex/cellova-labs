@@ -9,14 +9,28 @@ import { formatMoney, cn } from "@/lib/utils";
 import { shouldSuppressDefaultVariantDetails } from "@/lib/commerce/variants";
 
 /** Provider-backed purchase controls with a reference-aligned fulfillment panel. */
-export function PurchasePanel({ product }: { product: CommerceProduct }) {
+export function PurchasePanel({
+  product,
+  selectedVariantId: controlledVariantId,
+  onVariantChange,
+}: {
+  product: CommerceProduct;
+  selectedVariantId?: string;
+  onVariantChange?: (variantId: string) => void;
+}) {
   const { addItem, isLoading } = useCart();
   const { isAuthenticated, isReady } = useAuth();
-  const [selectedVariantId, setSelectedVariantId] = useState(product.variants[0]?.id ?? "");
+  const [internalVariantId, setInternalVariantId] = useState(product.variants[0]?.id ?? "");
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const hideDefaultVariantDetails = shouldSuppressDefaultVariantDetails(product);
+  const selectedVariantId = controlledVariantId ?? internalVariantId;
   const variant = useMemo(() => product.variants.find((item) => item.id === selectedVariantId) ?? product.variants[0], [product.variants, selectedVariantId]);
+
+  function selectVariant(variantId: string) {
+    if (controlledVariantId === undefined) setInternalVariantId(variantId);
+    onVariantChange?.(variantId);
+  }
 
   async function handleAdd() {
     if (!variant) return;
@@ -57,7 +71,7 @@ export function PurchasePanel({ product }: { product: CommerceProduct }) {
             {product.variants.map((item) => {
               const value = item.selectedOptions[option.name] ?? item.title;
               const selected = item.id === selectedVariantId;
-              return <button key={item.id} type="button" data-variant-id={item.id} onClick={() => setSelectedVariantId(item.id)} aria-pressed={selected} className={cn("rounded-[8px] border px-5 py-2.5 text-sm font-medium shadow-[0_7px_16px_-16px_rgba(32,32,32,0.55)] transition-all duration-200 active:scale-[0.985]", selected ? "border-ink bg-ink text-paper shadow-[0_10px_20px_-15px_rgba(32,32,32,0.8)]" : "border-line bg-paper text-ink hover:border-brand hover:bg-brand-tint/45")}>{value}</button>;
+              return <button key={item.id} type="button" data-variant-id={item.id} onClick={() => selectVariant(item.id)} aria-pressed={selected} className={cn("rounded-[8px] border px-5 py-2.5 text-sm font-medium shadow-[0_7px_16px_-16px_rgba(32,32,32,0.55)] transition-all duration-200 active:scale-[0.985]", selected ? "border-ink bg-ink text-paper shadow-[0_10px_20px_-15px_rgba(32,32,32,0.8)]" : "border-line bg-paper text-ink hover:border-brand hover:bg-brand-tint/45")}>{value}</button>;
             })}
           </div>
         </fieldset>

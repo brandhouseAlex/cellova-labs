@@ -321,6 +321,7 @@ function normalizeVariant(variant: ShopifyProductVariant): CommerceVariant {
     selectedOptions: Object.fromEntries(
       variant.selectedOptions.map((option) => [option.name, option.value])
     ),
+    image: normalizeImage(variant.image, variant.title),
   };
 }
 

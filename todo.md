@@ -119,3 +119,8 @@
 - [x] Add coverage, validate desktop/mobile PDP standards-band presentation, and publish the reference-matched correction to GitHub and Vercel.
 - [x] Tune the standards-band desktop lead-panel width, strip height, and benefit-column scale against the verified supplied reference before publication.
 - [x] Ensure the standards benefits use the requested 2×2 grid at standard mobile widths, reserving one column only for exceptionally narrow screens.
+- [x] Ensure the selected PDP variant displays its provider-supplied image and synchronizes gallery media when variants change.
+- [x] Replace only the COA tab presentation with the supplied flat structured layout: tab icons, batch-information table, analytical-results table, and outlined download action, with no gradients.
+- [ ] Preserve provider-backed COA values and PDF links, add regression coverage, verify desktop/mobile PDP behavior, and publish the media/COA update to GitHub and Vercel.
+- [x] Add per-variant image support to the active mock commerce provider so selected PDP variants can visibly swap gallery media outside the Shopify adapter.
+- [x] Add regression coverage for provider-level variant image normalization and active-provider PDP media selection.
