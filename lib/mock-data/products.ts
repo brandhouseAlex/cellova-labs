@@ -14,6 +14,23 @@ import type { CommerceProduct } from "@/lib/commerce/types";
 
 const USD = "USD";
 
+const MANAGED_PROVIDER_MEDIA: Record<string, string> = {
+  "bacteriostatic-water": "/manus-storage/bacteriostatic-water_602b26a1.svg",
+  "bpc-157": "/manus-storage/bpc-157_20fd0218.svg",
+  "bpc-157-tb-500-blend": "/manus-storage/bpc-157-tb-500-blend_6766c087.svg",
+  "empty-sterile-vials": "/manus-storage/empty-sterile-vials_455e0136.svg",
+  "ghk-cu": "/manus-storage/ghk-cu_6a558a93.svg",
+  "ghk-cu-serum-control": "/manus-storage/ghk-cu-serum-control_deb393aa.svg",
+  ipamorelin: "/manus-storage/ipamorelin_5ece16c6.svg",
+  kpv: "/manus-storage/kpv_13d424f7.svg",
+  "mots-c": "/manus-storage/mots-c_420c88c5.svg",
+  selank: "/manus-storage/selank_f6046cf4.svg",
+  semax: "/manus-storage/semax_2b919db7.svg",
+  "tb-500": "/manus-storage/tb-500_cd6bfb5d.svg",
+  tesamorelin: "/manus-storage/tesamorelin_ad385fa6.svg",
+  "thymosin-alpha-1": "/manus-storage/thymosin-alpha-1_4e1a4042.svg",
+};
+
 function money(amount: string) {
   return { amount, currencyCode: USD };
 }
@@ -322,7 +339,7 @@ const seeds: MockProductSeed[] = [
 
 function productImage(handle: string, title: string) {
   return {
-    url: `/products/${handle}.svg`,
+    url: MANAGED_PROVIDER_MEDIA[handle] ?? `/products/${handle}.svg`,
     altText: `${title} — research-grade lyophilized vial (illustration)`,
     width: 1200,
     height: 1200,

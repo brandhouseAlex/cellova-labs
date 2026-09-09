@@ -146,3 +146,4 @@
 - [x] Enable authenticated catalog add-to-cart actions for multi-variant products by using the provider’s first sellable variant as the default cart line.
 - [ ] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this correction set to GitHub and Vercel.
 - [x] Replace the PDP provider-media image renderer with a direct responsive image treatment so primary and secondary provider assets visibly load without cropping in the existing gallery frame.
+- [x] Move active mock provider product-image assets to managed external delivery so protected Vercel resource requests cannot leave gallery and grid frames blank.
