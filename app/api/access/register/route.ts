@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const category = error instanceof AccessConfigurationError
       ? "configuration"
       : error instanceof ShopifyAdminError
-        ? `admin_${error.category}_${error.operation}`
+        ? `admin_${error.category}_${error.operation}_${error.userErrorCode}`
         : "validation_or_unknown";
     console.error("[cellova-access] registration failed", { category });
     return securityHeaders(await applyCooldown(NextResponse.json({ success: false, error: "We could not complete your registration. Please review your details and try again." }, { status: 400 }), "register"));

@@ -158,8 +158,8 @@ async function findCustomerById(id: string): Promise<AdminCustomer | null> {
 }
 
 async function updateCustomer(customer: AdminCustomer, input: NormalizedRegistrationInput): Promise<AdminCustomer> {
-  const result = await adminGraphql<{ customerUpdate: { customer: AdminCustomer | null; userErrors: Array<{ message?: string }> } }>(
-    `mutation UpdateCustomer($input: CustomerInput!) { customerUpdate(input: $input) { customer { ${customerSelection()} } userErrors { message } } }`,
+  const result = await adminGraphql<{ customerUpdate: { customer: AdminCustomer | null; userErrors: Array<{ message?: string; code?: unknown }> } }>(
+    `mutation UpdateCustomer($input: CustomerInput!) { customerUpdate(input: $input) { customer { ${customerSelection()} } userErrors { message code } } }`,
     { input: { id: customer.id, firstName: input.firstName, lastName: input.lastName, email: input.email, phone: input.phone } }
   );
   throwOnUserErrors(result.customerUpdate.userErrors, "customer_update");
@@ -168,8 +168,8 @@ async function updateCustomer(customer: AdminCustomer, input: NormalizedRegistra
 }
 
 async function createCustomer(input: NormalizedRegistrationInput): Promise<AdminCustomer> {
-  const result = await adminGraphql<{ customerCreate: { customer: AdminCustomer | null; userErrors: Array<{ message?: string }> } }>(
-    `mutation CreateCustomer($input: CustomerInput!) { customerCreate(input: $input) { customer { ${customerSelection()} } userErrors { message } } }`,
+  const result = await adminGraphql<{ customerCreate: { customer: AdminCustomer | null; userErrors: Array<{ message?: string; code?: unknown }> } }>(
+    `mutation CreateCustomer($input: CustomerInput!) { customerCreate(input: $input) { customer { ${customerSelection()} } userErrors { message code } } }`,
     { input: { firstName: input.firstName, lastName: input.lastName, email: input.email, phone: input.phone } }
   );
   throwOnUserErrors(result.customerCreate.userErrors, "customer_create");
@@ -199,8 +199,8 @@ function fieldValues(schema: RegistrationSchema, input: NormalizedRegistrationIn
 }
 
 async function createRegistrationMetaobject(schema: RegistrationSchema, input: NormalizedRegistrationInput): Promise<AdminRegistrationMetaobject> {
-  const result = await adminGraphql<{ metaobjectCreate: { metaobject: AdminRegistrationMetaobject | null; userErrors: Array<{ message?: string }> } }>(
-    `mutation CreateRegistration($metaobject: MetaobjectCreateInput!) { metaobjectCreate(metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message } } }`,
+  const result = await adminGraphql<{ metaobjectCreate: { metaobject: AdminRegistrationMetaobject | null; userErrors: Array<{ message?: string; code?: unknown }> } }>(
+    `mutation CreateRegistration($metaobject: MetaobjectCreateInput!) { metaobjectCreate(metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message code } } }`,
     { metaobject: { type: schema.type, handle: registrationHandle(input.email), values: fieldValues(schema, input, false) } }
   );
   throwOnUserErrors(result.metaobjectCreate.userErrors, "registration_create");
@@ -209,8 +209,8 @@ async function createRegistrationMetaobject(schema: RegistrationSchema, input: N
 }
 
 async function updateRegistrationMetaobject(id: string, schema: RegistrationSchema, input: NormalizedRegistrationInput, complete: boolean): Promise<AdminRegistrationMetaobject> {
-  const result = await adminGraphql<{ metaobjectUpdate: { metaobject: AdminRegistrationMetaobject | null; userErrors: Array<{ message?: string }> } }>(
-    `mutation UpdateRegistration($id: ID!, $metaobject: MetaobjectUpdateInput!) { metaobjectUpdate(id: $id, metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message } } }`,
+  const result = await adminGraphql<{ metaobjectUpdate: { metaobject: AdminRegistrationMetaobject | null; userErrors: Array<{ message?: string; code?: unknown }> } }>(
+    `mutation UpdateRegistration($id: ID!, $metaobject: MetaobjectUpdateInput!) { metaobjectUpdate(id: $id, metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message code } } }`,
     { id, metaobject: { fields: Object.entries(fieldValues(schema, input, complete)).map(([key, value]) => ({ key, value })) } }
   );
   throwOnUserErrors(result.metaobjectUpdate.userErrors, "registration_update");
@@ -219,8 +219,8 @@ async function updateRegistrationMetaobject(id: string, schema: RegistrationSche
 }
 
 async function attachRegistrationReference(customerId: string, registrationId: string): Promise<void> {
-  const result = await adminGraphql<{ metafieldsSet: { userErrors: Array<{ message?: string }> } }>(
-    `mutation AttachRegistration($metafields: [MetafieldsSetInput!]!) { metafieldsSet(metafields: $metafields) { userErrors { message } } }`,
+  const result = await adminGraphql<{ metafieldsSet: { userErrors: Array<{ message?: string; code?: unknown }> } }>(
+    `mutation AttachRegistration($metafields: [MetafieldsSetInput!]!) { metafieldsSet(metafields: $metafields) { userErrors { message code } } }`,
     { metafields: [{ ownerId: customerId, namespace: REGISTRATION_REFERENCE.namespace, key: REGISTRATION_REFERENCE.key, type: REGISTRATION_REFERENCE.type, value: registrationId }] }
   );
   throwOnUserErrors(result.metafieldsSet.userErrors, "reference_attach");
