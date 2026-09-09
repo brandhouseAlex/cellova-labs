@@ -149,4 +149,4 @@
 - [x] Move active mock provider product-image assets to managed external delivery so protected Vercel resource requests cannot leave gallery and grid frames blank.
 - [x] Move the active mock provider image assets from protected same-origin storage paths to public CDN URLs so galleries and grids visibly paint in the live Vercel browser.
 - [x] Set only product-grid section backgrounds to Cellova Paper `#F7F7F4` while preserving existing white product cards.
-- [ ] Verify the focused product-grid surface adjustment and publish it to GitHub and Vercel.
+- [x] Verify the focused product-grid surface adjustment and publish it to GitHub and Vercel.
