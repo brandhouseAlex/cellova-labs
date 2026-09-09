@@ -19,7 +19,6 @@ export function ResearchGate() {
   const pathname = usePathname();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [acknowledged, setAcknowledged] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +42,6 @@ export function ResearchGate() {
     setBusy(true);
     const form = new FormData(event.currentTarget);
     const email = String(form.get("email") ?? "").trim();
-    const password = String(form.get("password") ?? "");
 
     try {
       const result = isRegister
@@ -53,11 +51,10 @@ export function ResearchGate() {
             email,
             phone: String(form.get("phone") ?? "").trim(),
             companyName: String(form.get("companyName") ?? "").trim(),
-            password,
             acceptsResearchUseTerms: acknowledged,
             researchUseConsentVersion: "research-network-v1.0",
           })
-        : await login({ email, password });
+        : await login({ email });
 
       if (!result.success) setError(result.error ?? "We could not complete that request. Please try again.");
       else if (!remember) {
@@ -74,7 +71,6 @@ export function ResearchGate() {
   function selectMode(next: "login" | "register") {
     setMode(next);
     setError(null);
-    setShowPassword(false);
   }
 
   return (
@@ -110,26 +106,18 @@ export function ResearchGate() {
               </div> : null}
 
               <GateField label="Email address" name="email" type="email" autoComplete="email" placeholder="Enter your email address" icon="mail" required />
-              <GateField label="Password" name="password" type={showPassword ? "text" : "password"} autoComplete={isRegister ? "new-password" : "current-password"} minLength={isRegister ? 8 : 6} placeholder="Enter your password" icon="lock" required endAdornment={
-                <button type="button" onClick={() => setShowPassword((current) => !current)} className="gate-password-toggle" aria-label={showPassword ? "Hide password" : "Show password"}>
-                  <GateIcon name={showPassword ? "eyeOff" : "eye"} className="h-5 w-5" />
-                </button>
-              } />
 
-              {!isRegister ? <div className="flex items-center justify-between gap-4 text-sm">
-                <label className="flex cursor-pointer items-center gap-2.5 text-slate"><input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="gate-checkbox h-[18px] w-[18px]" /> Remember me</label>
-                <Link href="/contact" className="font-medium text-brand-deep transition-colors hover:text-brand">Forgot password?</Link>
-              </div> : null}
+              {!isRegister ? <label className="flex cursor-pointer items-center gap-2.5 text-sm text-slate"><input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="gate-checkbox h-[18px] w-[18px]" /> Remember me</label> : null}
+
+              {isRegister ? <label htmlFor="gate-consent" className="gate-consent flex cursor-pointer items-start gap-4 rounded-[7px] border border-line bg-white/45 px-4 py-4 text-sm leading-6 text-slate">
+                <input id="gate-consent" type="checkbox" checked={acknowledged} onChange={(event) => setAcknowledged(event.target.checked)} required className="gate-checkbox mt-0.5 h-5 w-5 shrink-0" />
+                <span>I confirm that I am 21 years of age or older and that all products are intended strictly for research purposes.</span>
+              </label> : null}
 
               {error ? <p role="alert" className="rounded-[7px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p> : null}
               <button type="submit" disabled={!canSubmitGate(mode, acknowledged, busy)} className="gate-submit gate-submit--primary w-full rounded-[7px] px-5 py-[1.1rem] text-sm font-bold uppercase tracking-[0.04em] text-[#12141C] disabled:cursor-not-allowed disabled:opacity-45">
                 {busy ? "Please wait…" : isRegister ? "Create Your Research Account  →" : "Log In to Your Account  →"}
               </button>
-
-              <label htmlFor="gate-consent" className="gate-consent flex cursor-pointer items-start gap-4 rounded-[7px] border border-line bg-white/45 px-4 py-4 text-sm leading-6 text-slate">
-                <input id="gate-consent" type="checkbox" checked={acknowledged} onChange={(event) => setAcknowledged(event.target.checked)} className="gate-checkbox mt-0.5 h-5 w-5 shrink-0" />
-                <span>I confirm that I am 21 years of age or older and that all products are intended strictly for research purposes.</span>
-              </label>
             </form>
 
             <nav aria-label="Policies" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate">

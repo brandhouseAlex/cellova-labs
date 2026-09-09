@@ -200,7 +200,8 @@ export interface CommerceCustomer {
 
 export interface CommerceAuthInput {
   email: string;
-  password: string;
+  /** Optional for providers that offer passwordless research-access flows. */
+  password?: string;
 }
 
 export interface CommerceRegisterInput extends CommerceAuthInput {

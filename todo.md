@@ -152,3 +152,6 @@
 - [x] Verify the focused product-grid surface adjustment and publish it to GitHub and Vercel.
 - [x] Increase the Documentation First COA visual so it occupies more of the existing section while preserving its content and CTA.
 - [x] Verify the enlarged Documentation First COA presentation at desktop and mobile breakpoints, then publish the update.
+- [x] Remove password inputs from the research-access login and account-creation forms without weakening the protected-route boundary.
+- [x] Keep research-use consent explicitly mandatory for account creation and update gate regression coverage.
+- [x] Verify the passwordless access forms on desktop and mobile, then publish the gate update to GitHub and Vercel.

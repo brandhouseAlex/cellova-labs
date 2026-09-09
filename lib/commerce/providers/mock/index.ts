@@ -271,11 +271,8 @@ export const mockProvider: CommerceProvider = {
   /* --------------------------- Auth & customer -------------------------- */
 
   async login(input: CommerceAuthInput): Promise<CommerceAuthResult> {
-    if (!input.email || !input.password) {
-      return { success: false, error: "Email and password are required." };
-    }
-    if (input.password.length < 6) {
-      return { success: false, error: "Invalid credentials." };
+    if (!input.email) {
+      return { success: false, error: "An email address is required." };
     }
 
     const customer: CommerceCustomer = {
@@ -306,10 +303,10 @@ export const mockProvider: CommerceProvider = {
     if (!input.firstName || !input.lastName) {
       return { success: false, error: "First and last name are required." };
     }
-    if (!input.email || input.password.length < 8) {
+    if (!input.email) {
       return {
         success: false,
-        error: "A valid email and a password of at least 8 characters are required.",
+        error: "A valid email address is required.",
       };
     }
 

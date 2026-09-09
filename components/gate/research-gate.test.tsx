@@ -35,18 +35,18 @@ describe("ResearchGate", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
-  it("exposes keyboard-reachable controls and a real unchecked consent checkbox", async () => {
+  it("renders passwordless login controls and shows consent only for account creation", async () => {
     const user = userEvent.setup();
     render(<ResearchGate />);
-    const consent = screen.getByLabelText(/I confirm that I am 21/i) as HTMLInputElement;
-    expect(consent.type).toBe("checkbox");
-    expect(consent.checked).toBe(false);
+    expect(screen.queryByLabelText("Password")).toBeNull();
+    expect(screen.queryByLabelText(/I confirm that I am 21/i)).toBeNull();
     await user.tab();
     expect(document.activeElement).toBe(screen.getByRole("tab", { name: /log in/i }));
-    const password = screen.getByLabelText("Password") as HTMLInputElement;
-    expect(password.type).toBe("password");
-    await user.click(screen.getByRole("button", { name: /show password/i }));
-    expect(password.type).toBe("text");
+    await user.click(screen.getByRole("tab", { name: /create account/i }));
+    const consent = screen.getByLabelText(/I confirm that I am 21/i) as HTMLInputElement;
+    expect(consent.type).toBe("checkbox");
+    expect(consent.required).toBe(true);
+    expect(consent.checked).toBe(false);
   });
 
   it("blocks registration until consent is explicitly checked and preserves the complete registration payload", async () => {
@@ -60,7 +60,7 @@ describe("ResearchGate", () => {
     await user.type(screen.getByLabelText("Phone number"), "+15550000000");
     await user.type(screen.getByLabelText("Company name"), "Cellova Research");
     await user.type(screen.getByLabelText("Email address"), "ada@example.com");
-    await user.type(screen.getByLabelText("Password"), "correct-horse-battery");
+    expect(screen.queryByLabelText("Password")).toBeNull();
     await user.click(screen.getByLabelText(/I confirm that I am 21/i));
     expect(submit.disabled).toBe(false);
     await user.click(submit);
