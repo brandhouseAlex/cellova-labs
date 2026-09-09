@@ -7,7 +7,7 @@ vi.mock("next/link", () => ({
 }));
 
 vi.mock("next/image", () => ({
-  default: ({ src, alt }: { src: string; alt: string }) => <span role="img" aria-label={alt} data-src={src} />,
+  default: ({ src, alt, className }: { src: string; alt: string; className?: string }) => <span role="img" aria-label={alt} data-src={src} className={className} />,
 }));
 
 describe("TransparencyCoa", () => {
@@ -15,7 +15,9 @@ describe("TransparencyCoa", () => {
     render(<TransparencyCoa />);
 
     expect(screen.getByRole("heading", { name: /complete transparency/i })).toBeTruthy();
-    expect(screen.getByRole("img", { name: /aod-9604 certificate of analysis/i }).getAttribute("data-src")).toBe("/brand/aod-9604-coa.png");
+    const coaVisual = screen.getByRole("img", { name: /aod-9604 certificate of analysis/i });
+    expect(coaVisual.getAttribute("data-src")).toBe("/brand/aod-9604-coa.png");
+    expect(coaVisual.className).toContain("lg:max-h-[30rem]");
     expect(screen.getByRole("link", { name: /view coa library/i }).getAttribute("href")).toBe("/coa-library");
     expect(screen.getByText("Endotoxin & heavy metals testing")).toBeTruthy();
   });

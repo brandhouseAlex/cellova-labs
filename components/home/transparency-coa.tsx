@@ -30,7 +30,7 @@ export function TransparencyCoa() {
           <span className="absolute -right-[11%] -top-[35%] h-[100%] w-[68%] rounded-[48%] border-[72px] border-[#263653]/55" />
         </div>
 
-        <div className="relative grid gap-8 lg:grid-cols-[minmax(0,.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-10">
+        <div className="relative grid gap-8 lg:grid-cols-[minmax(0,.86fr)_minmax(0,1.14fr)] lg:items-center lg:gap-10">
           <div className="max-w-[34rem]">
             <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.23em] text-[#F2A63C]">
               <span className="h-3 w-3 rounded-full bg-[#F2A63C]" aria-hidden="true" />
@@ -67,7 +67,7 @@ export function TransparencyCoa() {
             </Link>
           </div>
 
-          <div className="relative mx-auto flex w-full max-w-[500px] items-center justify-center lg:min-h-[340px]">
+          <div className="relative mx-auto flex w-full max-w-[580px] items-center justify-center lg:min-h-[382px]">
             <div className="pointer-events-none absolute left-[16%] top-[7%] h-[81%] w-[60%] rotate-[-7deg] rounded-[3px] bg-[#E9EDEF] shadow-[0_18px_32px_-20px_rgba(0,0,0,.72)]" aria-hidden="true" />
             <div className="pointer-events-none absolute left-[23%] top-[5%] h-[85%] w-[59%] rotate-[-2deg] rounded-[3px] bg-[#F8F9F8] shadow-[0_20px_34px_-22px_rgba(0,0,0,.8)]" aria-hidden="true" />
             <div className="relative overflow-hidden rounded-[4px] border border-[#DEE4EC] bg-white shadow-[0_26px_44px_-22px_rgba(0,0,0,.82)]">
@@ -78,7 +78,7 @@ export function TransparencyCoa() {
                 height={632}
                 priority
                 sizes="(min-width: 1024px) 28vw, 72vw"
-                className="h-auto max-h-[19rem] w-auto max-w-full object-contain sm:max-h-[21rem] lg:max-h-[22rem]"
+                className="h-auto max-h-[24rem] w-auto max-w-full object-contain sm:max-h-[27rem] lg:max-h-[30rem]"
               />
             </div>
           </div>
