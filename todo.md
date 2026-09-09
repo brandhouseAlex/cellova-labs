@@ -173,3 +173,6 @@
 - [ ] Re-run the temporary read-only `customer_registration` definition query and record only the definition type plus field display names, exact keys, and types.
 - [ ] Remove the second temporary definition-verification route, helper, and test immediately after the exact keys are confirmed, then verify its production 404 response.
 - [x] Remove the second temporary definition-verification route, helper, and test immediately after its scope-enabled retry failed closed without returning or persisting sensitive data.
+- [ ] Run one final temporary read-only definition query using the re-saved Vercel Admin secret and return a sanitized failure category if it cannot retrieve the exact keys.
+- [ ] If the final definition query succeeds, record only the exact `customer_registration` field keys and remove the temporary verifier before immediately implementing the authorized access system.
+- [ ] Preserve the existing Cellova storefront and gate design while completing the secure Shopify-authoritative registration, OAuth, session, and server-access implementation without additional approval checkpoints.
