@@ -166,3 +166,5 @@
 - [x] Confirm Shopify Customer Account accepts the exact `https://www.cellovalabs.com/customer-account-api/callback`, `https://www.cellovalabs.com`, and `https://www.cellovalabs.com/access` production configuration before enabling OAuth.
 - [ ] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
 - [ ] Implement only conservative stateless/platform request protections when durable rate limiting is unavailable, and document the production limitation precisely.
+- [ ] Create a narrowly scoped temporary server-only Shopify Admin definition verification endpoint that returns only `customer_registration` field names, keys, and types.
+- [ ] Invoke and verify the temporary endpoint only after deployment, record the exact four immutable field keys, then remove the endpoint before authentication implementation begins.
