@@ -1,7 +1,11 @@
 import { ADMIN_API_VERSION, adminCredentials, adminShopHost } from "@/lib/server/access-config";
 
 export class ShopifyAdminError extends Error {
-  constructor(public readonly category: "configuration" | "token" | "transport" | "graphql" | "user", message: string) {
+  constructor(
+    public readonly category: "configuration" | "token" | "transport" | "graphql" | "user",
+    message: string,
+    public readonly operation: "unknown" | "customer_create" | "customer_update" | "registration_create" | "registration_update" | "reference_attach" = "unknown",
+  ) {
     super(message);
     this.name = "ShopifyAdminError";
   }
@@ -57,6 +61,9 @@ export async function adminGraphql<T>(query: string, variables: Record<string, u
   return payload.data;
 }
 
-export function throwOnUserErrors(errors: Array<{ message?: string }> | undefined): void {
-  if (errors?.length) throw new ShopifyAdminError("user", "Shopify rejected the requested registration update");
+export function throwOnUserErrors(
+  errors: Array<{ message?: string }> | undefined,
+  operation: ShopifyAdminError["operation"] = "unknown",
+): void {
+  if (errors?.length) throw new ShopifyAdminError("user", "Shopify rejected the requested registration update", operation);
 }
