@@ -20,4 +20,8 @@ Desktop and mobile viewport inspection confirms the existing Cellova gate compos
 
 ## Customer Account Email-Code Limitation
 
-The pre-authentication gate, PKCE authorization start, encrypted transaction cookie, invalid callback rejection, ID-token verification path, second server-side eligibility check, session minting logic, and logout behavior have automated regression coverage. A complete live email-code round trip requires an eligible account whose inbox can receive and enter the Shopify code; no such non-personal inbox is available to this session. No Shopify access token, ID token, or session has been fabricated to simulate that step.
+The pre-authentication gate, PKCE authorization start, encrypted transaction cookie, invalid callback rejection, ID-token verification path, second server-side eligibility check, session minting logic, and logout behavior have automated regression coverage. The site owner subsequently completed the live Customer Account email-code flow and confirmed that it works correctly. No Shopify access token, ID token, or session was surfaced or retained during validation.
+
+## Clean Deployment
+
+The final clean release, including strict phone validation, removed operation-level diagnostics, disabled mock-provider customer authentication, and removed hard-coded account-page session markers, reached Vercel production Ready. No temporary schema-verification route or diagnostic endpoint remains in the deployed application.

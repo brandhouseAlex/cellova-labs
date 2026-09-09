@@ -161,7 +161,7 @@
 - [x] Implement generic pre-login eligibility checks, Shopify Customer Account email-code PKCE initiation/callback validation, and a second server eligibility check.
 - [x] Replace client-trusted access state with a secure HttpOnly server session and server-enforced protection for all gated storefront routes.
 - [x] Add signed-cookie cooldown protection, safe exact-email query handling, logout/session clearing, security regression coverage, and retained commerce regression coverage; document the distributed rate-limit limitation.
-- [ ] Validate the full registration/login/eligibility/logout flow with the configured Shopify store and publish the secure gate update to GitHub and Vercel.
+- [x] Validate the full registration/login/eligibility/logout flow with the configured Shopify store and publish the secure gate update to GitHub and Vercel, including user-confirmed live Shopify email-code completion.
 - [x] Verify the existing Customer Registration definition through paginated server-side discovery by display name, resolving its exact runtime type and field keys without hard-coding or changing Shopify schema; verify the `custom.customer_registration` reference definition.
 - [x] Confirm Shopify Customer Account accepts the exact `https://www.cellovalabs.com/customer-account-api/callback`, `https://www.cellovalabs.com`, and `https://www.cellovalabs.com/access` production configuration before enabling OAuth.
 - [x] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
@@ -180,5 +180,5 @@
 - [x] Preserve the existing Cellova storefront and gate design while completing the secure Shopify-authoritative registration, OAuth, session, and server-access implementation without additional approval checkpoints.
 - [x] Discover the Customer Registration metaobject by Shopify definition name with automatic pagination and use its exact runtime type and immutable field keys without guessing or hard-coding them.
 - [x] Implement and validate the Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, a database, or another external storage service.
-- [ ] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, and existing storefront commerce regression behavior, then publish the completed implementation.
+- [x] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, existing storefront commerce regression behavior, and the user-confirmed live Customer Account email-code completion; publish the completed implementation.
 - [x] Verify the reauthorized production client-credentials path resolves the existing Customer Registration definition through normal paginated discovery, then complete the secure registration and pre-auth Customer Account flow.
