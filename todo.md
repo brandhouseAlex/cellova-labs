@@ -181,3 +181,4 @@
 - [ ] Discover the Customer Registration metaobject by Shopify definition name with automatic pagination, record its exact type and immutable field keys, and use those verified values without guessing.
 - [ ] Implement and validate the complete Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, or a database.
 - [ ] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, and existing storefront commerce regression behavior, then publish the completed implementation.
+- [ ] Verify the reauthorized production client-credentials token can read the existing Customer Registration definition exactly once, then automatically complete the remaining secure registration and Customer Account flow when available.
