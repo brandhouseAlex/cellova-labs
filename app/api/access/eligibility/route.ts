@@ -3,7 +3,6 @@ import { applyCooldown, enforceSameOrigin, hasCooldown, parseJsonBody, securityH
 import { CustomerAccountError, startCustomerAccountAuthorization } from "@/lib/server/customer-account";
 import { INELIGIBLE_MESSAGE } from "@/lib/server/registration-service";
 import { COOKIE_MAX_AGE, cookieOptions, getCookieName } from "@/lib/server/secure-cookie";
-import { ShopifyAdminError } from "@/lib/server/shopify-admin";
 
 export const runtime = "nodejs";
 
@@ -19,14 +18,6 @@ export async function POST(request: NextRequest) {
     response.cookies.set(getCookieName("oauth"), start.transactionCookie, cookieOptions(COOKIE_MAX_AGE.oauth));
     return securityHeaders(await applyCooldown(response, "eligibility"));
   } catch (error) {
-    if (!(error instanceof CustomerAccountError && error.code === "ineligible")) {
-      const category = error instanceof CustomerAccountError
-        ? error.code
-        : error instanceof ShopifyAdminError
-          ? `admin_${error.category}`
-          : "shopify_lookup";
-      console.error("[cellova-access] eligibility lookup failed", { category });
-    }
     const message = error instanceof CustomerAccountError && error.code === "ineligible"
       ? INELIGIBLE_MESSAGE
       : "We could not verify account access. Please try again.";

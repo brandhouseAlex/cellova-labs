@@ -83,6 +83,12 @@ After the Vercel Admin secret was re-saved and the project redeployed, one final
 
 The temporary route, server helper, and its focused test were removed immediately. No credentials, access tokens, upstream response bodies, customer data, metaobject entries, product data, order data, or privileged registration state were returned, logged, or persisted. Authentication and registration implementation remains deliberately blocked because the four immutable metaobject field keys must not be guessed.
 
+## Current Production Access Observation
+
+The normal server-side implementation now requests the full paginated `metaobjectDefinitions` connection by display name, rather than relying on the previously assumed type. A non-destructive, unknown-email eligibility request reached Shopify Admin successfully but produced the sanitized server log category `admin_graphql_access_denied`. The browser still receives only the generic denial response. This confirms a remaining authorization boundary for the production client-credentials token on definition reads; it does not expose credentials, tokens, customer data, metaobject entries, products, orders, or upstream error content.
+
+The authenticated Shopify Admin custom-data screen continues to show the `Customer Registration` definition and its four approved display labels/types, but it does not render their immutable API keys. No Shopify configuration, schema, customer, metafield, metaobject, product, or order record was changed during this observation.
+
 ## Source
 
 [1] [Shopify, Manage access scopes](https://shopify.dev/docs/apps/build/authentication-authorization/manage-access-scopes)
