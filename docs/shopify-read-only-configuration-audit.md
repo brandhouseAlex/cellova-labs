@@ -77,6 +77,12 @@ The temporary verifier was recreated with the same mutation-free GraphQL operati
 
 The remaining likely prerequisite is the production value assigned to `SHOPIFY_ADMIN_CLIENT_SECRET`, which cannot be inspected or logged. The temporary route, server helper, and safety test were removed immediately after the failed authorized retry. No authentication or registration behavior has been implemented.
 
+## Final Read-Only Verification Result
+
+After the Vercel Admin secret was re-saved and the project redeployed, one final temporary verifier was deployed. It returned the sanitized result `definition_unavailable`. This establishes that the OAuth client-credentials grant and the authorized Admin GraphQL request completed without a credential, transport, shop-permission, or GraphQL error, but Shopify did not return a usable `metaobjectDefinitionByType(type: "customer_registration")` definition record with field definitions.
+
+The temporary route, server helper, and its focused test were removed immediately. No credentials, access tokens, upstream response bodies, customer data, metaobject entries, product data, order data, or privileged registration state were returned, logged, or persisted. Authentication and registration implementation remains deliberately blocked because the four immutable metaobject field keys must not be guessed.
+
 ## Source
 
 [1] [Shopify, Manage access scopes](https://shopify.dev/docs/apps/build/authentication-authorization/manage-access-scopes)
