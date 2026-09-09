@@ -18,6 +18,10 @@ export async function POST(request: NextRequest) {
     response.cookies.set(getCookieName("oauth"), start.transactionCookie, cookieOptions(COOKIE_MAX_AGE.oauth));
     return securityHeaders(await applyCooldown(response, "eligibility"));
   } catch (error) {
+    if (!(error instanceof CustomerAccountError && error.code === "ineligible")) {
+      const category = error instanceof CustomerAccountError ? error.code : "shopify_lookup";
+      console.error("[cellova-access] eligibility lookup failed", { category });
+    }
     const message = error instanceof CustomerAccountError && error.code === "ineligible"
       ? INELIGIBLE_MESSAGE
       : "We could not verify account access. Please try again.";
