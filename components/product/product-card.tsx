@@ -29,7 +29,7 @@ export function ProductCard({
     priceRange.minVariantPrice.amount === priceRange.maxVariantPrice.amount;
 
   const singleVariant = product.variants.length === 1 ? product.variants[0] : null;
-  const canAddDirectly = Boolean(singleVariant?.availableForSale && isAuthenticated);
+  const canAddDirectly = Boolean(singleVariant && isAuthenticated);
   async function addToCart() {
     if (!singleVariant || !canAddDirectly) return;
     setError(null);
@@ -41,10 +41,10 @@ export function ProductCard({
   }
 
   return (
-    <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] border border-line bg-white p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
+    <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] bg-white p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
       <Link
         href={`/products/${product.handle}`}
-        className="relative block aspect-square overflow-hidden rounded-[12px] border border-ink-soft/30 bg-white"
+        className="relative block aspect-square overflow-hidden rounded-[12px] bg-white"
         aria-label={`View ${product.title}`}
       >
         {providerImage ? (
@@ -54,7 +54,7 @@ export function ProductCard({
             fill
             priority={prioritizeImage}
             sizes="(min-width: 1280px) 23vw, (min-width: 768px) 30vw, 48vw"
-            className="object-contain object-center p-3"
+            className="object-contain object-center p-2"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">

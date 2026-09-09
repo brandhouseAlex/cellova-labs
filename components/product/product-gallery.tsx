@@ -36,7 +36,7 @@ export function ProductGallery({
             fill
             priority
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="z-10 object-contain object-center"
+            className="z-10 max-h-full max-w-full object-contain object-center p-2"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">Product image unavailable</span>
@@ -67,7 +67,7 @@ export function ProductGallery({
                 selectedIndex === index ? "border-brand ring-2 ring-brand/15" : "border-line hover:border-brand/50"
               )}
             >
-              <Image src={image.url} alt="" fill sizes="96px" className="object-contain object-center" />
+              <Image src={image.url} alt="" fill sizes="96px" className="max-h-full max-w-full object-contain object-center p-1" />
             </button>
           ))}
         </div>
@@ -76,7 +76,7 @@ export function ProductGallery({
       {expanded && selected ? (
         <div role="dialog" aria-modal="true" aria-label={`${title} enlarged image`} className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/80 p-5 backdrop-blur-sm" onClick={() => setExpanded(false)}>
           <div className="relative h-full max-h-[90vh] w-full max-w-4xl" onClick={(event) => event.stopPropagation()}>
-            <Image src={selected.url} alt={selected.altText || title} fill sizes="90vw" className="object-contain" />
+            <Image src={selected.url} alt={selected.altText || title} fill sizes="90vw" className="max-h-full max-w-full object-contain object-center p-2" />
             <button type="button" onClick={() => setExpanded(false)} className="absolute right-1 top-1 flex h-10 w-10 items-center justify-center rounded-full bg-paper text-ink shadow-lg hover:bg-brand-tint" aria-label="Close enlarged image">×</button>
           </div>
         </div>

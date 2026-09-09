@@ -12,7 +12,7 @@ export function ProductToResearch() {
         <AbstractResearchShape />
         <div className="relative grid gap-7 lg:grid-cols-[minmax(0,32%)_minmax(0,68%)] lg:gap-x-12">
           <div>
-            <p className="section-eyebrow !text-[#2D3452]"><span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#F2A63C] align-middle" aria-hidden="true" />From product to research</p>
+            <p className="section-eyebrow !text-[#2D3452]">From product to research</p>
             <h2 id="product-to-research-heading" className="mt-3 max-w-[22rem] font-display text-[clamp(2rem,3.2vw,3.25rem)] font-semibold leading-[.98] tracking-[-.05em] text-[#2D3452]">A simpler path<br />from selection to research.</h2>
           </div>
           <p className="max-w-[16rem] self-start text-[14px] font-medium leading-5 text-[#69738B] lg:pt-1">Clear steps. Reliable information.<br />Less friction, more progress.</p>

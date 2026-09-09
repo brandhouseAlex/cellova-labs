@@ -55,16 +55,18 @@ describe("PurchasePanel functional behavior", () => {
     await waitFor(() => expect(addItem).toHaveBeenCalledWith("variant-10", 2));
   });
 
-  it("hides a single Default Title and retains unavailable state", () => {
-    const unavailableDefault: CommerceProduct = {
+  it("hides a single Default Title and retains the add-to-cart action", async () => {
+    addItem.mockResolvedValue();
+    const defaultVariant: CommerceProduct = {
       ...baseProduct,
       options: [{ id: "title", name: "Title", values: ["Default Title"] }],
       variants: [{ id: "variant-default", title: "Default Title", sku: null, availableForSale: false, price: { amount: "15.00", currencyCode: "USD" }, selectedOptions: { Title: "Default Title" } }],
     };
-    render(<PurchasePanel product={unavailableDefault} />);
+    render(<PurchasePanel product={defaultVariant} />);
 
     expect(screen.getByTestId("selected-variant-price").textContent).toBe("$15.00");
     expect(screen.queryByText("Default Title")).toBeNull();
-    expect(screen.getByRole("button", { name: "Unavailable" }).hasAttribute("disabled")).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Add to Cart" }));
+    await waitFor(() => expect(addItem).toHaveBeenCalledWith("variant-default", 1));
   });
 });

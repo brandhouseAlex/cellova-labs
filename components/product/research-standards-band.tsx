@@ -36,7 +36,7 @@ export function ResearchStandardsBand() {
 
 function MolecularCorner() {
   return (
-    <svg viewBox="0 0 170 238" className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden h-full w-40 text-[#8B93A7]/45 lg:block" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
+    <svg viewBox="0 0 170 238" className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden h-full w-40 text-[#8B93A7]/20 lg:block" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
       <path d="M150 0 128 31l25 30-35 25 23 33-33 25 26 31-28 32M170 41l-17 20 17 15M170 178l-36-3-26 31-28-11" />
       <path d="m128 31-26-15-20 24M108 144-24 12-26 31" />
       {[[150, 0], [128, 31], [153, 61], [118, 86], [141, 119], [108, 144], [134, 175], [106, 207], [102, 16], [82, 40], [82, 132], [108, 206]].map(([cx, cy]) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="4.25" fill="currentColor" stroke="none" />)}
@@ -46,7 +46,7 @@ function MolecularCorner() {
 
 function StandardsIcon({ name, className }: { name: (typeof STANDARDS)[number]["icon"]; className?: string }) {
   const paths = {
-    microscope: <><path d="M9 3h6v4H9z" /><path d="M12 7v4a5 5 0 0 1-5 5H5" /><path d="M8 15h2a4 4 0 0 0 4-4V8" /><path d="M5 20h14" /><path d="M8 20a4 4 0 0 1 8 0" /><path d="M16 5h3" /></>,
+    microscope: <><path d="M10 3h4v4h-4z" /><path d="M12 7v3a5 5 0 0 1-5 5H5" /><path d="M12 7h4l2 2" /><path d="M8 15h4a4 4 0 0 0 4-4v-1" /><path d="M4 20h16" /><path d="M8 20a4 4 0 0 1 8 0" /></>,
     shield: <><path d="M12 3 19 6v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z" /><path d="m9 12 2 2 4-4" /></>,
     box: <><path d="m4 7 8-4 8 4v10l-8 4-8-4ZM4 7l8 4 8-4M12 11v10" /></>,
     support: <><path d="M5 17.5V12a7 7 0 0 1 14 0v5.5M5 13H3.5v4.5H7V13H5ZM19 13h1.5v4.5H17V13h2ZM17 19c0 1.1-.9 2-2 2h-2" /></>,

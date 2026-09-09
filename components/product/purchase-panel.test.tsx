@@ -7,10 +7,11 @@ describe("FulfillmentDetails", () => {
     render(<FulfillmentDetails />);
 
     expect(screen.getByText("Free standard shipping")).toBeTruthy();
-    expect(screen.getByText("on orders over $150")).toBeTruthy();
+    expect(screen.getByText("Orders over $150")).toBeTruthy();
     expect(screen.getByText("Next day shipping")).toBeTruthy();
     expect(screen.getByText("Mon–Thu before 12 p.m. EST")).toBeTruthy();
     expect(screen.getByText("UPS")).toBeTruthy();
+    expect(screen.getByText(/Overnight options available\.$/)).toBeTruthy();
     expect(screen.getByText("Secure checkout")).toBeTruthy();
     expect(screen.getByText("Expert support")).toBeTruthy();
   });

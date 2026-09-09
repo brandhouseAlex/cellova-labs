@@ -136,3 +136,11 @@
 - [x] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this coordinated storefront refinement to GitHub and Vercel.
 - [x] Correct inconsistent live primary-gallery image rendering while retaining provider-only image selection, media fit, and all existing PDP layout/content.
 - [x] Publish and live-verify the corrected primary-gallery fill positioning without any other PDP layout or content changes.
+- [x] Restore the catalog page background to the standard Cellova site background while making product cards themselves white and removing image-frame outlines.
+- [x] Remove the duplicate dot from the From product to research section eyebrow.
+- [x] Replace the former three-card hero assurance section with the supplied four-item dark Indigo assurance strip and its verified icon/copy hierarchy.
+- [x] Ensure all PDP gallery media, including secondary images, use correct provider media and fit fully within the existing product image frame without cropping.
+- [x] Update PDP fulfillment copy to “Orders over $150” and remove only “at checkout.” from the UPS delivery detail.
+- [x] Ensure the Research-Grade Materials benefit uses a microscope and add faint molecular background detail to the PDP standards band.
+- [x] Make all current product variants available for add-to-cart without changing product titles, category assignment, or media mapping.
+- [ ] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this correction set to GitHub and Vercel.

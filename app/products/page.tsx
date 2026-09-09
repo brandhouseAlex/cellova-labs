@@ -49,7 +49,7 @@ export default async function ProductsPage({
   ]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#F7F7F4]">
       <div className="mx-auto max-w-[1500px] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
       <header className="max-w-2xl">
         <p className="section-eyebrow">

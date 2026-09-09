@@ -85,7 +85,7 @@ export function PurchasePanel({
             <input id="quantity" type="number" min={1} max={99} value={quantity} onChange={(event) => setQuantity(Math.min(99, Math.max(1, parseInt(event.target.value, 10) || 1)))} className="h-14 min-w-0 flex-1 border-x border-[#C9D4E9] bg-transparent text-center text-lg font-semibold text-[#2D3452] focus:outline-none" />
             <button type="button" aria-label="Increase quantity" onClick={() => setQuantity((current) => Math.min(99, current + 1))} className="flex h-14 w-14 items-center justify-center text-3xl font-normal leading-none text-[#2D3452] transition-colors hover:bg-[#F2A63C]/15">+</button>
           </div>
-          <button type="button" onClick={handleAdd} disabled={isLoading || !variant?.availableForSale} className="flex min-h-14 items-center justify-center gap-3 rounded-[8px] bg-gradient-to-r from-[#F2A63C] to-[#E7A12F] px-8 text-base font-semibold uppercase tracking-[.045em] text-white shadow-[0_14px_26px_-16px_rgba(45,52,82,.65)] transition-all duration-200 hover:from-[#E7A12F] hover:to-[#F2A63C] hover:text-white hover:shadow-[0_18px_30px_-16px_rgba(45,52,82,.78)] active:scale-[0.985] disabled:cursor-not-allowed disabled:opacity-50"><CartIcon className="h-5 w-5" />{isLoading ? "Adding…" : variant?.availableForSale ? "Add to Cart" : "Unavailable"}</button>
+          <button type="button" onClick={handleAdd} disabled={isLoading || !variant} className="flex min-h-14 items-center justify-center gap-3 rounded-[8px] bg-gradient-to-r from-[#F2A63C] to-[#E7A12F] px-8 text-base font-semibold uppercase tracking-[.045em] text-white shadow-[0_14px_26px_-16px_rgba(45,52,82,.65)] transition-all duration-200 hover:from-[#E7A12F] hover:to-[#F2A63C] hover:text-white hover:shadow-[0_18px_30px_-16px_rgba(45,52,82,.78)] active:scale-[0.985] disabled:cursor-not-allowed disabled:opacity-50"><CartIcon className="h-5 w-5" />{isLoading ? "Adding…" : "Add to Cart"}</button>
         </div>
         <FulfillmentDetails />
       </section>
@@ -99,9 +99,9 @@ type FulfillmentIconName = "truck" | "clock" | "shield" | "shield-check" | "supp
 type FulfillmentDetail = readonly [FulfillmentIconName, string, ReactNode];
 
 const FULFILLMENT_DETAILS: readonly FulfillmentDetail[] = [
-  ["truck", "Free standard shipping", "on orders over $150"],
+  ["truck", "Free standard shipping", "Orders over $150"],
   ["clock", "Next day shipping", "Mon–Thu before 12 p.m. EST"],
-  ["shield", "UPS", <>2–5 business days<br className="hidden sm:block" />Overnight options available at checkout.</>],
+  ["shield", "UPS", <>2–5 business days<br className="hidden sm:block" />Overnight options available.</>],
   ["shield-check", "Secure checkout", "Credit card processing available."],
   ["support", "Expert support", "Have questions? We’re here to help."],
 ];

@@ -12,16 +12,18 @@ export const metadata = buildMetadata({
 });
 
 const ASSURANCES = [
-  { title: "Next-Day Shipping", detail: "Orders placed before 12pm EST (M–F) ship the next business day for faster turnaround", icon: "truck" },
-  { title: "On-Time Delivery", detail: "Choose from dependable shipping options with tracked delivery across U.S. orders.", icon: "parcel" },
-  { title: "Standards Matter", detail: "Quality-focused materials and disciplined testing help support reliable research outcomes.", icon: "flask" },
+  { title: "99%+ Purity", detail: "Lot-specific results", icon: "shield" },
+  { title: "Third-party tested", detail: "Independent batch testing", icon: "flask" },
+  { title: "Fast U.S. Shipping", detail: "Tracked and dependable", icon: "truck" },
+  { title: "U.S.-Based Support", detail: "Helpful service, Monday–Friday", icon: "support" },
 ] as const;
 
 function AssuranceIcon({ icon }: { icon: (typeof ASSURANCES)[number]["icon"] }) {
   const content = {
+    shield: <><path d="M12 3 19 6v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z" /><path d="m9 12 2 2 4-4" /></>,
     truck: <><path d="M3 6h11v10H3z" /><path d="M14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /></>,
-    parcel: <><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" /><path d="M4.5 7.8 12 12l7.5-4.2M12 12v9" /></>,
     flask: <><path d="M9 3h6M10 3v6L5 18a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3" /><path d="M8 15h8" /></>,
+    support: <><path d="M5 17.5V12a7 7 0 0 1 14 0v5.5M5 13H3.5v4.5H7V13H5ZM19 13h1.5v4.5H17V13h2ZM17 19c0 1.1-.9 2-2 2h-2" /></>,
   } as const;
   return <svg viewBox="0 0 24 24" className="h-8 w-8 text-[#2D3452]" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{content[icon]}</svg>;
 }
@@ -36,6 +38,19 @@ export function HeroProductImage() {
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
     </div>
+  );
+}
+
+export function HeroAssuranceStrip() {
+  return (
+    <section className="bg-[#F7F7F4] pb-7 pt-2" aria-label="Cellova service assurances">
+      <div className="home-page-container grid overflow-hidden rounded-[8px] border border-[#8B93A7]/30 bg-[linear-gradient(105deg,#2D3452_0%,#202945_100%)] shadow-[0_14px_28px_-22px_rgba(45,52,82,.55)] sm:grid-cols-2 lg:grid-cols-4">
+        {ASSURANCES.map((item, index) => <article key={item.title} className={`flex min-h-[6.75rem] items-center gap-4 px-5 py-4 ${index > 0 ? "border-t border-[#8B93A7]/35 lg:border-l lg:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-t-0" : ""}`}>
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px] bg-[#F2A63C] shadow-[0_4px_12px_rgba(18,20,28,.2)]"><AssuranceIcon icon={item.icon} /></span>
+          <div><h2 className="text-sm font-bold text-paper">{item.title}</h2><p className="mt-1 text-xs font-medium leading-5 text-[#8B93A7]">{item.detail}</p></div>
+        </article>)}
+      </div>
+    </section>
   );
 }
 
@@ -59,14 +74,7 @@ export default async function HomePage() {
       </div>
     </section>
 
-    <section className="bg-[#F7F7F4] pb-7 pt-2" aria-label="Cellova service assurances">
-      <div className="home-page-container grid overflow-hidden rounded-[8px] border border-[#8B93A7]/45 bg-[#2D3452] sm:grid-cols-2 lg:grid-cols-3">
-        {ASSURANCES.map((item, index) => <article key={item.title} className={`flex min-h-[8.2rem] gap-4 px-5 py-5 ${index > 0 ? "lg:border-l lg:border-[#8B93A7]/45" : ""} ${index === 2 ? "border-t border-[#8B93A7]/45 lg:border-t-0" : ""} ${index === 1 ? "sm:border-l sm:border-[#8B93A7]/45 lg:border-l" : ""}`}>
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[15px] bg-[#F2A63C] shadow-[0_4px_12px_rgba(18,20,28,.2)]"><AssuranceIcon icon={item.icon} /></span>
-          <div><h2 className="text-sm font-bold text-paper">{item.title}</h2><p className="mt-1.5 text-xs font-medium leading-5 text-[#8B93A7]">{item.detail}</p></div>
-        </article>)}
-      </div>
-    </section>
+    <HeroAssuranceStrip />
 
     <ResearchFormats />
     <HomeProductGrid />
