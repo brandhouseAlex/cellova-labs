@@ -1,12 +1,6 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ProductGallery } from "./product-gallery";
-
-vi.mock("next/image", () => ({
-  default: ({ alt, className, src }: { alt: string; className?: string; src: string }) => (
-    <span role="img" aria-label={alt} className={className} data-src={src} />
-  ),
-}));
 
 describe("ProductGallery primary provider media", () => {
   it("keeps provider media fill positioning and full-containment fitting across gallery selections", () => {
@@ -23,14 +17,14 @@ describe("ProductGallery primary provider media", () => {
     );
 
     const image = screen.getByRole("img", { name: "Selected provider material" });
-    expect(image.getAttribute("data-src")).toBe("https://provider.example/selected.png");
+    expect(image.getAttribute("src")).toBe("https://provider.example/selected.png");
     expect(image.className).toContain("object-contain");
     expect(image.className).toContain("p-2");
-    expect(image.className).not.toContain("relative");
+    expect(image.className).toContain("absolute");
 
     fireEvent.click(screen.getByRole("button", { name: "Show image 2 of 3" }));
     const secondaryImage = screen.getByRole("img", { name: "Secondary provider material" });
-    expect(secondaryImage.getAttribute("data-src")).toBe("https://provider.example/secondary.png");
+    expect(secondaryImage.getAttribute("src")).toBe("https://provider.example/secondary.png");
     expect(secondaryImage.className).toContain("object-contain");
     expect(secondaryImage.className).toContain("p-2");
   });
