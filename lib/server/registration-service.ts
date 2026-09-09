@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { adminGraphql, ShopifyAdminError, throwOnUserErrors } from "@/lib/server/shopify-admin";
 
 const REGISTRATION_NAME = "Customer Registration";
@@ -75,9 +76,10 @@ function normaliseText(value: string, label: string, limit: number): string {
 export function normaliseRegistrationInput(input: RegistrationInput): NormalizedRegistrationInput {
   const email = input.email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 320) throw new Error("Invalid email address");
-  const digits = input.phone.replace(/[^\d+]/g, "");
-  const phone = digits.startsWith("+") ? digits : digits.length === 10 ? `+1${digits}` : `+${digits}`;
-  if (!/^\+[1-9]\d{6,14}$/.test(phone)) throw new Error("Invalid phone number");
+  const phoneSource = input.phone.trim();
+  const parsedPhone = parsePhoneNumberFromString(phoneSource, phoneSource.startsWith("+") ? undefined : "US");
+  if (!parsedPhone?.isValid()) throw new Error("Invalid phone number");
+  const phone = parsedPhone.number;
   if (!input.acceptsResearchUseTerms) throw new Error("Research-use consent is required");
   return {
     firstName: normaliseText(input.firstName, "first name", 80),
@@ -162,7 +164,7 @@ async function updateCustomer(customer: AdminCustomer, input: NormalizedRegistra
     `mutation UpdateCustomer($input: CustomerInput!) { customerUpdate(input: $input) { customer { ${customerSelection()} } userErrors { message field } } }`,
     { input: { id: customer.id, firstName: input.firstName, lastName: input.lastName, email: input.email, phone: input.phone } }
   );
-  throwOnUserErrors(result.customerUpdate.userErrors, "customer_update");
+  throwOnUserErrors(result.customerUpdate.userErrors);
   if (!result.customerUpdate.customer) throw new ShopifyAdminError("graphql", "Customer update did not return a customer");
   return result.customerUpdate.customer;
 }
@@ -172,7 +174,7 @@ async function createCustomer(input: NormalizedRegistrationInput): Promise<Admin
     `mutation CreateCustomer($input: CustomerInput!) { customerCreate(input: $input) { customer { ${customerSelection()} } userErrors { message field } } }`,
     { input: { firstName: input.firstName, lastName: input.lastName, email: input.email, phone: input.phone } }
   );
-  throwOnUserErrors(result.customerCreate.userErrors, "customer_create");
+  throwOnUserErrors(result.customerCreate.userErrors);
   if (!result.customerCreate.customer) throw new ShopifyAdminError("graphql", "Customer creation did not return a customer");
   return result.customerCreate.customer;
 }
@@ -203,7 +205,7 @@ async function createRegistrationMetaobject(schema: RegistrationSchema, input: N
     `mutation CreateRegistration($metaobject: MetaobjectCreateInput!) { metaobjectCreate(metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message field } } }`,
     { metaobject: { type: schema.type, handle: registrationHandle(input.email), values: fieldValues(schema, input, false) } }
   );
-  throwOnUserErrors(result.metaobjectCreate.userErrors, "registration_create");
+  throwOnUserErrors(result.metaobjectCreate.userErrors);
   if (!result.metaobjectCreate.metaobject) throw new ShopifyAdminError("graphql", "Registration creation did not return a metaobject");
   return result.metaobjectCreate.metaobject;
 }
@@ -213,7 +215,7 @@ async function updateRegistrationMetaobject(id: string, schema: RegistrationSche
     `mutation UpdateRegistration($id: ID!, $metaobject: MetaobjectUpdateInput!) { metaobjectUpdate(id: $id, metaobject: $metaobject) { metaobject { id type handle fields { key value } } userErrors { message field } } }`,
     { id, metaobject: { fields: Object.entries(fieldValues(schema, input, complete)).map(([key, value]) => ({ key, value })) } }
   );
-  throwOnUserErrors(result.metaobjectUpdate.userErrors, "registration_update");
+  throwOnUserErrors(result.metaobjectUpdate.userErrors);
   if (!result.metaobjectUpdate.metaobject) throw new ShopifyAdminError("graphql", "Registration update did not return a metaobject");
   return result.metaobjectUpdate.metaobject;
 }
@@ -223,7 +225,7 @@ async function attachRegistrationReference(customerId: string, registrationId: s
     `mutation AttachRegistration($metafields: [MetafieldsSetInput!]!) { metafieldsSet(metafields: $metafields) { userErrors { message field } } }`,
     { metafields: [{ ownerId: customerId, namespace: REGISTRATION_REFERENCE.namespace, key: REGISTRATION_REFERENCE.key, type: REGISTRATION_REFERENCE.type, value: registrationId }] }
   );
-  throwOnUserErrors(result.metafieldsSet.userErrors, "reference_attach");
+  throwOnUserErrors(result.metafieldsSet.userErrors);
 }
 
 function isComplete(customer: AdminCustomer, schema: RegistrationSchema): boolean {

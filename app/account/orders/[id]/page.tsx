@@ -14,21 +14,21 @@ export default function OrderDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const { isAuthenticated, isReady } = useAuth();
+  const { customer, isAuthenticated, isReady } = useAuth();
   const [order, setOrder] = useState<CommerceOrder | null | undefined>(
     undefined
   );
 
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !customer) return;
     let cancelled = false;
-    commerce.getOrderById("mock_session", id).then((result) => {
+    commerce.getOrderById(customer.id, id).then((result) => {
       if (!cancelled) setOrder(result);
     });
     return () => {
       cancelled = true;
     };
-  }, [isAuthenticated, id]);
+  }, [customer, isAuthenticated, id]);
 
   if (!isReady || (isAuthenticated && order === undefined)) {
     return (

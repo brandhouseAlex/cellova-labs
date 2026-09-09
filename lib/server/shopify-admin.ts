@@ -4,8 +4,6 @@ export class ShopifyAdminError extends Error {
   constructor(
     public readonly category: "configuration" | "token" | "transport" | "graphql" | "user",
     message: string,
-    public readonly operation: "unknown" | "customer_create" | "customer_update" | "registration_create" | "registration_update" | "reference_attach" = "unknown",
-    public readonly userErrorKind: "input" | "policy_or_eligibility" | "other" = "other",
   ) {
     super(message);
     this.name = "ShopifyAdminError";
@@ -64,14 +62,7 @@ export async function adminGraphql<T>(query: string, variables: Record<string, u
 
 export function throwOnUserErrors(
   errors: Array<{ message?: string; field?: unknown }> | undefined,
-  operation: ShopifyAdminError["operation"] = "unknown",
 ): void {
   if (!errors?.length) return;
-  const fields = errors.flatMap((error) => Array.isArray(error.field) ? error.field.map(String) : []);
-  const userErrorKind = fields.some((field) => ["email", "phone", "firstName", "lastName"].includes(field))
-    ? "input"
-    : fields.length === 0
-      ? "policy_or_eligibility"
-      : "other";
-  throw new ShopifyAdminError("user", "Shopify rejected the requested registration update", operation, userErrorKind);
+  throw new ShopifyAdminError("user", "Shopify rejected the requested registration update");
 }

@@ -8,19 +8,19 @@ import { useAuth } from "@/lib/auth/auth-store";
 import { formatDate, formatMoney, formatOrderStatus } from "@/lib/utils";
 
 export default function OrdersPage() {
-  const { isAuthenticated, isReady } = useAuth();
+  const { customer, isAuthenticated, isReady } = useAuth();
   const [orders, setOrders] = useState<CommerceOrder[] | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !customer) return;
     let cancelled = false;
-    commerce.getOrders("mock_session").then((result) => {
+    commerce.getOrders(customer.id).then((result) => {
       if (!cancelled) setOrders(result);
     });
     return () => {
       cancelled = true;
     };
-  }, [isAuthenticated]);
+  }, [customer, isAuthenticated]);
 
   if (!isReady) {
     return (

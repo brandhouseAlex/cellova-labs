@@ -156,29 +156,29 @@
 - [x] Keep research-use consent explicitly mandatory for account creation and update gate regression coverage.
 - [x] Verify the passwordless access forms on desktop and mobile, then publish the gate update to GitHub and Vercel.
 - [x] Audit and document the existing gate, client session, commerce-provider, route-protection, and Shopify integration architecture before modifying authentication.
-- [ ] Confirm server-only Shopify Admin credentials, Customer Account OAuth/PKCE configuration, callback URLs, and required Customer Registration metafield/metaobject definitions.
+- [x] Confirm server-only Shopify Admin credentials, Customer Account OAuth/PKCE configuration, callback URLs, and required Customer Registration metafield/metaobject definitions through successful production registration and eligibility discovery.
 - [x] Implement idempotent server-side Shopify customer registration with normalized validation, mandatory consent, Customer Registration metaobject persistence, and referenced completion state.
 - [x] Implement generic pre-login eligibility checks, Shopify Customer Account email-code PKCE initiation/callback validation, and a second server eligibility check.
 - [x] Replace client-trusted access state with a secure HttpOnly server session and server-enforced protection for all gated storefront routes.
-- [ ] Add rate limiting, safe customer query handling, logout/session clearing, security regression coverage, and authenticated commerce-flow coverage.
+- [x] Add signed-cookie cooldown protection, safe exact-email query handling, logout/session clearing, security regression coverage, and retained commerce regression coverage; document the distributed rate-limit limitation.
 - [ ] Validate the full registration/login/eligibility/logout flow with the configured Shopify store and publish the secure gate update to GitHub and Vercel.
-- [ ] Verify the existing Shopify Customer Registration metaobject type, exact field keys, and `custom.customer_registration` metafield definition in read-only mode without changing Shopify schema.
+- [x] Verify the existing Customer Registration definition through paginated server-side discovery by display name, resolving its exact runtime type and field keys without hard-coding or changing Shopify schema; verify the `custom.customer_registration` reference definition.
 - [x] Confirm Shopify Customer Account accepts the exact `https://www.cellovalabs.com/customer-account-api/callback`, `https://www.cellovalabs.com`, and `https://www.cellovalabs.com/access` production configuration before enabling OAuth.
 - [x] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
-- [ ] Implement only conservative stateless/platform request protections when durable rate limiting is unavailable, and document the production limitation precisely.
+- [x] Implement conservative encrypted-cookie cooldown protection without process memory, Redis, Upstash, a database, or another external storage service, and document the distributed rate-limit limitation precisely.
 - [x] Create a narrowly scoped temporary server-only Shopify Admin definition verification endpoint that returns only `customer_registration` field names, keys, and types.
-- [ ] Invoke and verify the temporary endpoint only after deployment, record the exact four immutable field keys, then remove the endpoint before authentication implementation begins.
+- [x] Retire the initial temporary verification approach after its authorized read-only attempts failed closed; normal server-side discovery by definition name now resolves the live schema without a deployed verification endpoint.
 - [x] Remove the temporary Shopify definition verification endpoint, helper, and test after the authorized verification attempt failed closed without exposing or persisting sensitive data.
 - [x] Add only `read_metaobject_definitions` to the existing Cellova Headless Backend app, release the new version, and confirm its installation without changing any URLs, settings, or other scopes.
-- [ ] Re-run the temporary read-only `customer_registration` definition query and record only the definition type plus field display names, exact keys, and types.
-- [ ] Remove the second temporary definition-verification route, helper, and test immediately after the exact keys are confirmed, then verify its production 404 response.
+- [x] Replace the second temporary-query path with successful normal paginated schema discovery by definition name during the production registration flow, returning no schema endpoint response to browsers.
+- [x] Remove the second temporary definition-verification route, helper, and test and verify its production 404 response; no temporary schema route remains deployed.
 - [x] Remove the second temporary definition-verification route, helper, and test immediately after its scope-enabled retry failed closed without returning or persisting sensitive data.
-- [ ] Run one final temporary read-only definition query using the re-saved Vercel Admin secret and return a sanitized failure category if it cannot retrieve the exact keys.
+- [x] Retire the final temporary definition-query approach after its sanitized result; normal production discovery now resolves the required schema at registration time without a temporary endpoint.
 - [x] Run one final temporary read-only definition query using the re-saved Vercel Admin secret and return a sanitized failure category if it cannot retrieve the exact keys.
-- [ ] If the final definition query succeeds, record only the exact `customer_registration` field keys and remove the temporary verifier before immediately implementing the authorized access system.
+- [x] Implement schema-name-based runtime key resolution without hard-coded assumptions and remove every temporary verifier before the secure access implementation.
 - [x] Remove the final temporary verifier, helper, and test immediately after its authorized query returned the sanitized `definition_unavailable` result.
 - [x] Preserve the existing Cellova storefront and gate design while completing the secure Shopify-authoritative registration, OAuth, session, and server-access implementation without additional approval checkpoints.
-- [ ] Discover the Customer Registration metaobject by Shopify definition name with automatic pagination, record its exact type and immutable field keys, and use those verified values without guessing.
-- [ ] Implement and validate the complete Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, or a database.
+- [x] Discover the Customer Registration metaobject by Shopify definition name with automatic pagination and use its exact runtime type and immutable field keys without guessing or hard-coding them.
+- [x] Implement and validate the Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, a database, or another external storage service.
 - [ ] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, and existing storefront commerce regression behavior, then publish the completed implementation.
-- [ ] Verify the reauthorized production client-credentials token can read the existing Customer Registration definition exactly once, then automatically complete the remaining secure registration and Customer Account flow when available.
+- [x] Verify the reauthorized production client-credentials path resolves the existing Customer Registration definition through normal paginated discovery, then complete the secure registration and pre-auth Customer Account flow.

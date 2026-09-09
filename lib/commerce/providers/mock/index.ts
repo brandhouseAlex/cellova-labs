@@ -20,15 +20,12 @@ import { mockCollections } from "@/lib/mock-data/collections";
  *
  * Behaves like a real backend against the demo catalog in lib/mock-data/,
  * so the entire storefront can run with zero external services. Cart state
- * is persisted to localStorage on the client; auth uses a signed demo
- * session token. This provider is NOT suitable for production security —
- * it exists so the UI can be built and tested before Medusa or Shopify
- * is connected.
+ * is persisted to localStorage on the client. Customer authentication is
+ * deliberately unavailable here: Cellova access is always owned by the
+ * server-side Shopify authorization flow, including during mock catalog use.
  */
 
 const CART_STORAGE_KEY = "cellova.cart";
-const CUSTOMER_STORAGE_KEY = "cellova.customer";
-const TOKEN_PREFIX = "mock_token_";
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -270,87 +267,17 @@ export const mockProvider: CommerceProvider = {
 
   /* --------------------------- Auth & customer -------------------------- */
 
-  async login(input: CommerceAuthInput): Promise<CommerceAuthResult> {
-    if (!input.email) {
-      return { success: false, error: "An email address is required." };
-    }
-
-    const customer: CommerceCustomer = {
-      id: `cust_${input.email.replace(/[^a-z0-9]/gi, "_").toLowerCase()}`,
-      email: input.email,
-      firstName: "Research",
-      lastName: "Customer",
-      phone: null,
-      acceptsMarketing: false,
-      defaultAddress: null,
-      createdAt: new Date().toISOString(),
-    };
-
-    if (isBrowser()) {
-      window.localStorage.setItem(CUSTOMER_STORAGE_KEY, JSON.stringify(customer));
-    }
-    return { success: true, customer };
+  async login(_input: CommerceAuthInput): Promise<CommerceAuthResult> {
+    return { success: false, error: "Customer authentication is managed by the secure Cellova access service." };
   },
 
-  async register(input: CommerceRegisterInput): Promise<CommerceAuthResult> {
-    if (!input.acceptsResearchUseTerms) {
-      return {
-        success: false,
-        error:
-          "You must confirm the research-use acknowledgement to create an account.",
-      };
-    }
-    if (!input.firstName || !input.lastName) {
-      return { success: false, error: "First and last name are required." };
-    }
-    if (!input.email) {
-      return {
-        success: false,
-        error: "A valid email address is required.",
-      };
-    }
-
-    const customer: CommerceCustomer = {
-      id: `cust_${input.email.replace(/[^a-z0-9]/gi, "_").toLowerCase()}`,
-      email: input.email,
-      firstName: input.firstName,
-      lastName: input.lastName,
-      phone: input.phone || null,
-      companyName: input.companyName || null,
-      researchUseConsent: {
-        accepted: true,
-        version: input.researchUseConsentVersion ?? "research-network-v1.0",
-        acceptedAt: new Date().toISOString(),
-      },
-      acceptsMarketing: false,
-      defaultAddress: null,
-      createdAt: new Date().toISOString(),
-    };
-
-    if (isBrowser()) {
-      window.localStorage.setItem(CUSTOMER_STORAGE_KEY, JSON.stringify(customer));
-    }
-    return { success: true, customer };
+  async register(_input: CommerceRegisterInput): Promise<CommerceAuthResult> {
+    return { success: false, error: "Customer registration is managed by the secure Cellova access service." };
   },
 
-  async logout(): Promise<void> {
-    if (isBrowser()) {
-      window.localStorage.removeItem(CUSTOMER_STORAGE_KEY);
-    }
-  },
+  async logout(): Promise<void> {},
 
-  async getCustomer(token: string): Promise<CommerceCustomer | null> {
-    if (!token.startsWith(TOKEN_PREFIX) && token !== "mock_session") {
-      // Accept the demo session marker used by the client auth store.
-    }
-    if (!isBrowser()) return null;
-    try {
-      const raw = window.localStorage.getItem(CUSTOMER_STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as CommerceCustomer) : null;
-    } catch {
-      return null;
-    }
-  },
+  async getCustomer(_token: string): Promise<CommerceCustomer | null> { return null; },
 
   /* ------------------------------- Orders ------------------------------ */
 

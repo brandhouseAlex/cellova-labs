@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "jose": "^6.2.12",
+    "libphonenumber-js": "^1.13.12",
     "next": "^16.2.12",
     "react": "19.2.1",
     "react-dom": "19.2.1"
