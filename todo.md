@@ -155,3 +155,14 @@
 - [x] Remove password inputs from the research-access login and account-creation forms without weakening the protected-route boundary.
 - [x] Keep research-use consent explicitly mandatory for account creation and update gate regression coverage.
 - [x] Verify the passwordless access forms on desktop and mobile, then publish the gate update to GitHub and Vercel.
+- [x] Audit and document the existing gate, client session, commerce-provider, route-protection, and Shopify integration architecture before modifying authentication.
+- [ ] Confirm server-only Shopify Admin credentials, Customer Account OAuth/PKCE configuration, callback URLs, and required Customer Registration metafield/metaobject definitions.
+- [ ] Implement idempotent server-side Shopify customer registration with normalized validation, mandatory consent, Customer Registration metaobject persistence, and referenced completion state.
+- [ ] Implement generic pre-login eligibility checks, Shopify Customer Account email-code PKCE initiation/callback validation, and a second server eligibility check.
+- [ ] Replace client-trusted access state with a secure HttpOnly server session and server-enforced protection for all gated storefront routes.
+- [ ] Add rate limiting, safe customer query handling, logout/session clearing, security regression coverage, and authenticated commerce-flow coverage.
+- [ ] Validate the full registration/login/eligibility/logout flow with the configured Shopify store and publish the secure gate update to GitHub and Vercel.
+- [ ] Verify the existing Shopify Customer Registration metaobject type, exact field keys, and `custom.customer_registration` metafield definition in read-only mode without changing Shopify schema.
+- [x] Confirm Shopify Customer Account accepts the exact `https://www.cellovalabs.com/customer-account-api/callback`, `https://www.cellovalabs.com`, and `https://www.cellovalabs.com/access` production configuration before enabling OAuth.
+- [ ] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
+- [ ] Implement only conservative stateless/platform request protections when durable rate limiting is unavailable, and document the production limitation precisely.
