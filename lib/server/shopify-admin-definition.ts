@@ -34,7 +34,8 @@ export class ShopifyDefinitionVerificationError extends Error {
 function getCredentials(): AdminCredentials {
   const clientId = process.env.SHOPIFY_ADMIN_CLIENT_ID?.trim();
   const clientSecret = process.env.SHOPIFY_ADMIN_CLIENT_SECRET?.trim();
-  const shop = process.env.SHOPIFY_ADMIN_SHOP?.trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+  const configuredShop = process.env.SHOPIFY_ADMIN_SHOP?.trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+  const shop = configuredShop && !configuredShop.includes(".") ? `${configuredShop}.myshopify.com` : configuredShop;
 
   if (!clientId || !clientSecret || !shop) {
     throw new ShopifyDefinitionVerificationError();

@@ -19,7 +19,7 @@ describe("fetchCustomerRegistrationDefinition", () => {
   it("returns only the permitted definition type and field metadata", async () => {
     process.env.SHOPIFY_ADMIN_CLIENT_ID = "test-client-id";
     process.env.SHOPIFY_ADMIN_CLIENT_SECRET = "test-client-secret";
-    process.env.SHOPIFY_ADMIN_SHOP = "cellova-test.myshopify.com";
+    process.env.SHOPIFY_ADMIN_SHOP = "cellova-test";
 
     const fetchMock = vi
       .fn()
@@ -51,6 +51,7 @@ describe("fetchCustomerRegistrationDefinition", () => {
       ],
     });
     expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(String(fetchMock.mock.calls[0][0])).toContain("cellova-test.myshopify.com/admin/oauth/access_token");
   });
 
   it("fails closed if Admin credentials are unavailable", async () => {
