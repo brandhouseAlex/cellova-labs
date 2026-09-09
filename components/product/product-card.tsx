@@ -28,13 +28,13 @@ export function ProductCard({
   const samePrice =
     priceRange.minVariantPrice.amount === priceRange.maxVariantPrice.amount;
 
-  const singleVariant = product.variants.length === 1 ? product.variants[0] : null;
-  const canAddDirectly = Boolean(singleVariant && isAuthenticated);
+  const defaultCartVariant = product.variants.find((variant) => variant.availableForSale) ?? product.variants[0] ?? null;
+  const canAddDirectly = Boolean(defaultCartVariant && isAuthenticated);
   async function addToCart() {
-    if (!singleVariant || !canAddDirectly) return;
+    if (!defaultCartVariant || !canAddDirectly) return;
     setError(null);
     try {
-      await addItem(singleVariant.id, 1);
+      await addItem(defaultCartVariant.id, 1);
     } catch {
       setError("Unable to add this item. Please try again.");
     }

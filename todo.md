@@ -143,4 +143,5 @@
 - [x] Update PDP fulfillment copy to “Orders over $150” and remove only “at checkout.” from the UPS delivery detail.
 - [x] Ensure the Research-Grade Materials benefit uses a microscope and add faint molecular background detail to the PDP standards band.
 - [x] Make all current product variants available for add-to-cart without changing product titles, category assignment, or media mapping.
+- [x] Enable authenticated catalog add-to-cart actions for multi-variant products by using the provider’s first sellable variant as the default cart line.
 - [ ] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this correction set to GitHub and Vercel.
