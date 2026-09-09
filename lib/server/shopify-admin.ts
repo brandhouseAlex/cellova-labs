@@ -5,7 +5,7 @@ export class ShopifyAdminError extends Error {
     public readonly category: "configuration" | "token" | "transport" | "graphql" | "user",
     message: string,
     public readonly operation: "unknown" | "customer_create" | "customer_update" | "registration_create" | "registration_update" | "reference_attach" = "unknown",
-    public readonly userErrorCode: "invalid" | "taken" | "not_permitted" | "other" = "other",
+    public readonly userErrorKind: "input" | "policy_or_eligibility" | "other" = "other",
   ) {
     super(message);
     this.name = "ShopifyAdminError";
@@ -63,17 +63,15 @@ export async function adminGraphql<T>(query: string, variables: Record<string, u
 }
 
 export function throwOnUserErrors(
-  errors: Array<{ message?: string; code?: unknown }> | undefined,
+  errors: Array<{ message?: string; field?: unknown }> | undefined,
   operation: ShopifyAdminError["operation"] = "unknown",
 ): void {
   if (!errors?.length) return;
-  const codes = new Set(errors.map((error) => String(error.code ?? "").toUpperCase()));
-  const userErrorCode = codes.has("INVALID") || codes.has("BLANK") || codes.has("TOO_LONG")
-    ? "invalid"
-    : codes.has("TAKEN") || codes.has("ALREADY_EXISTS")
-      ? "taken"
-      : codes.has("NOT_PERMITTED") || codes.has("ACCESS_DENIED") || codes.has("FORBIDDEN")
-        ? "not_permitted"
-        : "other";
-  throw new ShopifyAdminError("user", "Shopify rejected the requested registration update", operation, userErrorCode);
+  const fields = errors.flatMap((error) => Array.isArray(error.field) ? error.field.map(String) : []);
+  const userErrorKind = fields.some((field) => ["email", "phone", "firstName", "lastName"].includes(field))
+    ? "input"
+    : fields.length === 0
+      ? "policy_or_eligibility"
+      : "other";
+  throw new ShopifyAdminError("user", "Shopify rejected the requested registration update", operation, userErrorKind);
 }
