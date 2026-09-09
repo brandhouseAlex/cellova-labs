@@ -36,7 +36,7 @@ export function ProductGallery({
             fill
             priority
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="relative z-10 object-contain object-center"
+            className="z-10 object-contain object-center"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">Product image unavailable</span>
