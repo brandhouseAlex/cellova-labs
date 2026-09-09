@@ -7,7 +7,6 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { StoreProviders } from "@/components/layout/store-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { ResearchGate } from "@/components/gate/research-gate";
 import { StickyCartLauncher } from "@/components/cart/sticky-cart-launcher";
 import { NonProductResearchNotice } from "@/components/layout/non-product-research-notice";
 
@@ -78,7 +77,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <NonProductResearchNotice />
           <SiteFooter />
           <StickyCartLauncher />
-          <ResearchGate />
         </StoreProviders>
       </body>
     </html>

@@ -3,11 +3,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AuthProvider, useAuth } from "./auth-store";
 
-const { getCustomer } = vi.hoisted(() => ({ getCustomer: vi.fn() }));
-vi.mock("@/lib/commerce", () => ({
-  commerce: { getCustomer, login: vi.fn(), register: vi.fn(), logout: vi.fn() },
-}));
-
 function SessionProbe() {
   const { isAuthenticated, isReady } = useAuth();
   return <p data-testid="session-state">{isReady ? (isAuthenticated ? "authenticated" : "anonymous") : "loading"}</p>;
@@ -15,16 +10,18 @@ function SessionProbe() {
 
 describe("AuthProvider session restoration", () => {
   beforeEach(() => {
-    window.localStorage.clear();
-    getCustomer.mockResolvedValue({ id: "customer_1", email: "researcher@example.com" });
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ authenticated: true, customer: { id: "customer_1", email: "researcher@example.com", firstName: "Research", lastName: "User", createdAt: "2026-01-01T00:00:00.000Z" } }),
+    }));
   });
 
-  afterEach(() => window.localStorage.clear());
+  afterEach(() => vi.unstubAllGlobals());
 
-  it("restores a saved customer session after a page reload", async () => {
-    window.localStorage.setItem("cellova.session", "mock_session");
+  it("restores only a server-validated HttpOnly session after a page reload", async () => {
     render(<AuthProvider><SessionProbe /></AuthProvider>);
     await waitFor(() => expect(screen.getByTestId("session-state").textContent).toBe("authenticated"));
-    expect(getCustomer).toHaveBeenCalledWith("mock_session");
+    expect(fetch).toHaveBeenCalledWith("/api/access/session", { credentials: "include", cache: "no-store" });
+    expect(window.localStorage.getItem("cellova.session")).toBeNull();
   });
 });

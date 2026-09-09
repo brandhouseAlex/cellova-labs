@@ -2,39 +2,28 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { useAuth } from "@/lib/auth/auth-store";
-import { canSubmitGate, isPublicGateRoute } from "@/lib/auth/gate-policy";
+import { useState, type FormEvent, type ReactNode } from "react";
+import { canSubmitGate } from "@/lib/auth/gate-policy";
 import { cn } from "@/lib/utils";
 import { ResearchOrbit } from "@/components/gate/research-orbit";
 
 /**
- * Global Cellova catalog gate. The presentation is intentionally separate from
- * the provider-backed auth actions so login, registration, consent capture,
- * session persistence, and protected-route behaviour remain unchanged.
+ * The existing Cellova access presentation. It is rendered only by the public
+ * /access route; server-side route protection prevents any protected content
+ * from being rendered behind it.
  */
 export function ResearchGate() {
-  const { isAuthenticated, login, register } = useAuth();
-  const pathname = usePathname();
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register">(() =>
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("mode") === "register" ? "register" : "login"
+  );
   const [acknowledged, setAcknowledged] = useState(false);
-  const [remember, setRemember] = useState(true);
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(() =>
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("error") ? "We could not complete authentication. Please try again." : null
+  );
+  const [notice, setNotice] = useState<string | null>(null);
 
-  const informationalRoute = isPublicGateRoute(pathname);
-  const visible = !isAuthenticated && !informationalRoute;
   const isRegister = mode === "register";
-
-  useEffect(() => {
-    if (!visible) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
-  }, [visible]);
-
-  if (!visible) return null;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,22 +33,32 @@ export function ResearchGate() {
     const email = String(form.get("email") ?? "").trim();
 
     try {
-      const result = isRegister
-        ? await register({
+      const endpoint = isRegister ? "/api/access/register" : "/api/access/eligibility";
+      const payload = isRegister
+        ? {
             firstName: String(form.get("firstName") ?? "").trim(),
             lastName: String(form.get("lastName") ?? "").trim(),
             email,
             phone: String(form.get("phone") ?? "").trim(),
             companyName: String(form.get("companyName") ?? "").trim(),
             acceptsResearchUseTerms: acknowledged,
-            researchUseConsentVersion: "research-network-v1.0",
-          })
-        : await login({ email });
-
-      if (!result.success) setError(result.error ?? "We could not complete that request. Please try again.");
-      else if (!remember) {
-        // Preserve the current provider-session behaviour; remember-me is a
-        // presentation choice until the active customer provider owns it.
+          }
+        : { email, returnTo: new URLSearchParams(window.location.search).get("returnTo") };
+      const response = await fetch(endpoint, {
+        method: "POST",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = (await response.json()) as { success?: boolean; eligible?: boolean; error?: string; authorizationUrl?: string };
+      if (isRegister && result.success) {
+        setMode("login");
+        setNotice("Your research account is ready. Log in to receive a secure Shopify email code.");
+      } else if (!isRegister && result.eligible && result.authorizationUrl) {
+        window.location.assign(result.authorizationUrl);
+        return;
+      } else {
+        setError(result.error ?? "We could not complete that request. Please try again.");
       }
     } catch {
       setError("A connection error occurred. Please try again.");
@@ -71,6 +70,7 @@ export function ResearchGate() {
   function selectMode(next: "login" | "register") {
     setMode(next);
     setError(null);
+    setNotice(null);
   }
 
   return (
@@ -107,14 +107,13 @@ export function ResearchGate() {
 
               <GateField label="Email address" name="email" type="email" autoComplete="email" placeholder="Enter your email address" icon="mail" required />
 
-              {!isRegister ? <label className="flex cursor-pointer items-center gap-2.5 text-sm text-slate"><input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="gate-checkbox h-[18px] w-[18px]" /> Remember me</label> : null}
-
               {isRegister ? <label htmlFor="gate-consent" className="gate-consent flex cursor-pointer items-start gap-4 rounded-[7px] border border-line bg-white/45 px-4 py-4 text-sm leading-6 text-slate">
                 <input id="gate-consent" type="checkbox" checked={acknowledged} onChange={(event) => setAcknowledged(event.target.checked)} required className="gate-checkbox mt-0.5 h-5 w-5 shrink-0" />
                 <span>I confirm that I am 21 years of age or older and that all products are intended strictly for research purposes.</span>
               </label> : null}
 
               {error ? <p role="alert" className="rounded-[7px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p> : null}
+              {notice ? <p role="status" className="rounded-[7px] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{notice}</p> : null}
               <button type="submit" disabled={!canSubmitGate(mode, acknowledged, busy)} className="gate-submit gate-submit--primary w-full rounded-[7px] px-5 py-[1.1rem] text-sm font-bold uppercase tracking-[0.04em] text-[#12141C] disabled:cursor-not-allowed disabled:opacity-45">
                 {busy ? "Please wait…" : isRegister ? "Create Your Research Account  →" : "Log In to Your Account  →"}
               </button>

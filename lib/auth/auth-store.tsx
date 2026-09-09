@@ -9,30 +9,18 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { commerce } from "@/lib/commerce";
-import type {
-  CommerceAuthInput,
-  CommerceAuthResult,
-  CommerceCustomer,
-  CommerceRegisterInput,
-} from "@/lib/commerce/types";
+import type { CommerceCustomer } from "@/lib/commerce/types";
 
 /**
- * Client auth store backed by the active commerce provider's customer
- * authentication (mock today; Medusa/Shopify later). The mock adapter
- * keeps a demo session in localStorage — replace by switching providers,
- * not by redesigning components.
+ * Client view of the server-owned Cellova session. The browser never reads or
+ * writes a credential, Shopify token, eligibility value, or customer ID.
  */
-
-const SESSION_KEY = "cellova.session";
 
 interface AuthContextValue {
   customer: CommerceCustomer | null;
   isAuthenticated: boolean;
   /** True until the first session check completes (avoids gate flash). */
   isReady: boolean;
-  login: (input: CommerceAuthInput) => Promise<CommerceAuthResult>;
-  register: (input: CommerceRegisterInput) => Promise<CommerceAuthResult>;
   logout: () => Promise<void>;
 }
 
@@ -46,10 +34,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let cancelled = false;
     async function boot() {
       try {
-        const token = window.localStorage.getItem(SESSION_KEY);
-        if (token) {
-          const existing = await commerce.getCustomer(token);
-          if (!cancelled && existing) setCustomer(existing);
+        const response = await fetch("/api/access/session", { credentials: "include", cache: "no-store" });
+        if (response.ok) {
+          const payload = (await response.json()) as { customer?: CommerceCustomer };
+          if (!cancelled && payload.customer) setCustomer(payload.customer);
         }
       } catch {
         // Non-fatal: user simply appears signed out.
@@ -63,28 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const login = useCallback(async (input: CommerceAuthInput) => {
-    const result = await commerce.login(input);
-    if (result.success && result.customer) {
-      setCustomer(result.customer);
-      window.localStorage.setItem(SESSION_KEY, "mock_session");
-    }
-    return result;
-  }, []);
-
-  const register = useCallback(async (input: CommerceRegisterInput) => {
-    const result = await commerce.register(input);
-    if (result.success && result.customer) {
-      setCustomer(result.customer);
-      window.localStorage.setItem(SESSION_KEY, "mock_session");
-    }
-    return result;
-  }, []);
-
   const logout = useCallback(async () => {
-    await commerce.logout();
-    window.localStorage.removeItem(SESSION_KEY);
     setCustomer(null);
+    window.location.href = new URL("/api/access/logout", window.location.origin).toString();
   }, []);
 
   const value = useMemo<AuthContextValue>(
@@ -92,11 +61,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       customer,
       isAuthenticated: customer !== null,
       isReady,
-      login,
-      register,
       logout,
     }),
-    [customer, isReady, login, register, logout]
+    [customer, isReady, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

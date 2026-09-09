@@ -157,14 +157,14 @@
 - [x] Verify the passwordless access forms on desktop and mobile, then publish the gate update to GitHub and Vercel.
 - [x] Audit and document the existing gate, client session, commerce-provider, route-protection, and Shopify integration architecture before modifying authentication.
 - [ ] Confirm server-only Shopify Admin credentials, Customer Account OAuth/PKCE configuration, callback URLs, and required Customer Registration metafield/metaobject definitions.
-- [ ] Implement idempotent server-side Shopify customer registration with normalized validation, mandatory consent, Customer Registration metaobject persistence, and referenced completion state.
-- [ ] Implement generic pre-login eligibility checks, Shopify Customer Account email-code PKCE initiation/callback validation, and a second server eligibility check.
-- [ ] Replace client-trusted access state with a secure HttpOnly server session and server-enforced protection for all gated storefront routes.
+- [x] Implement idempotent server-side Shopify customer registration with normalized validation, mandatory consent, Customer Registration metaobject persistence, and referenced completion state.
+- [x] Implement generic pre-login eligibility checks, Shopify Customer Account email-code PKCE initiation/callback validation, and a second server eligibility check.
+- [x] Replace client-trusted access state with a secure HttpOnly server session and server-enforced protection for all gated storefront routes.
 - [ ] Add rate limiting, safe customer query handling, logout/session clearing, security regression coverage, and authenticated commerce-flow coverage.
 - [ ] Validate the full registration/login/eligibility/logout flow with the configured Shopify store and publish the secure gate update to GitHub and Vercel.
 - [ ] Verify the existing Shopify Customer Registration metaobject type, exact field keys, and `custom.customer_registration` metafield definition in read-only mode without changing Shopify schema.
 - [x] Confirm Shopify Customer Account accepts the exact `https://www.cellovalabs.com/customer-account-api/callback`, `https://www.cellovalabs.com`, and `https://www.cellovalabs.com/access` production configuration before enabling OAuth.
-- [ ] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
+- [x] Replace persistent OAuth/PKCE and Cellova session storage with signed/encrypted HttpOnly cookie envelopes and re-check Shopify eligibility server-side for every protected request, without Redis, Upstash, database, or another external storage service.
 - [ ] Implement only conservative stateless/platform request protections when durable rate limiting is unavailable, and document the production limitation precisely.
 - [x] Create a narrowly scoped temporary server-only Shopify Admin definition verification endpoint that returns only `customer_registration` field names, keys, and types.
 - [ ] Invoke and verify the temporary endpoint only after deployment, record the exact four immutable field keys, then remove the endpoint before authentication implementation begins.
@@ -177,4 +177,7 @@
 - [x] Run one final temporary read-only definition query using the re-saved Vercel Admin secret and return a sanitized failure category if it cannot retrieve the exact keys.
 - [ ] If the final definition query succeeds, record only the exact `customer_registration` field keys and remove the temporary verifier before immediately implementing the authorized access system.
 - [x] Remove the final temporary verifier, helper, and test immediately after its authorized query returned the sanitized `definition_unavailable` result.
-- [ ] Preserve the existing Cellova storefront and gate design while completing the secure Shopify-authoritative registration, OAuth, session, and server-access implementation without additional approval checkpoints.
+- [x] Preserve the existing Cellova storefront and gate design while completing the secure Shopify-authoritative registration, OAuth, session, and server-access implementation without additional approval checkpoints.
+- [ ] Discover the Customer Registration metaobject by Shopify definition name with automatic pagination, record its exact type and immutable field keys, and use those verified values without guessing.
+- [ ] Implement and validate the complete Shopify-authoritative registration, eligibility, Customer Account OAuth/PKCE, encrypted HttpOnly session, logout, and server-enforced route-protection system without Redis, Upstash, or a database.
+- [ ] Verify all requested positive and negative access flows, protected-route behavior, credential/token isolation, and existing storefront commerce regression behavior, then publish the completed implementation.
