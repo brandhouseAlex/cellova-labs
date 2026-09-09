@@ -17,10 +17,10 @@ type DocumentationIconName = (typeof DOCUMENTATION_POINTS)[number]["icon"];
 export function TransparencyCoa() {
   return (
     <section
-      className="bg-[#F7F7F4] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+      className="bg-[#F7F7F4] py-10 sm:py-12 lg:py-14"
       aria-labelledby="transparency-heading"
     >
-      <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[18px] bg-[#111B2F] px-6 py-8 text-paper shadow-[0_22px_46px_-34px_rgba(18,20,28,0.78)] sm:px-10 sm:py-9 lg:min-h-[402px] lg:px-14 lg:py-10">
+      <div className="home-page-container relative overflow-hidden rounded-[18px] bg-[#111B2F] px-6 py-8 text-paper shadow-[0_22px_46px_-34px_rgba(18,20,28,0.78)] sm:px-10 sm:py-9 lg:min-h-[402px] lg:px-14 lg:py-10">
         <div
           className="pointer-events-none absolute inset-0 opacity-80"
           aria-hidden="true"
@@ -32,7 +32,7 @@ export function TransparencyCoa() {
 
         <div className="relative grid gap-8 lg:grid-cols-[minmax(0,.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-10">
           <div className="max-w-[34rem]">
-            <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.23em] text-[#C8CFDB]">
+            <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.23em] text-[#F2A63C]">
               <span className="h-3 w-3 rounded-full bg-[#F2A63C]" aria-hidden="true" />
               Documentation first
             </p>
@@ -60,7 +60,7 @@ export function TransparencyCoa() {
 
             <Link
               href="/coa-library"
-              className="group mt-6 inline-flex min-h-11 items-center gap-4 rounded-[7px] bg-[#F2A63C] px-5 text-sm font-semibold text-[#12141C] shadow-[0_12px_24px_-16px_rgba(242,166,60,.85)] transition-colors hover:bg-[#F8BA55] active:scale-[0.98]"
+              className="group mt-6 inline-flex min-h-11 items-center gap-4 rounded-[7px] bg-[#F2A63C] px-5 text-sm font-semibold text-white shadow-[0_12px_24px_-16px_rgba(242,166,60,.85)] transition-colors hover:bg-[#D48624] hover:text-white active:scale-[0.98]"
             >
               View COA Library
               <span className="text-xl leading-none transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>

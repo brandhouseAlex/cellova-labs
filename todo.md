@@ -125,3 +125,12 @@
 - [x] Add per-variant image support to the active mock commerce provider so selected PDP variants can visibly swap gallery media outside the Shopify adapter.
 - [x] Add regression coverage for provider-level variant image normalization and active-provider PDP media selection.
 - [x] Correct the PDP primary-gallery image rendering so the selected provider image visibly paints in the main frame as well as in thumbnail controls.
+- [x] Set the specified homepage section-eyebrow text—Research-Focused. Quality Driven., Research Formats, Explore the catalog, and Documentation first—to Spark #F2A63C.
+- [x] Normalize homepage section containers to the same horizontal margin/padding system, including the hero media and Research Formats right edges.
+- [x] Ensure every Spark #F2A63C add-to-cart CTA uses white text in its base and hover states.
+- [x] Make full catalog product-grid sections white, use Spark add-to-cart CTAs, and keep each card’s media correctly fit and sourced only from its provider product/category data.
+- [x] Add a responsive Product to Research path section beneath Documentation First, matching the supplied four-step reference hierarchy and preserving proper container margins.
+- [x] Replace distorted PDP Research-Grade Materials and Storage Instructions icons with correct microscope and storage-safe icons.
+- [x] Add only a subtle blue-gray surface tint and drop shadow to the PDP Built for serious research standards band.
+- [x] Change only the PDP Download COA action to Indigo #2D3452.
+- [ ] Add coverage, verify desktop/mobile homepage and PDP presentation, and publish this coordinated storefront refinement to GitHub and Vercel.

@@ -6,7 +6,6 @@ import Image from "next/image";
 import type { CommerceCollection, CommerceProduct } from "@/lib/commerce/types";
 import { cn, formatMoney } from "@/lib/utils";
 import { ResearchUseBadge } from "@/components/ui/primitives";
-import { getPresentationImage } from "@/lib/commerce/presentation-image";
 
 /**
  * Cellova's collection-led product browser. Collections and products arrive
@@ -107,12 +106,12 @@ function CompactProductCard({ product }: { product: CommerceProduct }) {
   const isSinglePrice = priceRange.minVariantPrice.amount === priceRange.maxVariantPrice.amount;
   const firstAvailableVariant = product.variants.find((variant) => variant.availableForSale);
   const strength = firstAvailableVariant?.title ?? product.variants[0]?.title ?? "Unavailable";
-  const presentationImage = getPresentationImage(product);
+  const providerImage = product.featuredImage ?? product.images[0] ?? null;
 
   return (
-    <article className="group flex min-h-[320px] flex-col overflow-hidden rounded-[8px] border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-[0_18px_36px_-22px_rgba(40,40,40,0.4)]">
-      <Link href={`/products/${product.handle}`} className="relative m-2 block h-40 overflow-hidden rounded-[10px] border border-ink-soft/30 bg-paper" aria-label={`View ${product.title}`}>
-        {presentationImage ? <Image src={presentationImage.url} alt={presentationImage.altText} fill sizes="(min-width: 1280px) 20vw, (min-width: 640px) 40vw, 90vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.05]" /> : <span className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.18em] text-silver">Image pending</span>}
+    <article className="group flex min-h-[320px] flex-col overflow-hidden rounded-[8px] border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-[0_18px_36px_-22px_rgba(40,40,40,0.4)]">
+      <Link href={`/products/${product.handle}`} className="relative m-2 block h-40 overflow-hidden rounded-[10px] border border-ink-soft/30 bg-white" aria-label={`View ${product.title}`}>
+        {providerImage ? <Image src={providerImage.url} alt={providerImage.altText} fill sizes="(min-width: 1280px) 20vw, (min-width: 640px) 40vw, 90vw" className="object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.05]" /> : <span className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.18em] text-silver">Image pending</span>}
         <ResearchUseBadge className="pointer-events-none absolute left-3 top-3 z-10" />
       </Link>
       <div className="flex flex-1 flex-col p-4 pt-2">

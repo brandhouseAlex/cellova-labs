@@ -9,7 +9,7 @@ const STANDARDS = [
 
 export function ResearchStandardsBand() {
   return (
-    <section className="relative mt-8 overflow-hidden rounded-[20px] border border-[rgba(139,147,167,.22)] bg-[#F7F7F4] shadow-[0_10px_22px_-22px_rgba(18,20,28,.2)]" aria-labelledby="research-standards-heading">
+    <section className="relative mt-8 overflow-hidden rounded-[20px] border border-[rgba(139,147,167,.22)] bg-[linear-gradient(112deg,#F7F7F4_0%,rgba(229,233,239,.84)_100%)] shadow-[0_22px_42px_-28px_rgba(45,52,82,.30)]" aria-labelledby="research-standards-heading">
       <MolecularCorner />
       <div className="relative grid lg:min-h-[238px] lg:grid-cols-[32%_repeat(4,minmax(0,1fr))]">
         <div className="relative overflow-hidden bg-[#2D3452] px-7 py-8 text-paper sm:px-9 lg:px-9 lg:[border-bottom-right-radius:2rem_6rem]">
@@ -46,7 +46,7 @@ function MolecularCorner() {
 
 function StandardsIcon({ name, className }: { name: (typeof STANDARDS)[number]["icon"]; className?: string }) {
   const paths = {
-    microscope: <><path d="M7 20h12M12 4a3 3 0 0 1 3 3v3h-6V7a3 3 0 0 1 3-3ZM9 10h6v3a5 5 0 0 1-5 5H7v-3h3a2 2 0 0 0 2-2v-3Z" /><path d="m6 8 3 2M17 4l2 2M7 18H5" /></>,
+    microscope: <><path d="M9 3h6v4H9z" /><path d="M12 7v4a5 5 0 0 1-5 5H5" /><path d="M8 15h2a4 4 0 0 0 4-4V8" /><path d="M5 20h14" /><path d="M8 20a4 4 0 0 1 8 0" /><path d="M16 5h3" /></>,
     shield: <><path d="M12 3 19 6v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z" /><path d="m9 12 2 2 4-4" /></>,
     box: <><path d="m4 7 8-4 8 4v10l-8 4-8-4ZM4 7l8 4 8-4M12 11v10" /></>,
     support: <><path d="M5 17.5V12a7 7 0 0 1 14 0v5.5M5 13H3.5v4.5H7V13H5ZM19 13h1.5v4.5H17V13h2ZM17 19c0 1.1-.9 2-2 2h-2" /></>,

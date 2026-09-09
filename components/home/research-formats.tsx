@@ -10,12 +10,12 @@ const FORMATS = [
 
 export function ResearchFormats() {
   return <section className="border-y border-[#ECECE8] bg-[#F7F7F4] py-10 sm:py-14" aria-labelledby="research-formats-heading">
-    <div className="home-page-container grid gap-8 lg:grid-cols-[24.5%_75.5%] lg:gap-10">
+    <div className="home-page-container grid gap-8 lg:grid-cols-[minmax(0,24.5fr)_minmax(0,75.5fr)] lg:gap-10">
       <div className="lg:pt-2">
-        <p className="section-eyebrow !text-[#2D3452]">Research Formats</p>
+        <p className="section-eyebrow !text-[#F2A63C]">Research Formats</p>
         <h2 id="research-formats-heading" className="mt-4 font-display text-4xl font-semibold tracking-[-0.045em] text-ink sm:text-5xl">Multiple formats.<br /><span className="text-[#2D3452]">One standard.</span></h2>
         <p className="mt-3 max-w-[15rem] text-[15px] font-medium leading-6 text-[#8B93A7]">Choose the format that works best for your research.</p>
-        <Link href="/products" className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-[7px] bg-[#2D3452] px-4 text-sm font-bold text-paper transition-colors hover:bg-[#F2A63C] hover:text-[#2D3452]">View All Products <span aria-hidden="true">→</span></Link>
+        <Link href="/products" className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-[7px] bg-[#2D3452] px-4 text-sm font-bold text-paper transition-colors hover:bg-[#F2A63C] hover:text-white">View All Products <span aria-hidden="true">→</span></Link>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {FORMATS.map((format) => <Link key={format.title} href={format.href} className="group flex min-h-[15rem] flex-col rounded-[13px] border border-[#8B93A7]/35 bg-[linear-gradient(145deg,#FFFFFF_0%,#F3F4F1_58%,#E8ECF0_100%)] p-5 text-center shadow-[0_16px_32px_-28px_rgba(45,52,82,.9)] transition-all hover:-translate-y-0.5 hover:border-[#F2A63C] hover:shadow-[0_18px_34px_-24px_rgba(45,52,82,.65)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F2A63C]">

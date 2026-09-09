@@ -3,6 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 import { HomeProductGrid } from "@/components/home/home-product-grid";
 import { ResearchFormats } from "@/components/home/research-formats";
 import { TransparencyCoa } from "@/components/home/transparency-coa";
+import { ProductToResearch } from "@/components/home/product-to-research";
 
 export const metadata = buildMetadata({
   title: "Cellova Labs — Research-Grade Peptides & Laboratory Materials",
@@ -41,16 +42,16 @@ export function HeroProductImage() {
 export default async function HomePage() {
   return <>
     <section className="border-b border-black/[.07] bg-[#F7F7F4]">
-      <div className="home-page-container grid gap-10 py-8 lg:min-h-[31.5rem] lg:grid-cols-[39%_61%] lg:items-center lg:gap-12 lg:py-5">
+      <div className="home-page-container grid gap-10 py-8 lg:min-h-[31.5rem] lg:grid-cols-[minmax(0,39fr)_minmax(0,61fr)] lg:items-center lg:gap-12 lg:py-5">
         <div className="max-w-[31rem] lg:py-6">
-          <p className="section-eyebrow !text-[#2D3452]">Research-Focused. Quality Driven.</p>
+          <p className="section-eyebrow !text-[#F2A63C]">Research-Focused. Quality Driven.</p>
           <h1 className="mt-5 font-display text-[clamp(3rem,4.2vw,5rem)] font-bold leading-[.98] tracking-[-.06em] text-ink">Precision you<br />can <span className="text-[#F2A63C]">verify.</span></h1>
           <p className="mt-5 max-w-[28rem] text-[15px] font-medium leading-7 text-[#2D3452] sm:text-base">Premium quality peptides and compounds backed by third-party testing, transparent documentation, and dependable support for researchers nationwide.</p>
           <ul className="mt-6 flex flex-wrap gap-2" aria-label="Cellova quality assurances">
             {["USA Made", "Third-party tested", "COAs available"].map((item) => <li key={item} className="inline-flex items-center gap-2 rounded-full border border-[#8B93A7]/45 bg-paper px-3 py-2 text-xs font-semibold text-[#2D3452]"><span className="text-sm leading-none text-[#F2A63C]">✓</span>{item}</li>)}
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/products" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] bg-[#2D3452] px-6 text-sm font-bold text-paper shadow-[0_8px_16px_-12px_rgba(45,52,82,.8)] transition-colors hover:bg-[#F2A63C] hover:text-[#2D3452] active:scale-[.98]">Browse Peptides <span aria-hidden="true">→</span></Link>
+            <Link href="/products" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] bg-[#2D3452] px-6 text-sm font-bold text-paper shadow-[0_8px_16px_-12px_rgba(45,52,82,.8)] transition-colors hover:bg-[#F2A63C] hover:text-white active:scale-[.98]">Browse Peptides <span aria-hidden="true">→</span></Link>
             <Link href="/coa-library" className="inline-flex min-h-12 items-center gap-3 rounded-[7px] border border-[#8B93A7]/55 bg-paper px-6 text-sm font-bold text-[#2D3452] transition-colors hover:border-[#F2A63C] hover:bg-[#F2A63C]/10 active:scale-[.98]">View COA Library <span aria-hidden="true">→</span></Link>
           </div>
         </div>
@@ -70,5 +71,6 @@ export default async function HomePage() {
     <ResearchFormats />
     <HomeProductGrid />
     <TransparencyCoa />
+    <ProductToResearch />
   </>;
 }

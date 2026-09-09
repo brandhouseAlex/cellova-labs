@@ -71,7 +71,8 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   ]);
 
   return (
-    <div className="mx-auto max-w-[1500px] px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
+    <div className="bg-white">
+      <div className="mx-auto max-w-[1500px] px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -119,6 +120,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

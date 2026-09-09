@@ -8,7 +8,6 @@ import { formatMoney } from "@/lib/utils";
 import { ResearchUseBadge } from "@/components/ui/primitives";
 import { useCart } from "@/lib/auth/cart-store";
 import { useAuth } from "@/lib/auth/auth-store";
-import { getPresentationImage } from "@/lib/commerce/presentation-image";
 
 /**
  * Catalog style: an uncluttered clinical product card. All media and
@@ -25,7 +24,7 @@ export function ProductCard({
   const { isAuthenticated, isReady } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const { priceRange } = product;
-  const presentationImage = getPresentationImage(product);
+  const providerImage = product.featuredImage ?? product.images[0] ?? null;
   const samePrice =
     priceRange.minVariantPrice.amount === priceRange.maxVariantPrice.amount;
 
@@ -42,20 +41,20 @@ export function ProductCard({
   }
 
   return (
-    <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] border border-line bg-paper p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
+    <article data-product-type={product.productType} className="group relative flex min-h-full flex-col rounded-[12px] border border-line bg-white p-4 shadow-[0_12px_28px_-30px_rgba(32,32,32,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_18px_36px_-28px_rgba(32,32,32,0.42)]">
       <Link
         href={`/products/${product.handle}`}
-        className="relative block aspect-square overflow-hidden rounded-[12px] border border-ink-soft/30 bg-paper"
+        className="relative block aspect-square overflow-hidden rounded-[12px] border border-ink-soft/30 bg-white"
         aria-label={`View ${product.title}`}
       >
-        {presentationImage ? (
+        {providerImage ? (
           <Image
-            src={presentationImage.url}
-            alt={presentationImage.altText}
+            src={providerImage.url}
+            alt={providerImage.altText}
             fill
             priority={prioritizeImage}
             sizes="(min-width: 1280px) 23vw, (min-width: 768px) 30vw, 48vw"
-            className="object-contain object-center"
+            className="object-contain object-center p-3"
           />
         ) : (
           <span className="flex h-full items-center justify-center text-sm text-silver">
@@ -82,7 +81,7 @@ export function ProductCard({
                   priceRange.maxVariantPrice
                 )}`}
           </p>
-          {canAddDirectly ? <button type="button" onClick={addToCart} disabled={isLoading} className="mt-4 w-full rounded-[8px] bg-brand px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-brand-deep disabled:opacity-50">{isLoading ? "Adding…" : "Add to Cart"}</button> : <Link href={`/products/${product.handle}`} className="mt-4 block w-full rounded-[8px] border border-brand/60 px-4 py-2.5 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-tint" aria-label={`View product ${product.title}`}>{isReady && !isAuthenticated ? "Sign In to Order" : "View Product"}</Link>}
+          {canAddDirectly ? <button type="button" onClick={addToCart} disabled={isLoading} className="mt-4 w-full rounded-[8px] bg-[#F2A63C] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D48624] hover:text-white disabled:opacity-50">{isLoading ? "Adding…" : "Add to Cart"}</button> : <Link href={`/products/${product.handle}`} className="mt-4 block w-full rounded-[8px] border border-brand/60 px-4 py-2.5 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-tint" aria-label={`View product ${product.title}`}>{isReady && !isAuthenticated ? "Sign In to Order" : "View Product"}</Link>}
           {error ? <p role="alert" className="mt-2 text-xs text-red-700">{error}</p> : null}
         </div>
       </div>

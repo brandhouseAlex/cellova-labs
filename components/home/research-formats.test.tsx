@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
 import { ResearchFormats } from "./research-formats";
 
 vi.mock("next/link", () => ({
@@ -9,6 +9,8 @@ vi.mock("next/link", () => ({
 vi.mock("next/image", () => ({
   default: ({ alt, className, src }: { alt: string; className?: string; src: string }) => <span role="img" aria-label={alt} data-class={className} data-src={src} />,
 }));
+
+afterEach(cleanup);
 
 describe("ResearchFormats", () => {
   it("renders supplied format images with working collection destinations", () => {
@@ -27,5 +29,11 @@ describe("ResearchFormats", () => {
       expect(screen.getByRole("img", { name: `Cellova Labs ${label} research format` }).getAttribute("data-src")).toContain(asset);
       expect(screen.getByRole("link", { name: new RegExp(label, "i") }).getAttribute("href")).toBe(href);
     });
+  });
+
+  it("uses the Spark section-eyebrow treatment", () => {
+    render(<ResearchFormats />);
+
+    expect(screen.getByText("Research Formats").className).toContain("!text-[#F2A63C]");
   });
 });
