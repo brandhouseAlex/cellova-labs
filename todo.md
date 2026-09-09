@@ -151,4 +151,4 @@
 - [x] Set only product-grid section backgrounds to Cellova Paper `#F7F7F4` while preserving existing white product cards.
 - [x] Verify the focused product-grid surface adjustment and publish it to GitHub and Vercel.
 - [x] Increase the Documentation First COA visual so it occupies more of the existing section while preserving its content and CTA.
-- [ ] Verify the enlarged Documentation First COA presentation at desktop and mobile breakpoints, then publish the update.
+- [x] Verify the enlarged Documentation First COA presentation at desktop and mobile breakpoints, then publish the update.
