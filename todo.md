@@ -172,3 +172,4 @@
 - [x] Add only `read_metaobject_definitions` to the existing Cellova Headless Backend app, release the new version, and confirm its installation without changing any URLs, settings, or other scopes.
 - [ ] Re-run the temporary read-only `customer_registration` definition query and record only the definition type plus field display names, exact keys, and types.
 - [ ] Remove the second temporary definition-verification route, helper, and test immediately after the exact keys are confirmed, then verify its production 404 response.
+- [x] Remove the second temporary definition-verification route, helper, and test immediately after its scope-enabled retry failed closed without returning or persisting sensitive data.

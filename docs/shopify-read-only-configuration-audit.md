@@ -69,6 +69,14 @@ A temporary, read-only Vercel route was deployed to query only `metaobjectDefini
 
 The exact query requires `read_metaobject_definitions`, which is absent from the active app version. The temporary endpoint, its helper, and its test were removed immediately after this authorized attempt. No registration, authentication, Shopify schema, or Shopify data change was made.
 
+## Authorized Scope Addition and Second Verification Result
+
+The user authorized adding only `read_metaobject_definitions` to the existing Cellova Headless Backend app. Shopify app version `cellova-headless-backend-4` was released and confirmed active with exactly `write_customers`, `write_metaobjects`, and `read_metaobject_definitions`; no URLs, other scopes, Shopify schema, or store data were changed.
+
+The temporary verifier was recreated with the same mutation-free GraphQL operation and a corrected internal conversion of the configured store handle to its `.myshopify.com` hostname. The configured Vercel Admin shop matched the authenticated Cellova store and the configured Admin client ID matched the active Cellova Headless Backend app. Despite those checks, the production endpoint again returned only the designed generic `verification_unavailable` response. It did not reveal or persist the credential, token, upstream response, GraphQL errors, customer data, entries, products, or orders.
+
+The remaining likely prerequisite is the production value assigned to `SHOPIFY_ADMIN_CLIENT_SECRET`, which cannot be inspected or logged. The temporary route, server helper, and safety test were removed immediately after the failed authorized retry. No authentication or registration behavior has been implemented.
+
 ## Source
 
 [1] [Shopify, Manage access scopes](https://shopify.dev/docs/apps/build/authentication-authorization/manage-access-scopes)
