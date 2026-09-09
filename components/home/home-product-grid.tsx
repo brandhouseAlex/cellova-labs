@@ -11,7 +11,7 @@ const HOME_PRODUCT_LIMIT = 1000;
 export async function HomeProductGrid() {
   const result = await commerce.getProducts({ perPage: HOME_PRODUCT_LIMIT, sort: "alphabetical" });
 
-  return <section className="home-product-grid bg-white py-20 sm:py-24" aria-labelledby="home-catalog-title">
+  return <section className="home-product-grid bg-[#F7F7F4] py-20 sm:py-24" aria-labelledby="home-catalog-title">
     <div className="home-page-container">
       <header className="flex flex-col gap-7 border-b border-[#dfe4dc] pb-10 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
