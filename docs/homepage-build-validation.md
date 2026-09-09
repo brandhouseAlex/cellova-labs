@@ -96,3 +96,7 @@ Functional regression coverage verifies provider-backed variant price switching,
 ## Subtle purchase-card gradient
 
 Only the integrated quantity, cart, and fulfillment card background was updated. Its former medium blue fill is now the user-specified near-white **105-degree** wash using Cellova Slate **`#8B93A7`** at **4%**, **8%**, and **15%** opacity from left to right, with a `rgba(139,147,167,0.16)` border. A live Vercel BPC-157 review confirms the existing quantity control, Spark add-to-cart action, five fulfillment rows, typography, icons, borders, and dimensions remain unchanged. TypeScript, **17 Vitest tests**, ESLint, production build, and whitespace checks pass.
+
+## Reference-matched research standards band
+
+The product-documentation area is followed by a reusable standards strip matching the supplied reference: an approximately 32% Indigo `#2D3452` introductory panel with curved right edge, white/Spark `#F2A63C` heading treatment, outlined action, and four equal benefits with compact Navy outline icons, centered uppercase labels, and fine dividers. A restrained Slate molecular motif is confined to the far-right rail. Desktop verification confirmed its full five-column composition; the responsive rail is configured as 2×2 at standard mobile widths and only steps down to one column below 360px. The research-standards regression, full 17-test suite, type checks, lint, production build, and whitespace validation pass.
