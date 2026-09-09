@@ -114,3 +114,8 @@
 - [x] Verify no purchase-card layout, spacing, typography, icon, border, content, or sizing changes accompany the gradient adjustment; publish the update to GitHub and Vercel.
 - [x] Replace only the integrated PDP purchase-card background with the exact 105-degree #8B93A7 gradient at 4%, 8%, and 15% opacity, and use a 16%-opacity Slate border.
 - [x] Verify the product content above the purchase card and all card layout, spacing, typography, icons, content, and sizing remain unchanged; publish the correction to GitHub and Vercel.
+- [x] Replace the existing PDP research-standards band with the supplied reusable five-column horizontal composition, including a 32% curved #2D3452 lead panel, exact #F2A63C heading accent, and four equal benefit columns.
+- [x] Match the supplied standards-band dividers, thin outline icons, typography hierarchy, faint far-right molecular artwork, 18–22px radius, subtle border/shadow, and responsive 2×2 benefit behavior without changing other PDP areas.
+- [ ] Add coverage, validate desktop/mobile PDP standards-band presentation, and publish the reference-matched correction to GitHub and Vercel.
+- [x] Tune the standards-band desktop lead-panel width, strip height, and benefit-column scale against the verified supplied reference before publication.
+- [x] Ensure the standards benefits use the requested 2×2 grid at standard mobile widths, reserving one column only for exceptionally narrow screens.
