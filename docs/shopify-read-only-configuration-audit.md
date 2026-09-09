@@ -41,9 +41,10 @@ The Shopify definition screen does not display the underlying API keys for indiv
 | Customer Account client type | Public (web app) |
 | Customer Account API application configuration | Available in the Headless storefront’s Customer Account API page |
 | Active Dev Dashboard app version scopes | `write_customers`, `write_metaobjects` |
-| Implied read capability | Shopify documents that each write scope includes the corresponding read scope |
+| Customer and metaobject-entry read capability | Shopify documents that each write scope includes the corresponding resource read scope |
+| Metaobject-definition read capability | Not granted; Shopify documents `metaobjectDefinitionByType` as requiring `read_metaobject_definitions` |
 
-The active Admin app version therefore has the minimum authenticated scope family for customer and metaobject reads/writes through its existing `write_customers` and `write_metaobjects` grants. The remaining scope prerequisite is the applicable Shopify protected-customer-data approval for non-development production data. This audit has not changed the app version or any Shopify configuration. [1]
+The active Admin app version has the required customer and metaobject-entry read/write capability through its existing `write_customers` and `write_metaobjects` grants. However, the requested definition query requires the distinct `read_metaobject_definitions` scope. The remaining production prerequisite is the applicable Shopify protected-customer-data approval for non-development data. This audit has not changed the app version or any Shopify configuration. [1] [2]
 
 ## Verified Customer Account API Application URLs
 
@@ -60,8 +61,16 @@ The requested exact production paths are already registered: `https://www.cellov
 
 ## Pending Read-Only Checks
 
-The only remaining schema check is obtaining the exact API keys for the four existing metaobject fields without changing their schema. The rendered Shopify Admin definition screen confirms the type, labels, and field types but does not render the immutable keys. A one-time read-only Admin GraphQL confirmation query must execute in a server runtime with the already-configured Vercel Admin credentials; neither credentials nor Admin tokens were accessed in this audit.
+The only remaining schema check is obtaining the exact API keys for the four existing metaobject fields without changing their schema. The rendered Shopify Admin definition screen confirms the type, labels, and field types but does not render the immutable keys.
+
+## Authorized Temporary Verification Result
+
+A temporary, read-only Vercel route was deployed to query only `metaobjectDefinitionByType(type: "customer_registration")` and return only definition type plus field name/key/type records. It returned the fail-closed generic result `verification_unavailable` (HTTP 503). The route intentionally did not return, log, or persist the underlying Shopify response, token, credential, customer, metaobject-entry, product, or order data.
+
+The exact query requires `read_metaobject_definitions`, which is absent from the active app version. The temporary endpoint, its helper, and its test were removed immediately after this authorized attempt. No registration, authentication, Shopify schema, or Shopify data change was made.
 
 ## Source
 
 [1] [Shopify, Manage access scopes](https://shopify.dev/docs/apps/build/authentication-authorization/manage-access-scopes)
+
+[2] [Shopify, metaobjectDefinitionByType](https://shopify.dev/docs/api/admin-graphql/latest/queries/metaobjectDefinitionByType)
