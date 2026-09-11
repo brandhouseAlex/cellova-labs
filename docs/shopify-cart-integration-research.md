@@ -18,3 +18,7 @@ For an authenticated Cellova customer, cart creation includes the verified sessi
 2. [Shopify Storefront API: cartLinesAdd](https://shopify.dev/docs/api/storefront/latest/mutations/cartLinesAdd)
 3. [Shopify Storefront API: cartLinesUpdate](https://shopify.dev/docs/api/storefront/latest/mutations/cartLinesUpdate)
 4. [Shopify Storefront API: cartLinesRemove](https://shopify.dev/docs/api/storefront/latest/mutations/cartLinesRemove)
+
+## Deployment Observation
+
+The GitHub `main` commit `7614bd9` was pushed for Vercel production validation. The deployment reached **Ready** and the live Cart API and hosted-checkout validation is recorded in [Shopify Cart & Hosted Checkout Production Validation](./shopify-cart-production-validation.md).
