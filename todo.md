@@ -186,3 +186,9 @@
 - [x] Immediately initiate the existing Customer Account PKCE authorization flow after successful completed registration, preserving all cookie, state, eligibility, and route-protection controls.
 - [x] Include the normalized verified email as the Customer Account authorization `login_hint` for both returning login and post-registration authorization flows.
 - [x] Test the targeted registration/login redirects and auth regressions, then publish the scoped update to GitHub and Vercel.
+- [x] Confirm the existing Cellova Shopify Storefront domain and audit every current cart, header, and checkout integration boundary without changing authentication, catalog, styling, or unrelated pages.
+- [x] Replace client-local cart behavior with Shopify Storefront Cart API `cartCreate`, `cartLinesAdd`, `cartLinesUpdate`, and `cartLinesRemove` operations using actual ProductVariant IDs and Shopify as the cart source of truth.
+- [x] Persist the Shopify cart across navigation and refresh, associate it with the logged-in customer where Shopify supports it, and make header cart quantity/menu plus every existing Add to Cart action functional.
+- [x] Implement the existing-design `/cart` page with Shopify line images, names, variants, prices, quantity controls, removal, subtotal, errors, unavailable states, and a Shopify hosted-checkout redirect from `cart.checkoutUrl`.
+- [ ] Run all requested production cart and checkout validations, including add single/multiple variants, quantity changes, removal, refresh persistence, badge/menu, checkout contents, hosted payment visibility, and a non-duplicate test order if safely possible.
+- [ ] Push the verified cart and checkout implementation to GitHub `main`, confirm the Vercel deployment, and report the commit, deployment, store domain, and PASS/FAIL validation table.

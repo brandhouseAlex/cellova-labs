@@ -9,7 +9,7 @@ import { ResearchUseNotice } from "@/components/research/research-use-notice";
 
 /** Slide-over cart drawer. Pricing always comes from the provider. */
 export function CartDrawer() {
-  const { cart, isDrawerOpen, closeDrawer, updateItem, removeItem, isLoading } =
+  const { cart, isDrawerOpen, closeDrawer, updateItem, removeItem, beginCheckout, error, isLoading } =
     useCart();
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -178,6 +178,7 @@ export function CartDrawer() {
               Shipping and taxes are calculated at checkout. Pricing is
               confirmed by the commerce backend.
             </p>
+            {error ? <p role="alert" className="mt-3 text-sm text-red-700">{error}</p> : null}
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Link
                 href="/cart"
@@ -186,13 +187,14 @@ export function CartDrawer() {
               >
                 View Cart
               </Link>
-              <Link
-                href="/checkout"
-                onClick={closeDrawer}
-                className="bg-ink px-4 py-3 text-center text-xs font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-brand-deep"
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => void beginCheckout()}
+                className="bg-ink px-4 py-3 text-center text-xs font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-brand-deep disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Checkout
-              </Link>
+                {isLoading ? "Preparing…" : "Checkout"}
+              </button>
             </div>
             <ResearchUseNotice variant="compact" className="mt-4" />
           </div>

@@ -866,7 +866,7 @@ export const shopifyProvider: CommerceProvider = {
     return Array.from(new Set(items.map((product) => product.productType).filter(Boolean))).sort();
   },
 
-  async createCart(): Promise<CommerceCart> {
+  async createCart(input?: { buyerEmail?: string }): Promise<CommerceCart> {
     return mutateCart(
       "cartCreate",
       `mutation CartCreate($input: CartInput!) {
@@ -876,7 +876,7 @@ export const shopifyProvider: CommerceProvider = {
           warnings { message }
         }
       }`,
-      { input: {} },
+      { input: input?.buyerEmail ? { buyerIdentity: { email: input.buyerEmail.trim().toLowerCase() } } : {} },
       "cartCreate"
     );
   },

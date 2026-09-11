@@ -199,7 +199,7 @@ export const mockProvider: CommerceProvider = {
 
   /* ------------------------------- Cart -------------------------------- */
 
-  async createCart(): Promise<CommerceCart> {
+  async createCart(_input?: { buyerEmail?: string }): Promise<CommerceCart> {
     const id = `cart_${Date.now().toString(36)}_${Math.random()
       .toString(36)
       .slice(2, 8)}`;

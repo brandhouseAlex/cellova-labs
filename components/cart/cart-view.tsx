@@ -8,7 +8,7 @@ import { ResearchUseNotice } from "@/components/research/research-use-notice";
 
 /** Full cart page view. Totals come from the provider, not the browser. */
 export function CartView() {
-  const { cart, updateItem, removeItem, isLoading } = useCart();
+  const { cart, updateItem, removeItem, beginCheckout, error, isLoading } = useCart();
   const items = cart?.items ?? [];
 
   if (items.length === 0) {
@@ -153,12 +153,15 @@ export function CartView() {
           Final pricing, discounts, shipping, and taxes are confirmed by the
           commerce backend at checkout.
         </p>
-        <Link
-          href="/checkout"
-          className="mt-6 block bg-ink px-6 py-4 text-center text-sm font-medium uppercase tracking-[0.16em] text-paper transition-colors hover:bg-brand-deep"
+        {error ? <p role="alert" className="mt-4 text-sm text-red-700">{error}</p> : null}
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={() => void beginCheckout()}
+          className="mt-6 block w-full bg-ink px-6 py-4 text-center text-sm font-medium uppercase tracking-[0.16em] text-paper transition-colors hover:bg-brand-deep disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Proceed to Checkout
-        </Link>
+          {isLoading ? "Preparing Checkout…" : "Proceed to Checkout"}
+        </button>
         <ResearchUseNotice variant="compact" className="mt-5" />
       </aside>
     </div>

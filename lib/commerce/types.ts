@@ -313,7 +313,7 @@ export interface CommerceProvider {
   getProductTypes(): Promise<string[]>;
 
   /* Cart */
-  createCart(): Promise<CommerceCart>;
+  createCart(input?: { buyerEmail?: string }): Promise<CommerceCart>;
   getCart(cartId: string): Promise<CommerceCart | null>;
   addCartItem(
     cartId: string,

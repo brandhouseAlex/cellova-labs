@@ -83,7 +83,7 @@ export const medusaProvider: CommerceProvider = {
     return notConfigured();
   },
 
-  async createCart(): Promise<CommerceCart> {
+  async createCart(_input?: { buyerEmail?: string }): Promise<CommerceCart> {
     return notConfigured();
   },
   async getCart(_cartId: string): Promise<CommerceCart | null> {

@@ -29,12 +29,21 @@ function resolveProvider(): CommerceProviderName {
   const raw = (
     process.env.COMMERCE_PROVIDER ??
     process.env.NEXT_PUBLIC_COMMERCE_PROVIDER ??
-    "mock"
+    ""
   ).toLowerCase();
 
   if (raw === "medusa" || raw === "shopify" || raw === "mock") {
     return raw;
   }
+
+  // `COMMERCE_PROVIDER` is server-only in Vercel. Client cart interactions
+  // receive only public variables, so infer Shopify when both public
+  // Storefront settings are present rather than falling back to a mock cart.
+  if (process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN && process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN) {
+    return "shopify";
+  }
+
+  if (!raw) return "mock";
 
   // Unknown value — fall back to the mock provider so the storefront
   // always renders, and make the misconfiguration visible in logs.
