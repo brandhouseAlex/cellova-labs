@@ -39,9 +39,31 @@ const multiVariantProduct: CommerceProduct = {
 describe("ProductCard provider purchasability", () => {
   beforeEach(() => addItem.mockReset());
 
-  it("adds an authenticated multi-variant product with its first sellable provider variant", async () => {
-    addItem.mockResolvedValue();
+  it("routes an authenticated multi-variant product to its detail page for variant selection", () => {
     render(<ProductCard product={multiVariantProduct} />);
+
+    expect(
+      screen.getByRole("link", { name: "Select variant for Provider Material" }).getAttribute("href")
+    ).toBe("/products/provider-material");
+    expect(screen.queryByRole("button", { name: "Add to Cart" })).toBeNull();
+    expect(addItem).not.toHaveBeenCalled();
+  });
+
+  it("adds an authenticated single-variant product directly to Shopify cart", async () => {
+    addItem.mockResolvedValue();
+    render(
+      <ProductCard
+        product={{
+          ...multiVariantProduct,
+          options: [],
+          variants: [multiVariantProduct.variants[1]],
+          priceRange: {
+            minVariantPrice: multiVariantProduct.variants[1].price,
+            maxVariantPrice: multiVariantProduct.variants[1].price,
+          },
+        }}
+      />
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "Add to Cart" }));
 

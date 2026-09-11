@@ -29,7 +29,10 @@ export function ProductCard({
     priceRange.minVariantPrice.amount === priceRange.maxVariantPrice.amount;
 
   const defaultCartVariant = product.variants.find((variant) => variant.availableForSale) ?? product.variants[0] ?? null;
-  const canAddDirectly = Boolean(defaultCartVariant && isAuthenticated);
+  const requiresVariantSelection = product.variants.length > 1;
+  const canAddDirectly = Boolean(
+    !requiresVariantSelection && defaultCartVariant && isAuthenticated
+  );
   async function addToCart() {
     if (!defaultCartVariant || !canAddDirectly) return;
     setError(null);
@@ -81,7 +84,7 @@ export function ProductCard({
                   priceRange.maxVariantPrice
                 )}`}
           </p>
-          {canAddDirectly ? <button type="button" onClick={addToCart} disabled={isLoading} className="mt-4 w-full rounded-[8px] bg-[#F2A63C] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D48624] hover:text-white disabled:opacity-50">{isLoading ? "Adding…" : "Add to Cart"}</button> : <Link href={`/products/${product.handle}`} className="mt-4 block w-full rounded-[8px] border border-brand/60 px-4 py-2.5 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-tint" aria-label={`View product ${product.title}`}>{isReady && !isAuthenticated ? "Sign In to Order" : "View Product"}</Link>}
+          {canAddDirectly ? <button type="button" onClick={addToCart} disabled={isLoading} className="mt-4 w-full rounded-[8px] bg-[#F2A63C] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D48624] hover:text-white disabled:opacity-50">{isLoading ? "Adding…" : "Add to Cart"}</button> : <Link href={`/products/${product.handle}`} className="mt-4 block w-full rounded-[8px] border border-brand/60 px-4 py-2.5 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-tint" aria-label={`${requiresVariantSelection ? "Select variant for" : "View product"} ${product.title}`}>{isReady && !isAuthenticated ? "Sign In to Order" : requiresVariantSelection ? "Select Variant" : "View Product"}</Link>}
           {error ? <p role="alert" className="mt-2 text-xs text-red-700">{error}</p> : null}
         </div>
       </div>
